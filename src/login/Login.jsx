@@ -36,18 +36,18 @@ const Login = ({ value }) => {
     <>
       <div>
         <div className="flex flex-col-reverse lg:flex-row overflow-hidden">
-          <div className="px-36 pb-20 pt-10  w-full lg:w-1/2 h-full lg:h-screen bg-white relative">
-            <div className="flex flex-col justify-center gap-6 items-start">
-              <img src={ENHR} alt="ENHR logo" className="mx-auto" width={80} />
-              <h4 className="text-2xl">
+          <div className=" px-10 lg:px-36 pb-20 pt-10 w-screen lg:w-1/2 h-full lg:h-screen bg-white relative">
+            <div className="flex flex-col justify-center gap-6">
+              <img src={ENHR} alt="ENHR logo" className="mx-auto mt-5" width={80} />
+              <h4 className="text-2xl mt-5">
                 Welcome to
                 <br />
-                <span className="text-3xl font-bold">ENCompliance HR</span>
+                <span className="text-3xl font-bold text-nowrap">ENCompliance HR</span><br/>
               </h4>
-            </div>
+            </div> 
 
-            <form onSubmit={handleSubmit}>
-              <h3 className="text-xl font-semibold pb-2 mt-2">Login</h3>
+            <form onSubmit={handleSubmit} className="mt-7">
+              <h3 className="text-xl font-semibold pb-2 mt-3 mb-3">Login</h3>
               <label htmlFor="email" className="block pb-1">
                 Email ID
               </label>
@@ -118,10 +118,10 @@ const Login = ({ value }) => {
                 width={340}
               />
               <div className="text-center mt-3">
-                <p className="text-2xl font-semibold">
+                <p className="text-xl font-semibold">
                   Compliance simplified, Result Amplified
                   <br />
-                  <span className="text-base">
+                  <span className="text-base font-medium">
                     Your trusted partners for seamless business compliance and
                     success
                   </span>

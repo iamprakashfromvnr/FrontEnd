@@ -27,6 +27,11 @@ import Staff from './Pages/Dashboard/StaffDashBoard';
 import ClientDash from './Pages/Dashboard/ClientDash';
 import ClientManagement from './Pages/company/ClientManagement';
 import ClientBranchManagement from './Pages/company/ClientBranchManagement';
+import CalendarComponent from './Pages/CompanyMaster/CalendarModule';
+import MyCalendar from './Pages/company/MyCalendar';
+import CompanyComplianceList from './Pages/company/CompanyComplianceList';
+import Consolidate from './Pages/compliancefilling/Consolidate';
+import CompanyCompliance from './Pages/company/CompanyCompliance';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -69,12 +74,16 @@ const App = () => {
                 <Route path="/viewsubcatlist" element={<Viewsub />} />
                 <Route path="/companyreport" element={<CompanywiseReport />} />
                 <Route path="/compliancereport" element={<ComplianceReport />} />
-                <Route path="/calendar" element={<CalendarModule/>} />
+                <Route path="/calendar" element={<MyCalendar/>} />
                 <Route path="/dash" element={<Staff />} />
                 <Route path="/admindash" element={<Index/>} />
                 <Route path="/clientdash" element={<ClientDash/>} />
                 <Route path="/clientmanagement" element={<ClientManagement/>} />
                 <Route path="/clientbranchmanagement" element={<ClientBranchManagement/>} />
+                <Route path="/companycompliancelist" element={<CompanyComplianceList/>} />
+                <Route path="/compliancefilling" element={<Consolidate/>} />
+                <Route path="/companycompliance" element={<CompanyCompliance/>} />
+
                 {/* <Route path="/reportCompany" element={<CompanywiseReport/>}/> */}
               </Route>
             </Routes>

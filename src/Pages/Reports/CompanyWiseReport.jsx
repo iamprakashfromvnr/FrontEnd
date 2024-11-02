@@ -107,6 +107,7 @@ import { CiMail } from 'react-icons/ci';
 import { FiPrinter } from 'react-icons/fi';
 import moment from 'moment'; 
 import { MdOutlineCalendarMonth } from 'react-icons/md';
+import ActionMenu from '../../Components/compliance list/ActionMenu';
 const CompanyWiseReport = () => {
   const [data] = useState(CompanyData);
   const [startDate, setStartDate] = useState(null);
@@ -133,12 +134,22 @@ const CompanyWiseReport = () => {
   });
 
   const [filters, setFilters] = useState({
-    companyname: false,
-    state: false,
-    branch: false,
-    status: false,
-    activity: false,
-    filtedate: false,
+    sno:true,
+    companyname: true,
+    state: true,
+    branch: true,
+    activity: true,
+    formname:true,
+    act:true,
+    acttype:true,
+    state2:true,
+    filedate:true,
+    period:true,
+    document:true,
+    priority:true,
+    status: true,
+    natureact:false,
+    actions:true,
   });
 
   const handleCheckboxChange = (filterName) => {
@@ -215,7 +226,7 @@ const CompanyWiseReport = () => {
   return (
     <div className='p-2 -z-50'>
       <div className='flex justify-between items-center'>
-        <h2 className='font-semibold text-lg'>Companywise Report</h2>
+        <h2 className='font-semibold text-lg'>Companywise Report ({filter.length})</h2>
         <div className='flex gap-3'>
           <button><FiPrinter className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
           <button><CiMail className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
@@ -254,10 +265,10 @@ const CompanyWiseReport = () => {
             {CompanyData.map((item) => <option key={item.Status} value={item.Status}>{item.Status}</option>)}
           </select>
         )}
-        {filters.filtedate && (
-          <div className='relative'>
+        {filters.filedate && (
+          <div className='relative z-20 lg:w-36 w-96'>
             <DatePicker
-              className='focus-visible focus-visible:outline-none w-full lg:w-36 py-1.5 ps-2 border border-bordergray  rounded-md z-50'
+              className='focus-visible focus-visible:outline-none lg:w-36 w-96 py-1.5 ps-2 border border-bordergray  rounded-md '
               selected={startDate}
               onChange={(date) => {
                 setStartDate(date);
@@ -279,9 +290,13 @@ const CompanyWiseReport = () => {
         </span>
         <span className='relative'>
           <FaSliders size={35} className="p-1.5 bg-white border border-gray-400 rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
-          <div className='absolute z-30 -left-44 top-10'>
+          <div className='absolute z-30 lg:-left-44 left-0 top-10'>
             {showMenu && (
               <div className='border border-gray-300 rounded-md p-4 w-56 bg-white shadow-md'>
+                 <label>
+                  <input type='checkbox' checked={filters.sno} onChange={() => handleCheckboxChange('sno')} className='me-3 accent-black' />
+                  S No
+                </label><br />
                 <label>
                   <input type='checkbox' checked={filters.companyname} onChange={() => handleCheckboxChange('companyname')} className='me-3 accent-black' />
                   Company Name
@@ -299,12 +314,44 @@ const CompanyWiseReport = () => {
                   Activity
                 </label><br />
                 <label>
+                  <input type='checkbox' checked={filters.natureact} onChange={() => handleCheckboxChange('natureact')} className='me-3 accent-black' />
+                  Nature of Activity
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.formname} onChange={() => handleCheckboxChange('formname')} className='me-3 accent-black' />
+                  Name of the Form
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.act} onChange={() => handleCheckboxChange('act')} className='me-3 accent-black' />
+                  Applicable Labour Act 
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.acttype} onChange={() => handleCheckboxChange('acttype')} className='me-3 accent-black' />
+                  Type of Act 
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.state2} onChange={() => handleCheckboxChange('state2')} className='me-3 accent-black' />
+                  state
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.filedate} onChange={() => handleCheckboxChange('filedate')} className='me-3 accent-black' />
+                  File Date
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.period} onChange={() => handleCheckboxChange('period')} className='me-3 accent-black' />
+                  Period
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.document} onChange={() => handleCheckboxChange('document')} className='me-3 accent-black' />
+                  Document
+                </label><br />
+                <label> 
                   <input type='checkbox' checked={filters.status} onChange={() => handleCheckboxChange('status')} className='me-3 accent-black' />
                   Status
                 </label><br />
-                <label>
-                  <input type='checkbox' checked={filters.filtedate} onChange={() => handleCheckboxChange('filtedate')} className='me-3 accent-black' />
-                  Filed Date
+                <label> 
+                  <input type='checkbox' checked={filters.actions} onChange={() => handleCheckboxChange('actions')} className='me-3 accent-black' />
+                  actions
                 </label><br />
               </div>
             )}
@@ -313,7 +360,127 @@ const CompanyWiseReport = () => {
       </div>
 
       <DataTable 
-        columns={CompanyColumns} sortIcon={<PiCaretUpDownFill />}
+        columns={
+          [
+            {
+                name:"Sno",
+                selector:row=>row.Sno,
+                sortable:true,
+                width:'100px',
+                omit:filters.sno==false,
+            },
+            {
+                name:"Company Name",
+                selector:row=>row.Company_Name,
+                sortable:true,
+                width:'140px',
+                omit:filters.companyname==false,
+            },
+            {
+                name:"State",
+                selector:row=>row.State,
+                sortable:true,
+                width:'100px',
+                omit:filters.state==false,
+            },
+            {
+                name:"Branch",
+                selector:row=>row.Branch,
+                sortable:true,
+                width:'100px',
+                omit:filters.branch==false,
+            },
+            {
+                name:"Activity",
+                selector:row=>row.Activity,
+                sortable:true,
+                width:'150px',
+                omit:filters.activity==false,
+              },
+              {
+                name:"Nature of Activity",
+                selector:row=>row.NatureofActivity,
+                sortable:true,
+                width:'100px',
+                omit:filters.natureact==false,
+            },
+            {
+                name:"Name of the Form",
+                selector:row=>row.Form_name,
+                sortable:true,
+                omit:filters.formname==false,
+            },
+            {
+                name:"Applicable Labour Act",
+                cell:(row)=>row.Acts,
+                sortable:true,
+                omit:filters.act==false,
+            },
+            {
+                name:"Type of  Act",
+                selector:row=>row.ActType,
+                sortable:true,
+                width:'140px',
+                omit:filters.acttype==false,
+            },
+            {
+              name:"state",
+                selector:row=>row.state,
+                sortable:true,
+                width:'120px',
+                omit:filters.state2==false,
+
+            },
+            {
+                name:"Fild Date",
+                selector:row=>row.Filed_Date,
+                sortable:true,
+                width:'100px',
+                omit:filters.filedate==false,
+            },
+            {
+                name:"Period",
+                selector:row=>row.Period,
+                sortable:true,
+                width:'100px',
+                omit:filters.period==false,
+            },
+            {
+                name:"Document",
+                selector:row=>row.Document,
+                sortable:true,
+                omit:filters.document==false,
+            },
+            {
+                name:"Priority",
+                selector:row=>row.Priority,
+                sortable:true,
+                width:'100px',
+                omit:filters.priority==false,
+            },
+            {
+                name:"Status",
+                cell:(row)=><p className={`${row.Status ==='Complied' ? 'text-green-600':row.Status==='Not Complied'? 'text-red-600':'text-yellow-500'}`}>{row.Status}</p>,
+                sortable:true,
+                width:'100px',
+                omit:filters.status==false,
+            },
+            {
+                // name:"Action",
+                // selector:row=>row.Action,
+                // cell:(row)=><button><SlOptionsVertical/></button>,
+                name: 'Actions',
+                cell:(row)=>(<ActionMenu/>),
+                ignoreRowClick:true,
+                allowOverflow:true,
+                button:true,
+                width:'65px',
+                omit:filters.actions==false
+            }
+        
+        
+        ]
+        } sortIcon={<PiCaretUpDownFill />}
         data={filter}
         responsive
         selectableRows

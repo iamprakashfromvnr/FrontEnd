@@ -14,6 +14,7 @@ import moment from 'moment';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import CompanyData from '../../Components/reports/CompanyDatas';
 import { ComplianceColumns } from '../../Components/reports/ComplianceColumns';
+import ActionMenu from '../../Components/category/ActionMenu';
 const ComplianceReport = () => {
   const [data] = useState(CompanyData);
   const [startDate, setStartDate] = useState(null);
@@ -39,11 +40,22 @@ const ComplianceReport = () => {
   });
 
   const [filters, setFilters] = useState({
-    companyname: false,
-    branch: false,
-    status: false,
-    activity: false,
-    filtedate: false,
+    sno:true,
+    companyname: true,
+    state: true,
+    branch: true,
+    activity: true,
+    formname:true,
+    act:true,
+    acttype:true,
+    state:true,
+    period:true,
+    document:true,
+    priority:true,
+    status: true,
+    natureact:false,
+    actions:true,
+    filtedate: true
   });
 
   const handleCheckboxChange = (filterName) => {
@@ -180,6 +192,10 @@ const ComplianceReport = () => {
             {showMenu && (
               <div className='border border-gray-300 rounded-md p-4 w-56 bg-white shadow-md'>
                 <label>
+                  <input type='checkbox' checked={filters.sno} onChange={() => handleCheckboxChange('sno')} className='me-3 accent-black' />
+                  S No
+                </label><br />
+                <label>
                   <input type='checkbox' checked={filters.companyname} onChange={() => handleCheckboxChange('companyname')} className='me-3 accent-black' />
                   Company Name
                 </label><br />
@@ -192,12 +208,48 @@ const ComplianceReport = () => {
                   Activity
                 </label><br />
                 <label>
-                  <input type='checkbox' checked={filters.status} onChange={() => handleCheckboxChange('status')} className='me-3 accent-black' />
-                  Status
+                  <input type='checkbox' checked={filters.natureact} onChange={() => handleCheckboxChange('natureact')} className='me-3 accent-black' />
+                  Nature of Activity
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.formname} onChange={() => handleCheckboxChange('formname')} className='me-3 accent-black' />
+                  Name of the Form
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.act} onChange={() => handleCheckboxChange('act')} className='me-3 accent-black' />
+                  Applicable Labour Act
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.acttype} onChange={() => handleCheckboxChange('acttype')} className='me-3 accent-black' />
+                  Type of Act
                 </label><br />
                 <label>
                   <input type='checkbox' checked={filters.filtedate} onChange={() => handleCheckboxChange('filtedate')} className='me-3 accent-black' />
                   Filed Date
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.period} onChange={() => handleCheckboxChange('period')} className='me-3 accent-black' />
+                  Period
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.document} onChange={() => handleCheckboxChange('document')} className='me-3 accent-black' />
+                  Document
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.state} onChange={() => handleCheckboxChange('state')} className='me-3 accent-black' />
+                  State
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.priority} onChange={() => handleCheckboxChange('priority')} className='me-3 accent-black' />
+                  priority
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.status} onChange={() => handleCheckboxChange('status')} className='me-3 accent-black' />
+                  Status
+                </label><br />
+                <label>
+                  <input type='checkbox' checked={filters.actions} onChange={() => handleCheckboxChange('actions')} className='me-3 accent-black' />
+                  Actions
                 </label><br />
               </div>
             )}
@@ -206,7 +258,121 @@ const ComplianceReport = () => {
       </div>
       <div className='-z-50 w-auto'>
       <DataTable className='z-0'
-        columns={ComplianceColumns} sortIcon={<PiCaretUpDownFill />}
+        columns={
+          [
+            {
+                name:"Sno",
+                selector:row=>row.Sno,
+                sortable:true,
+                width:'100px',
+                omit:filters.sno==false
+            },
+            {
+                name:"Company Name",
+                selector:row=>row.Company_Name,
+                sortable:true,
+                width:'140px',
+                omit:filters.companyname==false
+            },
+            {
+                name:"Branch",
+                selector:row=>row.Branch,
+                sortable:true,
+                width:'100px',
+                omit:filters.branch==false
+            },
+            {
+                name:"Activity",
+                selector:row=>row.Activity,
+                sortable:true,
+                width:'150px',
+                omit:filters.activity==false
+            },
+            {
+              name:" Nature of Activity",
+              selector:row=>row.NatureofActivity,
+              sortable:true,
+              width:'150px',
+              omit:filters.natureact==false
+          },
+            {
+                name:"Name of the Form",
+                selector:row=>row.Form_name,
+                sortable:true,
+                omit:filters.formname==false
+            },
+            {
+                name:"Applicable Labour Act",
+                cell:(row)=>row.Acts,
+                sortable:true,
+                omit:filters.act==false
+            },
+            {
+                name:"Type of  Act",
+                selector:row=>row.ActType,
+                sortable:true,
+                width:'140px',
+                omit:filters.acttype==false
+            },
+            {
+                name:"state",
+                selector:row=>row.state,
+                sortable:true,
+                width:'120px',
+                omit:filters.state==false
+            },
+            {
+                name:"Fild Date",
+                selector:row=>row.Filed_Date,
+                sortable:true,
+                width:'100px',
+                omit:filters.filtedate==false
+            },
+            {
+                name:"Period",
+                selector:row=>row.Period,
+                sortable:true,
+                width:'100px',
+                omit:filters.period==false
+            },
+            {
+                name:"Document",
+                selector:row=>row.Document,
+                sortable:true,
+                omit:filters.document==false
+            },
+            {
+                name:"Priority",
+                selector:row=>row.Priority,
+                sortable:true,
+                width:'100px',
+                omit:filters.priority==false
+            },
+            {
+                name:"Status",
+                cell:(row)=><p className={`${row.Status ==='Complied' ? 'text-green-600':row.Status==='Not Complied'? 'text-red-600':'text-yellow-500'}`}>{row.Status}</p>,
+                sortable:true,
+                width:'100px',
+                omit:filters.status==false
+            },
+            {
+                // name:"Action",
+                // selector:row=>row.Action,
+                // cell:(row)=><button><SlOptionsVertical/></button>,
+                name: 'Actions',
+                cell:(row)=>(<ActionMenu/>),
+                ignoreRowClick:true,
+                allowOverflow:true,
+                button:true,
+                width:'65px',
+                omit:filters.actions==false
+        
+            }
+        
+        
+        ]
+        }
+         sortIcon={<PiCaretUpDownFill />}
         data={filter}
         responsive
         selectableRows

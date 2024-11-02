@@ -18,31 +18,31 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-const Piechart = ({ title, pieData, COLORS }) => {
+const Piechart = ({ pieData, COLORS }) => {
   return (
-    <div className="flex flex-col items-center justify-center">
-    <div className="bg-white rounded-lg border p-3 w-11/12 md:w-80 lg:w-96">
-      <h5 className="text-center font-semibold mb-2">{title}</h5>
-      <ResponsiveContainer width="100%" height={200}>
-        <PieChart>
-          <Pie
-            data={pieData}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius="70%"
-            dataKey="value"
-            isAnimationActive={false}>
-            {pieData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-          </Pie>
-          <Legend layout="vertical" verticalAlign="middle" align="right" />
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="flex flex-col items-center justify-center ">
+      <div className="bg-white p-3 w-11/12 md:w-80 lg:w-96">
+        <h5 className="font-semibold mb-2">Compliance Status</h5>
+        <ResponsiveContainer width="100%" height={200}>
+          <PieChart>
+            <Pie
+              data={pieData}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius="70%"
+              dataKey="value"
+              isAnimationActive={false}>
+              {pieData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Legend layout="vertical" verticalAlign="middle" align="right" />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
     </div>
-  </div>
   );
 };
 

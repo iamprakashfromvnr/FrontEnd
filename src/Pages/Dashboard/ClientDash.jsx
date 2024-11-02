@@ -7,6 +7,7 @@ import Graph from '../../Components/Dashboard/ClientDash/Graph';
 import Activity from '../../Components/Dashboard/ClientDash/Activity';
 import Activities from '../../Components/Dashboard/ClientDash/ActivityData';
 import Filter from '../../Components/Dashboard/ClientDash/Filter';
+
 const ClientDash = () => {
     const company = { totalCompany: 1, state: 43, district: 27, branch: 7 };
     const complianceData = { complied: 60, notComplied: 20, partiallyComplied: 12, overdue: 8 };
@@ -14,6 +15,12 @@ const ClientDash = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const totalPages = 10;
+
+    const [filters, setFilters] = useState({});
+
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+    };
 
     const chartData = [
         { name: "Jan", Complied: 30, "NotComplied": 40, Partially: 20, Overdue: 10 },
@@ -29,15 +36,15 @@ const ClientDash = () => {
         { name: "Nov", Complied: 70, "NotComplied": 5, Partially: 15, Overdue: 10 },
         { name: "Dec", Complied: 75, "NotComplied": 5, Partially: 10, Overdue: 10 },
     ];
-     
+
     return (
-        <div style={{width:'95%'}} className='ms-10 font-poppins'>
-            <Filter />
+        <div style={{ width: '95%' }} className='ms-10 font-poppins'>
+            <Filter onFilterChange={handleFilterChange} />
             <CompanyList
                 totalCompany={company.totalCompany}
                 state={company.state}
                 district={company.district}
-                branch={company.branch}/>
+                branch={company.branch} />
 
             <Status {...complianceData} />
 
@@ -53,13 +60,14 @@ const ClientDash = () => {
             </div>
             <Graph
                 chartData={chartData}
-                title="Compliance Status for the period April 2024 to August 2024"/>
+                title="Compliance Status for the period April 2024 to August 2024" />
             <div>
-            <Activity activities={Activities}/>
+                <Activity activities={Activities}
+                filters={filters}
+                />
             </div>
 
         </div>
-
     );
 };
 

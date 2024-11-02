@@ -4,7 +4,7 @@ const ClientList = ({ totalCompany, state, district, branch }) => {
   return (
     <div className='border rounded mt-2'>
       <div>
-        <h5 className='font-semi bold ps-12 mt-3' >Client list</h5>
+        <h5 className='font-semibold ps-10 mt-3' >Client list</h5>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 font-poppins">
       <div className=" p-5 sm:ms-5 md:ms-14 rounded-lg shadow-md w-full sm:w-3/4 h-auto min-h-[8rem] border-l-4 border-l-purple-500 " style={{  backgroundColor: '#e6e6e6', borderColor: '#003366' }}>

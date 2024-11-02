@@ -7,6 +7,7 @@ import companies from '../../Components/Dashboard/AdminDash/companies';
 import Graph from '../../Components/Dashboard/AdminDash/CustomLegend';
 import Stafftable from '../../Components/Dashboard/AdminDash/Stafftable';
 import Staffdata from '../../Components/Dashboard/AdminDash/Staffdata';
+
 const Index = () => {
     const company = { totalCompany: 1567, state: 454, district: 219, branch: 53 };
     const complianceData = { complied: 60, notComplied: 20, partiallyComplied: 12, overdue: 8 };
@@ -14,6 +15,12 @@ const Index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const totalPages = 10;
+
+    const [filters, setFilters] = useState({});
+
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+    };
 
     const chartData = [
         { name: "Jan", Complied: 30, "NotComplied": 40, Partially: 20, Overdue: 10 },
@@ -31,33 +38,8 @@ const Index = () => {
     ];
 
     return (
-        // <div style={{ width: '95%' }} className='ms-10 font-poppins'>
-        //     <Dropdown />
-        //     <ClientList
-        //         totalCompany={company.totalCompany}
-        //         state={company.state}
-        //         district={company.district}
-        //         branch={company.branch} />
-        //     <Status {...complianceData} />
-
-        //     <div className="p-4">
-        //         <Table
-        //             companies={companies}
-        //             currentPage={currentPage}
-        //             totalPages={totalPages}
-        //             onPageChange={setCurrentPage}
-        //             itemsPerPage={itemsPerPage}
-        //             onItemsPerPageChange={setItemsPerPage}
-        //         />
-        //     </div>
-        //     <Graph
-        //         chartData={chartData}
-        //         title="Compliance Status for the period April 2024 to August 2024"
-        //     />
-        //     <Stafftable Staffdata={Staffdata} />
-        // </div>
         <div style={{ width: '95%' }} className='ms-10 font-poppins'>
-            <Dropdown />
+            <Dropdown onFilterChange={handleFilterChange} />
             <ClientList
                 totalCompany={company.totalCompany}
                 state={company.state}
@@ -73,6 +55,7 @@ const Index = () => {
                     onPageChange={setCurrentPage}
                     itemsPerPage={itemsPerPage}
                     onItemsPerPageChange={setItemsPerPage}
+                    filters={filters}
                 />
             </div>
             <Graph

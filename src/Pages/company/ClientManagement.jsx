@@ -8,8 +8,9 @@ import { AiOutlineFileSearch, AiOutlineMail } from 'react-icons/ai'
 import DataTable from 'react-data-table-component'
 import ActionMenu from '../../Components/company/ActionMenu'
 import { Clients } from '../../Components/company/Data'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const ClientManagement = () => {
+    const navigate=useNavigate()
 const columns=[
     {
         name:"sno",
@@ -72,11 +73,14 @@ const customStyles={
             (filter.company ? data.company === filter.company : true) &&
             (data.company.toLowerCase().includes(search.toLowerCase()) ||
             data.branches.toLowerCase().includes(search.toLowerCase()) ||
-            data.level.toLowerCase().includes(search.toLowerCase()))
+            data.level.toLoswerCase().includes(search.toLowerCase()))
         );
     });
     setfilterData(filtered);
 }, [Data, filter, search]);
+   const branch=()=>{
+    navigate('/clientbranchmanagement')
+   }
   return (
     <div className='h-screen'>
       <div className="flex justify-between">
@@ -113,7 +117,7 @@ const customStyles={
 
     {filterData.map((data)=>
         // <div className='relative py-8 px-16 rounded-md bg-white items-center' style={{borderLeft:`40px solid ${data.level == 'high' ? 'blue': data.level==='medium'?'green':data.level==='low'?'orange':'white'}`}}>
-        <div className='flex items-center border border-bordergray rounded-md bg-white w-min'>
+        <div className='flex items-center border border-bordergray rounded-md bg-white w-min' onClick={branch}>
             <span className={`w-8 h-full  ${data.level == 'high' ? 'bg-highBlue': data.level==='medium'?'bg-medgreen':data.level==='low'?'bg-lowOrange':'bg-white'} text-center text-white flex items-center justify-center rounded-s-md`}>
                 <p className='transform -rotate-90 font-bold'>{data.level.toUpperCase()}</p>
             </span>

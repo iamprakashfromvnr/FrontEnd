@@ -1,8 +1,25 @@
 import React from 'react';
-const Table = ({ companies, currentPage, totalPages, onPageChange }) => {
+const Table = ({ companies, currentPage, totalPages, onPageChange, filters }) => {
     const handlePageClick = (page) => {
         onPageChange(page);
     };
+
+    const filteredData = companies.filter((row) => {
+        const [day, month, year] = row.Date.split('-');
+        const rowDate = new Date(`${year}-${month}-${day}`);
+        const selectedDate = filters.date ? new Date(filters.date) : null;
+
+        // console.log('Row Date:', rowDate.toDateString(), 'selected Date;', selectedDate ? selectedDate.toDateString() : 'None');
+        return (
+            (!filters.company || row.CompanyName === filters.company) &&
+            (!filters.state || row.State === filters.state) &&
+            (!filters.branch || row.Branch === filters.branch) &&
+            (!filters.priority || row.Priority === filters.priority) &&
+            (!filters.area || row.Area === filters.area) &&
+            (!selectedDate || rowDate.toDateString() === selectedDate.toDateString())
+        );
+    });
+
     const getPaginationButtons = (currentPage, totalPages) => {
         const paginationButtons = [];
         const maxButtons = 3;
@@ -48,11 +65,9 @@ const Table = ({ companies, currentPage, totalPages, onPageChange }) => {
         return finalButtons;
     };
 
-
     return (
         <div className='border mt-5 p-4 rounded'>
             <h6 className='mt-4'>Compliance for the period of April 2024 to November 2024</h6>
-
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
                 <table className="min-w-full text-sm text-left text-black">
                     <thead className="text-xs text-black font-semibold">
@@ -67,7 +82,7 @@ const Table = ({ companies, currentPage, totalPages, onPageChange }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {companies.map((row) => (
+                        {filteredData.map((row) => (
                             <tr key={row.SNO} className="border-b border-gray-300">
                                 <td className="px-4 py-2">{row.SNO}</td>
                                 <td className="px-4 py-2">{row.Date}</td>
@@ -93,20 +108,15 @@ const Table = ({ companies, currentPage, totalPages, onPageChange }) => {
             </div>
 
             <div className="flex items-center justify-between mt-4 flex-wrap">
-                    <div className="bg-white border border-gray-300 rounded-md px-4 py-2 mb-2">
-                        <label htmlFor="page-select" className="mr-2 text-sm"> Page</label>
-                        <select 
-                            id="page-select" 
-                            value={currentPage} 
-                            onChange={(e) => handlePageClick(Number(e.target.value))}
-                            className="border border-gray-300 rounded-md p-1"
-                        >
-                            {Array.from({ length: totalPages }, (_, index) => (
-                                <option key={index} value={index + 1}>{index + 1}</option>
-                            ))}
-                        </select>
-                        <span className="ml-2 text-sm">of {totalPages}</span>
-                    </div>
+                <div className="bg-white px-4 py-2 mb-2">
+                    <label htmlFor="page-select" className="mr-2 text-sm"> Page</label>
+                    <select id="page-select" value={currentPage} onChange={(e) => handlePageClick(Number(e.target.value))} className="border border-gray-300 rounded-md p-1">
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <option key={index} value={index + 1}>{index + 1}</option>
+                        ))}
+                    </select>
+                    <span className="ml-2 text-sm">of {totalPages}</span>
+                </div>
 
                 <div className="flex items-center space-x-2 mt-2 md:mt-0">
                     <button onClick={() => handlePageClick(1)} disabled={currentPage === 1}
@@ -147,7 +157,7 @@ const Table = ({ companies, currentPage, totalPages, onPageChange }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default Table;
