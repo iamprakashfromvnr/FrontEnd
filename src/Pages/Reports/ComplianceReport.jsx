@@ -128,7 +128,7 @@ const ComplianceReport = () => {
 
   return (
     <div className='p-2 -z-50'>
-      <div className='flex justify-between items-center'>
+      <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-semibold text-lg'>Compliance Report</h2>
         <div className='flex gap-3'>
           <button><FiPrinter className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>

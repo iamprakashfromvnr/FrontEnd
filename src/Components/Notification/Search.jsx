@@ -84,7 +84,7 @@ import { CiSearch } from 'react-icons/ci';
 
 const Search = ({ searchTerm, setSearchTerm, startDate, setStartDate }) => {
     return (
-        <div className="flex flex-col md:flex-row items-center p-5 gap-4 px-2 py-2">
+        <div className="flex flex-col md:flex-row items-center gap-4">
             <DatePicker 
                 block 
                 placeholder="Date Range" 

@@ -145,14 +145,14 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
             transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
             transition-transform duration-300 ease-in-out overflow-scroll`}
         >
-            <div className="px-3 flex justify-between items-center">
+            <div className="px-3 py-4 flex justify-between items-center">
                 <div className='flex items-center gap-2'>
                     <img src={ENHR} alt="ENCompliance HR" width={50} />
                     <h3 className="text-sm lg:text-base font-bold">ENCOMPLIANCE HR</h3>
                 </div>
                 <FaTimes className="text-lg cursor-pointer lg:hidden" onClick={closeSidebar} />
             </div>
-            <ul className="space-y-4 mt-6">
+            <ul className="mt-4 flex flex-col gap-2">
                 
                 <li className="px-4 py-2 cursor-pointer 
                   hover:bg-primary hover:border-black hover:border-e-4"
@@ -216,7 +216,7 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
 
                 <li>
                     <div
-                        className="px-4 py-1 cursor-pointer flex items-center justify-between
+                        className="px-4 py-2 cursor-pointer flex items-center justify-between
                          hover:bg-primary hover:border-black hover:border-e-4" onClick={toggleReports}
                     >
                         <div className='flex items-center gap-2'>

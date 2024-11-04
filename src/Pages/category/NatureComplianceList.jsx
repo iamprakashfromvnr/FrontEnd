@@ -53,7 +53,7 @@ const NatureComplianceList = () => {
   return (
     <>
 
-      <div className='flex w-full p-5 justify-between items-center'>
+      <div className='flex flex-col justify-center gap-2 items-start lg:flex-row m-5 lg:items-center lg:justify-between'>
         <h2 className='  font-semibold text-lg'>Nature Of Compliance List</h2>
         <div className='flex gap-3'>
           <HiOutlineDownload onClick={downloadCSV}   className='w-9 h-9 p-2 rounded-full bg-primary text-white' />

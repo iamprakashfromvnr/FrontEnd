@@ -124,7 +124,7 @@ const Consolidate = () => {
 
     return (
         <>
-            <div className='flex justify-between p-5'>
+            <div className='flex flex-col justify-center gap-2 items-start lg:flex-row m-5 lg:items-center lg:justify-between'>
                 <h2 className='font-semibold text-lg '>Consolidated Compliance Filling</h2>
                 <div className='flex gap-3'>
                     <button onClick={handleMail} ><FiMail className='rounded-full w-9 h-9 p-2 mt-0.5 text-white' style={{ backgroundColor: '#D7B95F' }} /> </button>

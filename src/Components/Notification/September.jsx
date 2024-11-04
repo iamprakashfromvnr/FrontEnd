@@ -48,7 +48,7 @@ const September = ({ time, message, status }) => {
           <FaEllipsisV />
         </div>
         {dropdownOpen && (
-          <div className="absolute right-0 mt-1 w-32 bg-white border border-selectbg rounded-md shadow-lg">
+          <div className="absolute right-0 mt-1 w-28 bg-white rounded-md shadow-md z-10">
             <button
               onClick={handleEdit}
               className="flex items-center  w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

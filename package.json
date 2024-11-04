@@ -37,6 +37,7 @@
     "react-router-dom": "^6.27.0",
     "recharts": "^2.13.0",
     "rsuite": "^5.72.0",
+    "sweetalert2": "^11.14.4",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

@@ -51,7 +51,7 @@ const CategoryList = () => {
     };
     return (
         <>
-            <div className='flex m-5 justify-between'>
+            <div className='flex flex-col justify-center gap-2 items-start lg:flex-row m-5 lg:items-center lg:justify-between'>
                 <h2 className='font-semibold text-lg'>Category List</h2>
                 <div className='flex gap-3 items-center'>
                     <HiOutlineDownload onClick={downloadCSV} className='w-9 h-9 p-2 rounded-full bg-primary text-light'/>

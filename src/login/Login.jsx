@@ -8,6 +8,7 @@ import { CiLock } from "react-icons/ci";
 import { AiOutlineMail } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import ProtectedRoute from "../Components/ProtectedRoutes";
+import Swal from 'sweetalert2'; 
 
 const Login = ({ value }) => {
   const navigate = useNavigate();
@@ -15,23 +16,56 @@ const Login = ({ value }) => {
   const [password, setPassword] = useState("");
   const [showpassword, setShowPassword] = useState(true);
   const [error, setError] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email, password);
 
     if (!email || !password) {
-      setError("Please fill the credential");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill in all fields!',
+      });
       return;
     }
-    if (email == "admin@gmail.com" && password == "admin"){
-      navigate('/home')
+
+    if (email === "admin@gmail.com" && password === "admin") {
+      // Successful login
+      Swal.fire({
+        
+        icon: 'success',
+        title: 'Success!',
+        text: 'You have logged in successfully!',
+      }).then(() => {
+        navigate('/home');
+      });
+    } else {
+      // Failed login
+      Swal.fire({
+        
+        icon: 'error',
+        title: 'Failed!',
+        text: 'Invalid email or password!',
+      });
     }
-    else{
-      setError("please fill the credential")
-    }
-    // navigate('/home')
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(email, password);
+
+  //   if (!email || !password) {
+  //     setError("Please fill the credential");
+  //     return;
+  //   }
+  //   if (email == "admin@gmail.com" && password == "admin"){
+  //     navigate('/home')
+  //   }
+  //   else{
+  //     setError("please fill the credential")
+  //   }
+  //   // navigate('/home')
+  // };
 
   const visiblePassword = (e) => {
     e.preventDefault();

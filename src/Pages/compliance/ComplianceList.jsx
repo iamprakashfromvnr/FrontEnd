@@ -101,7 +101,7 @@ const handleCheckboxChange = (filterName) => {
 
   return (
     <div className='p-2 -z-50'>
-      <div className='flex justify-between items-center'>
+      <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-bold  text-lg'>Compliance List</h2>
         <div className='flex gap-3 items-center'>
           <button className='relative'><HiOutlineDownload className='w-9 h-9 p-2 rounded-full mt-1 bg-primary' onClick={()=>{setDownMenu(!downMenu)}} color='white' />

@@ -57,7 +57,7 @@ const Sublist = () => {
 
   return (
     <div className='p-5 mt-5 '>
-      <div className='flex justify-between items-center'>
+      <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-semibold text-lg'>Sub Category List</h2>
         <div className='flex gap-3'>
           <button><HiOutlineDownload onClick={downloadCSV} className='w-9 h-9 p-2 rounded-full bg-primary text-light ' /></button>

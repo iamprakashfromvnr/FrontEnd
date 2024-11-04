@@ -70,7 +70,7 @@ const UserList = () => {
     var filterData = filterData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     return (
         <div className='h-full w-full p-5 shadow-lg'>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col justify-center gap-2 items-start lg:flex-row mb-6 lg:items-center lg:justify-between">
                 <h2 className='text-xl font-bold'>User Management({filterData.length})</h2>
                 <div className="flex items-center justify-center gap-2 lg:gap-4">
                     <LuDownload className="bg-primary text-white rounded-full p-2 cursor-pointer" size={35} />

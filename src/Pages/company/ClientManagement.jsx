@@ -83,7 +83,7 @@ const customStyles={
    }
   return (
     <div className='h-screen'>
-      <div className="flex justify-between">
+      <div className="flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between">
             <h1 className='font-bold text-lg mt-3 ms-4'>Client Management({Data.length})</h1>
             <div className='flex justify-evenly items-center gap-3 me-5 p-3'>    
                 <GoDownload className='rounded-full bg-primary text-white h-9 w-9 p-2' size={15} onClick={()=>window.print()}/>
