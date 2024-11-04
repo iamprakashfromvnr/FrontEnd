@@ -68,7 +68,7 @@ import { TbReportAnalytics } from 'react-icons/tb';
 
 const ClientList = ({ totalCompany, state, district, branch }) => {
   return (
-    <div className='border rounded mt-2'>
+    <div className='border border-bordergray rounded mt-2'>
       <div>
         <h5 className='font-semibold ps-9 mt-3'>Client list</h5>
       </div>

@@ -223,7 +223,7 @@ const Table = ({ companies, currentPage, totalPages, onPageChange, filters }) =>
     };
 
     return (
-        <div className='border mt-5 p-4 rounded'>
+        <div className='border border-bordergray mt-5 p-4 rounded'>
             <h6 className='mt-4'>Compliance for the period of April 2024 to November 2024</h6>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
                 <table className="min-w-full text-sm text-left text-black">

@@ -141,7 +141,7 @@ const Dropdown = ({ onFilterChange }) => {
   return (
     <div className="p-4 bg-white-100 mt-2">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row gap-4">
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={company} onChange={(e) => handleFilterChange('company', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={company} onChange={(e) => handleFilterChange('company', e.target.value)}>
             <option value="">Company</option>
             <option value="Acme Corporation">Acme Corporation</option>
             <option value="Hamll - Gusikowski">Hamll - Gusikowski</option>
@@ -150,13 +150,13 @@ const Dropdown = ({ onFilterChange }) => {
             <option value="Zeme and Sons">Zeme and Sons</option>
           </select>
 
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={state} onChange={(e) => handleFilterChange('state', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={state} onChange={(e) => handleFilterChange('state', e.target.value)}>
             <option value="">State</option>
             <option value="Tamilnadu">Tamilnadu</option>
             <option value="Mumbai">Mumbai</option>
           </select>
 
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={branch} onChange={(e) => handleFilterChange('branch', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={branch} onChange={(e) => handleFilterChange('branch', e.target.value)}>
             <option value="">Branch</option>
             <option value="Rayapuram">Rayapuram</option>
             <option value="Indira Nagar">Indira Nagar</option>
@@ -165,25 +165,25 @@ const Dropdown = ({ onFilterChange }) => {
             <option value="Nagaon">Nagaon</option>
           </select>
 
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={area} onChange={(e) => handleFilterChange('area', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={area} onChange={(e) => handleFilterChange('area', e.target.value)}>
             <option value="">Area</option>
             <option value="Area1">Area 1</option>
             <option value="Area2">Area 2</option>
           </select>
 
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={username} onChange={(e) => handleFilterChange('username', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={username} onChange={(e) => handleFilterChange('username', e.target.value)}>
             <option value="">User Name</option>
             <option value="username 1">Username 1</option>
             <option value="username 2">Username 2</option>
           </select>
 
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={compliancetype} onChange={(e) => handleFilterChange('compliancetype', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={compliancetype} onChange={(e) => handleFilterChange('compliancetype', e.target.value)}>
             <option value="">Compliance Type</option>
             <option value="compliance type 1">Compliance Type 1</option>
             <option value="compliance type 2">Compliance Type 2</option>
           </select>
 
-          <select className="p-2 border rounded-lg focus:outline-none flex-1" value={priority} onChange={(e) => handleFilterChange('priority', e.target.value)}>
+          <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={priority} onChange={(e) => handleFilterChange('priority', e.target.value)}>
             <option value="">Priority</option>
             <option value="Priority1">Priority 1</option>
             <option value="Priority2">Priority 2</option>
@@ -244,7 +244,7 @@ export default Dropdown;
 //   return (
 //     <div className="p-4 bg-white-100 mt-2">
 //       <div className="flex flex-col md:flex-row md:space-x-4 md:items-center gap-2">
-//         <select className="p-2 border rounded-lg focus:outline-none flex-1" value={company} onChange={(e) => handleFilterChange('company', e.target.value)}>
+//         <select className="p-2 border border-bordergray rounded-lg focus:outline-none flex-1" value={company} onChange={(e) => handleFilterChange('company', e.target.value)}>
 //           <option value="">Company</option>
 //           <option value="Acme Corporation">Acme Corporation</option>
 //           <option value="Hamll - Gusikowski">Hamll - Gusikowski</option>

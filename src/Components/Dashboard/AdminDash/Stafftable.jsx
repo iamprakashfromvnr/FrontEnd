@@ -4,7 +4,7 @@ import Staffdata from './Staffdata';
 const Stafftable = () => {
   return (
     <div>
-      <div className='border mt-5 pe-4 ps-4 pb-4 rounded mb-4'>
+      <div className='border border-bordergray mt-5 pe-4 ps-4 pb-4 rounded mb-4'>
         <h6 className='mt-4'>Staff Performance for the month of September 24</h6>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
           <table className="w-full text-sm text-left rtl:text-right text-black">

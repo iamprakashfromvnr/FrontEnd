@@ -24,7 +24,13 @@ const Login = ({ value }) => {
       setError("Please fill the credential");
       return;
     }
-    navigate('/home')
+    if (email == "admin@gmail.com" && password == "admin"){
+      navigate('/home')
+    }
+    else{
+      setError("please fill the credential")
+    }
+    // navigate('/home')
   };
 
   const visiblePassword = (e) => {
@@ -95,10 +101,12 @@ const Login = ({ value }) => {
                 className="w-full bg-primary text-md py-1.5 rounded cursor-pointer mt-3"
                 required
               />
-              <p className="text-center py-2 cursor-pointer pb-12 lg:pb-20 font-pop">
+              <div>
+              {error && <p style={{ color: "red" }} className="text-center font-pop">{error}</p>}
+              <p className="text-center mb-10 cursor-pointer font-pop">
                 Forget Password ?
               </p>
-              {error && <p style={{ color: "red" }}>{error}</p>}
+              </div>
             </form>
             <div
               className="h-96 w-96 rounded-full absolute -left-36 -bottom-60"

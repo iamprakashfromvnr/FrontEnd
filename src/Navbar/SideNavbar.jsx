@@ -153,13 +153,13 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                 <FaTimes className="text-lg cursor-pointer lg:hidden" onClick={closeSidebar} />
             </div>
             <ul className="space-y-4 mt-6">
-                <Link to='/home'>
-                <li className="px-4 py-2 cursor-pointer flex items-center gap-2
+                
+                <li className="px-4 py-2 cursor-pointer 
                   hover:bg-primary hover:border-black hover:border-e-4"
                 >
-                    <AiOutlinePieChart className='text-2xl' /><span>Dashboard</span>
-                </li></Link>
-
+                    <Link to='/home' className='flex items-center gap-2'><AiOutlinePieChart className='text-2xl' /><span>Dashboard</span> </Link>
+                </li>
+                
                 <li>
                     <div
                         className="px-4 py-2 cursor-pointer flex items-center justify-between
@@ -188,35 +188,35 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                     )}
                 </li>
 
-                <li>
-                    <Link to="/clientmanagement" className="px-4 py-2 cursor-pointer flex items-center justify-between
+                <Link to="/clientmanagement">
+                <li className="px-4 py-2 cursor-pointer flex items-center justify-between
                         hover:bg-primary hover:border-black hover:border-e-4">
                         <div className='flex items-center gap-2'>
                             <TbBuildingSkyscraper className='text-2xl' /><span>Company Master</span>
                         </div>
                         <FaPlus className='text-sm' />
-                    </Link>
                 </li>
+                </Link>
                 <Link to='/compliancefilling'>
                 <li className="px-4 py-2 hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer flex items-center gap-2">
                     <TbReportSearch className='text-2xl' /><span>Compliance Filling</span>
                 </li>
                 </Link>
 
-                <li>
-                    <Link to="/userlist" className="px-4 py-2 cursor-pointer flex items-center justify-between
+                <Link to="/userlist">
+                <li className="px-4 py-2 cursor-pointer flex items-center justify-between
                         hover:bg-primary hover:border-black hover:border-e-4">
                         <div className='flex items-center gap-2'>
                             <FaRegUserCircle className='text-2xl' />
                             <span>User Management</span>
                         </div>
                         <FaPlus className='text-sm' />
-                    </Link>
                 </li>
+                </Link>
 
                 <li>
                     <div
-                        className="px-4 py-2 cursor-pointer flex items-center justify-between
+                        className="px-4 py-1 cursor-pointer flex items-center justify-between
                          hover:bg-primary hover:border-black hover:border-e-4" onClick={toggleReports}
                     >
                         <div className='flex items-center gap-2'>
