@@ -42,3 +42,6 @@ a:active{
 a:link{
     @apply text-black
 }
+*{
+    scrollbar-width: none;
+}

@@ -143,7 +143,7 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
     return (
         <div className={`fixed top-0 left-0 py-3 h-screen bg-white w-60
             transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
-            transition-transform duration-300 ease-in-out`}
+            transition-transform duration-300 ease-in-out overflow-scroll`}
         >
             <div className="px-3 flex justify-between items-center">
                 <div className='flex items-center gap-2'>
@@ -238,10 +238,11 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                         </ul>
                     )}
                 </li>
-
+                <Link to="/notification">
                 <li className="px-4 py-2 hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer flex items-center gap-2">
                     <FaRegBell className='text-2xl' /><span>Notifications</span>
                 </li>
+                </Link>
             </ul>
         </div>
     );

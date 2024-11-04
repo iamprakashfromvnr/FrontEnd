@@ -32,6 +32,7 @@ import MyCalendar from './Pages/company/MyCalendar';
 import CompanyComplianceList from './Pages/company/CompanyComplianceList';
 import Consolidate from './Pages/compliancefilling/Consolidate';
 import CompanyCompliance from './Pages/company/CompanyCompliance';
+import Message from './Pages/notification/Message';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -83,6 +84,8 @@ const App = () => {
                 <Route path="/companycompliancelist" element={<CompanyComplianceList/>} />
                 <Route path="/compliancefilling" element={<Consolidate/>} />
                 <Route path="/companycompliance" element={<CompanyCompliance/>} />
+                <Route path="/notification" element={<Message/>} />
+                
 
                 {/* <Route path="/reportCompany" element={<CompanywiseReport/>}/> */}
               </Route>
