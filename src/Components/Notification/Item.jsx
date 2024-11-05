@@ -12,7 +12,7 @@ const Item = ({ time, message, status }) => {
     const handleDelete = () => {
         setDropdownOpen(false);
     };
-
+    
     const toggleDropdown = () => {
         setDropdownOpen(prev => !prev);
     };

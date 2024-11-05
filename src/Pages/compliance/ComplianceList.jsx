@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { HiOutlineDownload } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import DataTable from 'react-data-table-component';
@@ -10,8 +10,11 @@ import { FaSliders } from 'react-icons/fa6';
 import CustomPagination from '../../Components/compliance list/CustomPagination';
 import ActionMenu from '../../Components/category/ActionMenu';
 import { IoCalendarOutline } from 'react-icons/io5';
+import html2pdf from 'html2pdf.js'
 
 const ComplianceList = () => {
+  const pdfref=useRef()
+
   const [data] = useState(Data)
   const [downMenu,setDownMenu]=useState(false)
   const [search, setSearch] = useState('')
@@ -96,18 +99,24 @@ const handleCheckboxChange = (filterName) => {
       }
     },
   }
+  const downloadPdf=()=>{
+    const input=pdfref.current;
+    html2pdf().from(input).save('compliancelist.pdf')
+    
+  }
+
 
 
 
   return (
-    <div className='p-2 -z-50'>
-      <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
+    <div className='p-2 -z-50' ref={pdfref}>
+      <div className='flex flex-col justify-center gap/-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-bold  text-lg'>Compliance List</h2>
         <div className='flex gap-3 items-center'>
           <button className='relative'><HiOutlineDownload className='w-9 h-9 p-2 rounded-full mt-1 bg-primary' onClick={()=>{setDownMenu(!downMenu)}} color='white' />
           {downMenu && <div className='absolute bg-light w-36 border shadow-md top-10 z-20 py-2 flex flex-col justify-start items-center rounded-md'>
             <span className='hover:bg-zinc-300 bg-light w-full px-2 py-1'>download csv</span><br />
-            <span className='hover:bg-zinc-300 bg-light w-full px-2 py-1'>download pdf</span>
+            <span className='hover:bg-zinc-300 bg-light w-full px-2 py-1' onClick={downloadPdf}>download pdf</span>
           </div>}
           </button>
           <Link to="/compliance"><button className='py-2 w-44 lg:w-40 rounded-md text-white bg-primary'>Create Compliance</button> </Link>
