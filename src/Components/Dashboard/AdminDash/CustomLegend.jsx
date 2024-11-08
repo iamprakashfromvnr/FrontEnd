@@ -23,7 +23,7 @@ const CustomLegend = (props) => {
 
 const Curve = ({ chartData, title }) => {
     return (
-        <div className='curve-container border mt-5 p-4 rounded'>
+        <div className='curve-container border border-bordergray mt-5 p-4 rounded'>
             <h5 className='mt-4 ps-2 mb-4'>{title}</h5>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData}>

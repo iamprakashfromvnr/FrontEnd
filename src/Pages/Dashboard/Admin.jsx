@@ -37,7 +37,7 @@ const Index = () => {
     ];
 
     return (
-        <div className='p-5 font-poppins'>
+        <div className='p-5'>
             <Dropdown onFilterChange={handleFilterChange} />
             <ClientList
                 totalCompany={company.totalCompany}
