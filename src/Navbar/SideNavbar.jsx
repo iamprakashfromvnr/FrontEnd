@@ -172,16 +172,16 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                     </div>
                     {isComplianceOpen && (
                         <ul className="flex flex-col gap-2">
-                            <Link to="/compliancelist" className="px-12 py-2 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
-                                Compliance<FaPlus className='text-sm' />
+                            <Link to="/compliance" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
+                                Compliance<FaPlus className='text-sm ' />
                             </Link>
-                            <Link to="/naturecompliancelist" className="px-12 py-2 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer text-nowrap">
+                            <Link to="/naturecompliancelist" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Nature of Comp..<FaPlus className='text-sm' />
                             </Link>
-                            <Link to="/categorylist" className="px-12 py-2 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
+                            <Link to="/categorylist" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Category<FaPlus className='text-sm' />
                             </Link>
-                            <Link to="/subcatlist" className="px-12 py-2 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
+                            <Link to="/subcatlist" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Sub-Category<FaPlus className='text-sm' />
                             </Link>
                         </ul>
@@ -189,7 +189,7 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                 </li>
 
                 <Link to="/clientmanagement">
-                <li className="px-4 py-2 cursor-pointer flex items-center justify-between
+                <li className="ps-4 py-2 pe-4 hover:pe-3 cursor-pointer flex items-center justify-between
                         hover:bg-primary hover:border-black hover:border-e-4">
                         <div className='flex items-center gap-2'>
                             <TbBuildingSkyscraper className='text-2xl' /><span>Company Master</span>
@@ -204,7 +204,7 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                 </Link>
 
                 <Link to="/userlist">
-                <li className="px-4 py-2 cursor-pointer flex items-center justify-between
+                <li className="ps-4 py-2 pe-4 hover:pe-3 cursor-pointer flex items-center justify-between
                         hover:bg-primary hover:border-black hover:border-e-4">
                         <div className='flex items-center gap-2'>
                             <FaRegUserCircle className='text-2xl' />

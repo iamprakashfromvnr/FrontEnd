@@ -11,6 +11,7 @@ import CheckedSelect from "../../Components/CheckedSelect";
 
 const CreateCompliance = () => {
   const navigate = useNavigate();
+  const [fileName, setFileName] = useState('')
   const [selectOptions, setSelectOptions] = useState([]);
   const [compliance, setCompliance] = useState({
     natureOfCompliance: "",
@@ -35,8 +36,12 @@ const CreateCompliance = () => {
     const file = e.target.files[0];
     if (file) {
       setCompliance({ ...compliance, documentPdf: URL.createObjectURL(file) });
+      setFileName(file.name)
     }
+    console.log(file);    
+    console.log(fileName.slice(-5, -1));    
   };
+  
   const handleCancel = () => {
     setCompliance({
       natureOfCompliance: "",
@@ -53,6 +58,7 @@ const CreateCompliance = () => {
       priorityType: "",
       documentPdf: null,
     });
+    setFileName('')
     navigate("/compliancelist");
 
   };
@@ -75,6 +81,7 @@ const CreateCompliance = () => {
       priorityType: "",
       documentPdf: null,
     });
+    setFileName('')
     navigate("/compliancelist");
   };
   const handleSelectedOptions = (options) => {
@@ -101,10 +108,10 @@ const CreateCompliance = () => {
               value={compliance.natureOfCompliance}
               onChange={handleInputChange}
               options={[
-                { value: "", label: "Statutory payment" },
-                { value: "high", label: "High" },
-                { value: "medium", label: "Medium" },
-                { value: "low", label: "Low" },
+                { value: "", label: "SELECT" },
+                { value: "Statutory payment", label: "Statutory payment" },
+                { value: "Registration", label: "Registration" },
+                
               ]}
             />
             <SelectInput
@@ -113,6 +120,7 @@ const CreateCompliance = () => {
               value={compliance.typeOfAct}
               onChange={handleInputChange}
               options={[
+                { value: "", label: "Select The Type Of Act" },
                 { value: "state", label: "State" },
                 { value: "central", label: "Central" },
               ]}
@@ -175,7 +183,7 @@ const CreateCompliance = () => {
                   </span>
                 )}
                 {compliance.documentPdf ? (
-                  <span>Sample...pdf</span>
+                  <span>{fileName.slice(0,4)}..{fileName.slice(-5,)}</span>
                 ) : (
                   <span className="font-semibold">upload</span>
                 )}
@@ -203,7 +211,7 @@ const CreateCompliance = () => {
                 name="state"
                 value={compliance.state}
                 onChange={handleInputChange}
-                className="w-full p-2 border border-bordergray bg-selectbg rounded"
+                className={`${compliance.typeOfAct==="central" ? 'bg-white cursor-not-allowed':'bg-selectbg' }   w-full p-2 border border-bordergray  rounded`}
                 disabled={compliance.typeOfAct === "central"}
               >
                 <option value="">Select the state</option>
@@ -235,9 +243,22 @@ const CreateCompliance = () => {
               onChange={handleInputChange}
               options={[
                 { value: "", label: "Select frequency of compliance" },
-                { value: "frequency 1", label: "Frequency 1" },
-                { value: "frequency 2", label: "Frequency 2" },
-                { value: "frequency 3", label: "Frequency 3" },
+                { value: "Monthly", label: "Monthly" },
+                { value: "Bi-Monthly", label: "Bi-Monthly" },
+                { value: "Quarterly", label: "Quarterly" },
+                { value: "Half-Yearly", label: "Half-Yearly" },
+                { value: "Annual", label: "Annual" },
+                { value: "Bi-Annual", label: "Bi-Annual" },
+                { value: "3 Year Once", label: "3 Year Once" },
+                { value: "4 Year Once", label: "4 Year Once" },
+                { value: "5 Year Once", label: "5 Year Once" },
+                { value: "6 Year Once", label: "6 Year Once" },
+                { value: "7 Year Once", label: "7 Year Once" },
+                { value: "8 Year Once", label: "8 Year Once" },
+                { value: "9 Year Once", label: "9 Year Once" },
+                { value: "10 Year Once", label: "10 Year Once" },
+                { value: "11 Year Once", label: "11 Year Once" },
+                { value: "12 Year Once", label: "12 Year Once" },
               ]}
             />
             <TextInput
@@ -246,6 +267,7 @@ const CreateCompliance = () => {
               value={compliance.remarks}
               placeholder="Enter the remarks"
               onChange={handleInputChange}
+              required={false}
             />
           </div>
         </div>
@@ -258,7 +280,7 @@ const CreateCompliance = () => {
           <Button
             label="Save"
             type="submit"
-            className="text-white bg-primary border border-yellow-500"
+            className="text-white bg-primary border border-primary"
           />
         </div>
       </form>

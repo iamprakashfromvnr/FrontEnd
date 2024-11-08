@@ -7,6 +7,7 @@ export const Columns = [
         name: 'Sno',
         selector: (row) => row.sno,
         sortable: true,
+        left:true,
         width: '100px',
     },
     {

@@ -10,7 +10,7 @@ const Dummy = ({ percent, things }) => {
     return (
         <>
             <div className='relative flex items-center justify-center'>
-                <svg width={50} height={50} className='transform -rotate-90 z-20'>
+                <svg width={50} height={50} className='transform -rotate-90 z-10'>
                     <circle cx={25} cy={25} r={radius} stroke='transparent'
                         strokeWidth={strokeWidth} fill='transparent'
                     />

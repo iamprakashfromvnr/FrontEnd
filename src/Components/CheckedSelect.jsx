@@ -5,10 +5,11 @@ const CheckedSelect = ({ selectedOptions, setSelectedOptions }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectAll, setSelectAll] = useState(false);
     const options = [
-        { id: 'low', label: 'Low' },
-        { id: 'medium', label: 'Medium' },
+        { id: 'Low', label: 'Low' },
+        { id: 'Medium', label: 'Medium' },
         { id: 'High', label: 'High' },
     ];
+    
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
     const handleSelectAll = () => {
         if (!selectAll) {
@@ -30,7 +31,6 @@ const CheckedSelect = ({ selectedOptions, setSelectedOptions }) => {
             toggleDropdown()
         }
     };
-
     return (
         <>
             <button
@@ -39,7 +39,9 @@ const CheckedSelect = ({ selectedOptions, setSelectedOptions }) => {
                 className="flex justify-between items-center w-full p-2 bg-gray-200 border border-bordergray rounded-md shadow-sm"
             >
                 {selectedOptions.length > 0
-                    ? `Selected ${selectedOptions} options`
+                    ? 
+
+                    ` ${selectedOptions} `
                     : 'Select the priority type'}
                 <FaAngleDown />
             </button>
@@ -50,7 +52,7 @@ const CheckedSelect = ({ selectedOptions, setSelectedOptions }) => {
                         <input
                             type="checkbox"
                             id="selectAll"
-                            checked={selectAll}
+                            checked={selectAll && selectedOptions.length === 3}
                             onChange={handleSelectAll}
                             className="mr-2"
                         />

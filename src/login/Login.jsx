@@ -88,7 +88,7 @@ const Login = ({ value }) => {
 
             <form onSubmit={handleSubmit} className="mt-7">
               <h3 className="text-xl font-semibold pb-2 mt-3 mb-3">Login</h3>
-              <label htmlFor="email" className="block pb-1">
+              <label htmlFor="email" className="block pb-1 font-bold">
                 Email ID
               </label>
               <div className="relative flex items-center pb-2">
@@ -99,11 +99,11 @@ const Login = ({ value }) => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full ps-10 pt-2 pb-2 rounded border border-gray-400 "
                   placeholder="Enter Your Email ID"
-                  required
+                  required autoComplete="off"
                 />
                 <AiOutlineMail className="absolute ms-1 text-xl left-2" />
               </div>
-              <label htmlFor="password" className="block p-1">
+              <label htmlFor="password" className="block p-1 font-bold">
                 Password
               </label>
               <div className="relative flex items-center pb-2">

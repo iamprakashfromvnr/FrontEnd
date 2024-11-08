@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 import { PiCaretUpDownFill } from "react-icons/pi";
 import { Link } from 'react-router-dom';
 import { FaSliders } from 'react-icons/fa6';
-import CustomPagination from '../../Components/compliance list/CustomPagination';
+import CustomPagination from '../../Components/CustomPagination';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CiMail } from 'react-icons/ci';
@@ -18,7 +18,8 @@ import ActionMenu from '../../Components/category/ActionMenu';
 const ComplianceReport = () => {
   const [data] = useState(CompanyData);
   const [startDate, setStartDate] = useState(null);
-
+  const [EndDate, setEndDate] = useState(null);
+  const [isDatePickerActive, setIsDatePickerActive] = useState(false);
   const [search, setSearch] = useState('');
   const [count, setCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
@@ -64,16 +65,20 @@ const ComplianceReport = () => {
       [filterName]: !filters[filterName],
     });
   };
-
-  var filter = CompanyData.filter((item) => {
-    const formattedFiledDate = startDate ? moment(startDate).format('DD-MM-YYYY') : '';
-
+  const filter = CompanyData.filter((item) => {
+    const itemFiledDate = moment(item.Filed_Date, 'DD-MM-YYYY'); // Ensure consistent date format
+  
+    // Only filter by date range if both dates are set
+    const isDateInRange =
+      startDate && EndDate
+        ? itemFiledDate.isBetween(moment(startDate), moment (EndDate), null, '[]')
+        : true; // If no date range selected, show all records
     return (
+      isDateInRange &&
       (selectValue.Company_Name ? item.Company_Name === selectValue.Company_Name : true) &&
       (selectValue.Branch ? item.Branch === selectValue.Branch : true) &&
       (selectValue.Activity ? item.Activity === selectValue.Activity : true) &&
       (selectValue.Status ? item.Status === selectValue.Status : true) &&
-      (formattedFiledDate ? item.Filed_Date === formattedFiledDate : true) &&
       (item.Company_Name.toLowerCase().includes(search.toLowerCase()) ||
         item.Branch.toLowerCase().includes(search.toLowerCase()) ||
         item.Activity.toLowerCase().includes(search.toLowerCase()) ||
@@ -89,8 +94,32 @@ const ComplianceReport = () => {
     );
   });
 
+  // const filter = CompanyData.filter((item) => {
+  //   const formattedFiledDate = startDate && EndDate ? moment(startDate,EndDate).format('DD-MM-YYYY') : '';
+
+  //   return (
+  //     (selectValue.Company_Name ? item.Company_Name === selectValue.Company_Name : true) &&
+  //     (selectValue.Branch ? item.Branch === selectValue.Branch : true) &&
+  //     (selectValue.Activity ? item.Activity === selectValue.Activity : true) &&
+  //     (selectValue.Status ? item.Status === selectValue.Status : true) &&
+  //     (formattedFiledDate ? item.Filed_Date === formattedFiledDate : true) &&
+  //     (item.Company_Name.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Branch.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Activity.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Form_name.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Acts.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.ActType.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.state.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Filed_Date.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Period.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Document.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Priority.toLowerCase().includes(search.toLowerCase()) ||
+  //       item.Status.toLowerCase().includes(search.toLowerCase()))
+  //   );
+  // });
+
   const totalPages = Math.ceil(filter.length / itemsPerPage);
-  filter = filter.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const pagination = filter.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   useEffect(() => {
     setCount(selectValue.length);
@@ -125,6 +154,14 @@ const ComplianceReport = () => {
     link.click();
     document.body.removeChild(link);
   };
+  useEffect(() => {
+    if (currentPage > totalPages) {
+        setCurrentPage(totalPages);
+    }}, [filter, currentPage, totalPages])
+    const handlePageChange = (newPage) => {
+      setCurrentPage(newPage);
+    };
+
 
   return (
     <div className='p-2 -z-50'>
@@ -137,54 +174,76 @@ const ComplianceReport = () => {
         </div>
       </div>
 
-      <div className='relative py-6 flex justify-start items-center flex-wrap gap-5 mb-4'>
+      <div className='relative py-6 flex justify-start items-center flex-wrap gap-3 mb-4'>
         {filters.companyname && (
-          <select className='w-full lg:w-36 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.Company_Name} onChange={(e) => setSelectValue({ ...selectValue, Company_Name: e.target.value })}>
+          <select className='w-full lg:w-36 bg-white py-2 px-4 rounded-md border border-bordergray' value={selectValue.Company_Name} onChange={(e) => setSelectValue({ ...selectValue, Company_Name: e.target.value })}>
             <option value="">Company</option>
-            {CompanyData.map((item) => <option key={item.Company_Name} value={item.Company_Name}>{item.Company_Name}</option>)}
+            {/* {CompanyData.map((item) => <option key={item.Company_Name} value={item.Company_Name}>{item.Company_Name}</option>)} */}
+            {[...new Set(CompanyData.map((data) => data.Company_Name))].map((company, index) => (
+                            <option key={index} value={company}>{company}</option>
+                        ))}
           </select>
+
         )}
         
         {filters.branch && (
-          <select className='w-full lg:w-36 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
+          <select className='w-full lg:w-36 bg-white py-2 px-4 rounded-md border border-bordergray' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
             <option value="">Branch</option>
-            {CompanyData.map((item) => <option key={item.Branch} value={item.Branch}>{item.Branch}</option>)}
+            {[...new Set(CompanyData.map((data) => data.Branch))].map((branch, index) => (
+                            <option key={index} value={branch}>{branch}</option>
+                        ))}
           </select>
         )}
         {filters.activity && (
-          <select className='w-full lg:w-36 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.Activity} onChange={(e) => setSelectValue({ ...selectValue, Activity: e.target.value })}>
+          <select className='w-full lg:w-36 bg-white py-2 px-4 rounded-md border border-bordergray' value={selectValue.Activity} onChange={(e) => setSelectValue({ ...selectValue, Activity: e.target.value })}>
             <option value="">Activity</option>
-            {CompanyData.map((item) => <option key={item.Activity} value={item.Activity}>{item.Activity}</option>)}
+            {[...new Set(CompanyData.map((data) => data.Activity))].map((activity, index) => (
+                            <option key={index} value={activity}>{activity}</option>
+                        ))}
           </select>
         )}
         {filters.status && (
-          <select className='w-full lg:w-36 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.Status} onChange={(e) => setSelectValue({ ...selectValue, Status: e.target.value })}>
+          <select className='w-full lg:w-36 bg-white py-2 px-4 rounded-md border border-bordergray' value={selectValue.Status} onChange={(e) => setSelectValue({ ...selectValue, Status: e.target.value })}>
             <option value="">Status</option>
-            {CompanyData.map((item) => <option key={item.Status} value={item.Status}>{item.Status}</option>)}
+            {[...new Set(CompanyData.map((data) => data.Status))].map((status, index) => (
+                            <option key={index} value={status}>{status}</option>
+                        ))}
           </select>
         )}
         {filters.filtedate && (
-          <div className='relative lg:w-auto w-96'>
+          <div className='relative lg:w-auto w-96 '>
             <DatePicker
-              className='focus-visible focus-visible:outline-none lg:w-36 w-96  py-1.5 ps-2 border border-bordergray rounded-md z-50'
+              className='focus-visible focus-visible:outline-none lg:w-36 w-96   py-1.5 ps-2 border border-bordergray rounded-md z-50'
               selected={startDate}
+              startDate={startDate}
+              endDate={EndDate}
               onChange={(date) => {
-                setStartDate(date);
+                const [start,end]=date;
+                setStartDate(start);
+                setEndDate(end)
                 setSelectValue({
                   ...selectValue,
                   Filed_Date: date
                 });
               }}
+              selectsRange={true}
+              onCalendarOpen={() => setIsDatePickerActive(true)}
+
+              isClearable={true}
               placeholderText="Select Date"
               dateFormat="dd-MM-yyyy"
             />
-            <span className='absolute top-2 right-2'><MdOutlineCalendarMonth size={20}/></span>
+          {!isDatePickerActive && (
+          <span className="absolute top-2 right-2">
+            <MdOutlineCalendarMonth size={20} />
+          </span>
+        )}
             </div>
             
         )}
         <span className='w-full lg:w-36 relative'>
-          <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
-          <IoIosSearch className='absolute top-2.5 left-2' size={20} />
+          <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md placeholder:text-black' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
+          <IoIosSearch className='absolute top-1.5 left-2 text-input' size={23} />
         </span>
         <span className='relative'>
           <FaSliders size={35} className="p-1.5 bg-white border border-bordergray rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
@@ -373,7 +432,7 @@ const ComplianceReport = () => {
         ]
         }
          sortIcon={<PiCaretUpDownFill />}
-        data={filter}
+        data={pagination}
         responsive
         selectableRows
         fixedHeader
@@ -389,7 +448,7 @@ const ComplianceReport = () => {
           <option value="20">Show 20</option>
           <option value="30">Show 30</option>
         </select>
-        <CustomPagination currentPage={currentPage} totalPages={totalPages} onPageChange={(page) => setCurrentPage(page)} />
+        <CustomPagination page={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
     </div>
   );

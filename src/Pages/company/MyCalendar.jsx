@@ -121,20 +121,20 @@ const MyCalendar = () => {
           <h4 className="text-md font-bold">Ace Corporation, <span className="text-md font-medium">Bangalore</span></h4>
         </span>
         <span className="flex justify-between items-center gap-3">
-          <AiOutlineMail className='w-8 h-8 p-1.5 bg-yellow-500 text-white rounded-full' size={15} />
-          <MdOutlineFileDownload className='w-8 h-8 p-1.5 bg-yellow-500 text-white rounded-full' size={15} />
+          <AiOutlineMail className='w-8 h-8 p-1.5 bg-primary text-white rounded-full' size={15} />
+          <MdOutlineFileDownload className='w-8 h-8 p-1.5 bg-primary text-white rounded-full' size={15} />
         </span>
       </div>
 
       <div className="flex justify-start my-4 ms-5 gap-3">
-        <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5">
+        <select className="bg-white border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5">
           <option>Status</option>
           <option>2</option>
         </select>
         <select
           value={view}
           onChange={(e) => setView(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5">
+          className="bg-white border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5">
           <option value="month">Month</option>
           <option value="week">Week</option>
           <option value="day">Day</option>
@@ -143,16 +143,16 @@ const MyCalendar = () => {
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           placeholderText="Date Range"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
+          className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
         />
-        <input type='text' placeholder='search' value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5" />
+        <input type='text' placeholder='search' value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5" />
       </div>
 
       <div className="App">
         <Calendar className='-z-50'
           localizer={localizer}
           events={convertedEvents}
-          style={{ height: 800, margin: '20px' }}
+          style={{ height: 800, margin: '20px', }}
           view={view}
           onView={(newView) => setView(newView)}
           header={false}

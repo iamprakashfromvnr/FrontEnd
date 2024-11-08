@@ -1,3 +1,335 @@
+// export const Data = [
+//     {
+//         "sno": "1",
+//         "company": "Company 1 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 1",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "1",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "2",
+//         "company": "Company 2 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 2",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "2",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "3",
+//         "company": "Company 3 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 3",
+//         "compliance": "Trade License",
+//         "staff": "Swetha",
+//         "priority": "Low",
+//         "score": "3",
+//         "status": "Not Complied"
+//     },
+//     {
+//         "sno": "4",
+//         "company": "Company 4 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 4",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "4",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "5",
+//         "company": "Company 5 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 5",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "High",
+//         "score": "5",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "6",
+//         "company": "Company 6 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 6",
+//         "compliance": "PF Remittance",
+//         "staff": "Swetha",
+//         "priority": "Medium",
+//         "score": "6",
+//         "status": "Not Complied"
+//     },
+//     {
+//         "sno": "7",
+//         "company": "Company 7 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 7",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "7",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "8",
+//         "company": "Company 8 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 8",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "8",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "9",
+//         "company": "Company 9 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 9",
+//         "compliance": "Trade License",
+//         "staff": "Swetha",
+//         "priority": "Low",
+//         "score": "9",
+//         "status": "Not Complied"
+//     },
+//     {
+//         "sno": "10",
+//         "company": "Company 10 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 10",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "High",
+//         "score": "0",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "11",
+//         "company": "Company 11 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 11",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "1",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "12",
+//         "company": "Company 12 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 12",
+//         "compliance": "PF Remittance",
+//         "staff": "Swetha",
+//         "priority": "Medium",
+//         "score": "2",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "13",
+//         "company": "Company 13 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 13",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "3",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "14",
+//         "company": "Company 14 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 14",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "4",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "15",
+//         "company": "Company 15 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 15",
+//         "compliance": "Trade License",
+//         "staff": "Swetha",
+//         "priority": "High",
+//         "score": "5",
+//         "status": "Not Complied"
+//     },
+//     {
+//         "sno": "16",
+//         "company": "Company 16 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 16",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "6",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "17",
+//         "company": "Company 17 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 17",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "7",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "18",
+//         "company": "Company 18 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 18",
+//         "compliance": "PF Remittance",
+//         "staff": "Swetha",
+//         "priority": "Medium",
+//         "score": "8",
+//         "status": "Not Complied"
+//     },
+//     {
+//         "sno": "19",
+//         "company": "Company 19 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 19",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "9",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "20",
+//         "company": "Company 20 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 20",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "High",
+//         "score": "0",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "21",
+//         "company": "Company 21 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 21",
+//         "compliance": "Trade License",
+//         "staff": "Swetha",
+//         "priority": "Low",
+//         "score": "1",
+//         "status": "Not Complied"
+//     },
+//     {
+//         "sno": "22",
+//         "company": "Company 22 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 22",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "2",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "23",
+//         "company": "Company 23 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 23",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "3",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "24",
+//         "company": "Company 24 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 24",
+//         "compliance": "PF Remittance",
+//         "staff": "Swetha",
+//         "priority": "Medium",
+//         "score": "4",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "25",
+//         "company": "Company 25 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 25",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "High",
+//         "score": "5",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "26",
+//         "company": "Company 26 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 26",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "6",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "27",
+//         "company": "Company 27 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 27",
+//         "compliance": "Trade License",
+//         "staff": "Swetha",
+//         "priority": "Low",
+//         "score": "7",
+//         "status": "Partially Complied"
+//     },
+//     {
+//         "sno": "28",
+//         "company": "Company 28 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 28",
+//         "compliance": "PF Remittance",
+//         "staff": "Ashok",
+//         "priority": "Medium",
+//         "score": "8",
+//         "status": "Complied"
+//     },
+//     {
+//         "sno": "29",
+//         "company": "Company 29 Technologies India Private Limited",
+//         "state": "Maharashtra",
+//         "branch": "Branch 29",
+//         "compliance": "Trade License",
+//         "staff": "Ashok",
+//         "priority": "Low",
+//         "score": "9",
+//         "status": "Over Due"
+//     },
+//     {
+//         "sno": "30",
+//         "company": "Company 30 Technologies India Private Limited",
+//         "state": "Tamil Nadu",
+//         "branch": "Branch 30",
+//         "compliance": "PF Remittance",
+//         "staff": "Swetha",
+//         "priority": "High",
+//         "score": "0",
+//         "status": "Not Complied"
+//     }
+// ]
 export const Data = [
     {
         "sno": "1",
@@ -6,8 +338,8 @@ export const Data = [
         "branch": "Branch 1",
         "compliance": "Trade License",
         "staff": "Ashok",
-        "priority": "Low",
-        "score": "1",
+        "priority": "High",
+        "score": "0",
         "status": "Over Due"
     },
     {
@@ -16,10 +348,10 @@ export const Data = [
         "state": "Tamil Nadu",
         "branch": "Branch 2",
         "compliance": "PF Remittance",
-        "staff": "Ashok",
-        "priority": "Medium",
-        "score": "2",
-        "status": "Over Due"
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "1",
+        "status": "Partially Complied"
     },
     {
         "sno": "3",
@@ -29,8 +361,8 @@ export const Data = [
         "compliance": "Trade License",
         "staff": "Swetha",
         "priority": "Low",
-        "score": "3",
-        "status": "Not Complied"
+        "score": "2",
+        "status": "Partially Complied"
     },
     {
         "sno": "4",
@@ -40,8 +372,8 @@ export const Data = [
         "compliance": "PF Remittance",
         "staff": "Ashok",
         "priority": "Medium",
-        "score": "4",
-        "status": "Complied"
+        "score": "3",
+        "status": "Partially Complied"
     },
     {
         "sno": "5",
@@ -49,9 +381,9 @@ export const Data = [
         "state": "Maharashtra",
         "branch": "Branch 5",
         "compliance": "Trade License",
-        "staff": "Ashok",
-        "priority": "High",
-        "score": "5",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "4",
         "status": "Over Due"
     },
     {
@@ -61,9 +393,9 @@ export const Data = [
         "branch": "Branch 6",
         "compliance": "PF Remittance",
         "staff": "Swetha",
-        "priority": "Medium",
-        "score": "6",
-        "status": "Not Complied"
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
     },
     {
         "sno": "7",
@@ -72,9 +404,9 @@ export const Data = [
         "branch": "Branch 7",
         "compliance": "Trade License",
         "staff": "Ashok",
-        "priority": "Low",
-        "score": "7",
-        "status": "Over Due"
+        "priority": "Medium",
+        "score": "6",
+        "status": "Not Complied"
     },
     {
         "sno": "8",
@@ -82,9 +414,9 @@ export const Data = [
         "state": "Tamil Nadu",
         "branch": "Branch 8",
         "compliance": "PF Remittance",
-        "staff": "Ashok",
-        "priority": "Medium",
-        "score": "8",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "7",
         "status": "Complied"
     },
     {
@@ -95,8 +427,8 @@ export const Data = [
         "compliance": "Trade License",
         "staff": "Swetha",
         "priority": "Low",
-        "score": "9",
-        "status": "Not Complied"
+        "score": "8",
+        "status": "Over Due"
     },
     {
         "sno": "10",
@@ -105,9 +437,9 @@ export const Data = [
         "branch": "Branch 10",
         "compliance": "PF Remittance",
         "staff": "Ashok",
-        "priority": "High",
-        "score": "0",
-        "status": "Over Due"
+        "priority": "Medium",
+        "score": "9",
+        "status": "Partially Complied"
     },
     {
         "sno": "11",
@@ -115,10 +447,10 @@ export const Data = [
         "state": "Maharashtra",
         "branch": "Branch 11",
         "compliance": "Trade License",
-        "staff": "Ashok",
-        "priority": "Low",
-        "score": "1",
-        "status": "Over Due"
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "0",
+        "status": "Partially Complied"
     },
     {
         "sno": "12",
@@ -127,9 +459,9 @@ export const Data = [
         "branch": "Branch 12",
         "compliance": "PF Remittance",
         "staff": "Swetha",
-        "priority": "Medium",
-        "score": "2",
-        "status": "Complied"
+        "priority": "Low",
+        "score": "1",
+        "status": "Partially Complied"
     },
     {
         "sno": "13",
@@ -138,8 +470,8 @@ export const Data = [
         "branch": "Branch 13",
         "compliance": "Trade License",
         "staff": "Ashok",
-        "priority": "Low",
-        "score": "3",
+        "priority": "Medium",
+        "score": "2",
         "status": "Over Due"
     },
     {
@@ -148,10 +480,10 @@ export const Data = [
         "state": "Tamil Nadu",
         "branch": "Branch 14",
         "compliance": "PF Remittance",
-        "staff": "Ashok",
-        "priority": "Medium",
-        "score": "4",
-        "status": "Over Due"
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "3",
+        "status": "Partially Complied"
     },
     {
         "sno": "15",
@@ -160,9 +492,9 @@ export const Data = [
         "branch": "Branch 15",
         "compliance": "Trade License",
         "staff": "Swetha",
-        "priority": "High",
-        "score": "5",
-        "status": "Not Complied"
+        "priority": "Low",
+        "score": "4",
+        "status": "Complied"
     },
     {
         "sno": "16",
@@ -171,9 +503,9 @@ export const Data = [
         "branch": "Branch 16",
         "compliance": "PF Remittance",
         "staff": "Ashok",
-        "priority": "Medium",
-        "score": "6",
-        "status": "Complied"
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
     },
     {
         "sno": "17",
@@ -181,9 +513,9 @@ export const Data = [
         "state": "Maharashtra",
         "branch": "Branch 17",
         "compliance": "Trade License",
-        "staff": "Ashok",
+        "staff": "Swetha",
         "priority": "Low",
-        "score": "7",
+        "score": "6",
         "status": "Over Due"
     },
     {
@@ -193,9 +525,9 @@ export const Data = [
         "branch": "Branch 18",
         "compliance": "PF Remittance",
         "staff": "Swetha",
-        "priority": "Medium",
-        "score": "8",
-        "status": "Not Complied"
+        "priority": "Low",
+        "score": "7",
+        "status": "Partially Complied"
     },
     {
         "sno": "19",
@@ -204,9 +536,9 @@ export const Data = [
         "branch": "Branch 19",
         "compliance": "Trade License",
         "staff": "Ashok",
-        "priority": "Low",
-        "score": "9",
-        "status": "Over Due"
+        "priority": "Medium",
+        "score": "8",
+        "status": "Not Complied"
     },
     {
         "sno": "20",
@@ -214,10 +546,10 @@ export const Data = [
         "state": "Tamil Nadu",
         "branch": "Branch 20",
         "compliance": "PF Remittance",
-        "staff": "Ashok",
-        "priority": "High",
-        "score": "0",
-        "status": "Complied"
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "9",
+        "status": "Partially Complied"
     },
     {
         "sno": "21",
@@ -226,9 +558,9 @@ export const Data = [
         "branch": "Branch 21",
         "compliance": "Trade License",
         "staff": "Swetha",
-        "priority": "Low",
-        "score": "1",
-        "status": "Not Complied"
+        "priority": "High",
+        "score": "0",
+        "status": "Over Due"
     },
     {
         "sno": "22",
@@ -238,8 +570,8 @@ export const Data = [
         "compliance": "PF Remittance",
         "staff": "Ashok",
         "priority": "Medium",
-        "score": "2",
-        "status": "Over Due"
+        "score": "1",
+        "status": "Complied"
     },
     {
         "sno": "23",
@@ -247,10 +579,10 @@ export const Data = [
         "state": "Maharashtra",
         "branch": "Branch 23",
         "compliance": "Trade License",
-        "staff": "Ashok",
+        "staff": "Swetha",
         "priority": "Low",
-        "score": "3",
-        "status": "Over Due"
+        "score": "2",
+        "status": "Partially Complied"
     },
     {
         "sno": "24",
@@ -259,9 +591,9 @@ export const Data = [
         "branch": "Branch 24",
         "compliance": "PF Remittance",
         "staff": "Swetha",
-        "priority": "Medium",
-        "score": "4",
-        "status": "Complied"
+        "priority": "Low",
+        "score": "3",
+        "status": "Partially Complied"
     },
     {
         "sno": "25",
@@ -270,8 +602,8 @@ export const Data = [
         "branch": "Branch 25",
         "compliance": "Trade License",
         "staff": "Ashok",
-        "priority": "High",
-        "score": "5",
+        "priority": "Medium",
+        "score": "4",
         "status": "Over Due"
     },
     {
@@ -280,10 +612,10 @@ export const Data = [
         "state": "Tamil Nadu",
         "branch": "Branch 26",
         "compliance": "PF Remittance",
-        "staff": "Ashok",
-        "priority": "Medium",
-        "score": "6",
-        "status": "Over Due"
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
     },
     {
         "sno": "27",
@@ -293,7 +625,7 @@ export const Data = [
         "compliance": "Trade License",
         "staff": "Swetha",
         "priority": "Low",
-        "score": "7",
+        "score": "6",
         "status": "Partially Complied"
     },
     {
@@ -304,8 +636,8 @@ export const Data = [
         "compliance": "PF Remittance",
         "staff": "Ashok",
         "priority": "Medium",
-        "score": "8",
-        "status": "Complied"
+        "score": "7",
+        "status": "Partially Complied"
     },
     {
         "sno": "29",
@@ -313,9 +645,9 @@ export const Data = [
         "state": "Maharashtra",
         "branch": "Branch 29",
         "compliance": "Trade License",
-        "staff": "Ashok",
+        "staff": "Swetha",
         "priority": "Low",
-        "score": "9",
+        "score": "8",
         "status": "Over Due"
     },
     {
@@ -325,8 +657,778 @@ export const Data = [
         "branch": "Branch 30",
         "compliance": "PF Remittance",
         "staff": "Swetha",
+        "priority": "Low",
+        "score": "9",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "31",
+        "company": "Company 31 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 31",
+        "compliance": "Trade License",
+        "staff": "Ashok",
         "priority": "High",
         "score": "0",
         "status": "Not Complied"
+    },
+    {
+        "sno": "32",
+        "company": "Company 32 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 32",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "1",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "33",
+        "company": "Company 33 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 33",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "2",
+        "status": "Over Due"
+    },
+    {
+        "sno": "34",
+        "company": "Company 34 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 34",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "3",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "35",
+        "company": "Company 35 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 35",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "4",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "36",
+        "company": "Company 36 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 36",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "5",
+        "status": "Complied"
+    },
+    {
+        "sno": "37",
+        "company": "Company 37 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 37",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "6",
+        "status": "Over Due"
+    },
+    {
+        "sno": "38",
+        "company": "Company 38 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 38",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "7",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "39",
+        "company": "Company 39 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 39",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "8",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "40",
+        "company": "Company 40 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 40",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "9",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "41",
+        "company": "Company 41 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 41",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "0",
+        "status": "Over Due"
+    },
+    {
+        "sno": "42",
+        "company": "Company 42 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 42",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "1",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "43",
+        "company": "Company 43 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 43",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "2",
+        "status": "Not Complied"
+    },
+    {
+        "sno": "44",
+        "company": "Company 44 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 44",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "3",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "45",
+        "company": "Company 45 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 45",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "4",
+        "status": "Over Due"
+    },
+    {
+        "sno": "46",
+        "company": "Company 46 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 46",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "47",
+        "company": "Company 47 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 47",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "6",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "48",
+        "company": "Company 48 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 48",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "7",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "49",
+        "company": "Company 49 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 49",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "8",
+        "status": "Over Due"
+    },
+    {
+        "sno": "50",
+        "company": "Company 50 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 50",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "9",
+        "status": "Complied"
+    },
+    {
+        "sno": "51",
+        "company": "Company 51 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 51",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "0",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "52",
+        "company": "Company 52 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 52",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "1",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "53",
+        "company": "Company 53 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 53",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "2",
+        "status": "Over Due"
+    },
+    {
+        "sno": "54",
+        "company": "Company 54 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 54",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "3",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "55",
+        "company": "Company 55 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 55",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "4",
+        "status": "Not Complied"
+    },
+    {
+        "sno": "56",
+        "company": "Company 56 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 56",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "57",
+        "company": "Company 57 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 57",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "6",
+        "status": "Over Due"
+    },
+    {
+        "sno": "58",
+        "company": "Company 58 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 58",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "7",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "59",
+        "company": "Company 59 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 59",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "8",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "60",
+        "company": "Company 60 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 60",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "9",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "61",
+        "company": "Company 61 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 61",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "High",
+        "score": "0",
+        "status": "Over Due"
+    },
+    {
+        "sno": "62",
+        "company": "Company 62 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 62",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "1",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "63",
+        "company": "Company 63 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 63",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "2",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "64",
+        "company": "Company 64 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 64",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "3",
+        "status": "Complied"
+    },
+    {
+        "sno": "65",
+        "company": "Company 65 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 65",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "4",
+        "status": "Over Due"
+    },
+    {
+        "sno": "66",
+        "company": "Company 66 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 66",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "67",
+        "company": "Company 67 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 67",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "6",
+        "status": "Not Complied"
+    },
+    {
+        "sno": "68",
+        "company": "Company 68 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 68",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "7",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "69",
+        "company": "Company 69 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 69",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "8",
+        "status": "Over Due"
+    },
+    {
+        "sno": "70",
+        "company": "Company 70 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 70",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "9",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "71",
+        "company": "Company 71 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 71",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "0",
+        "status": "Complied"
+    },
+    {
+        "sno": "72",
+        "company": "Company 72 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 72",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "1",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "73",
+        "company": "Company 73 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 73",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "2",
+        "status": "Over Due"
+    },
+    {
+        "sno": "74",
+        "company": "Company 74 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 74",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "3",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "75",
+        "company": "Company 75 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 75",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "4",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "76",
+        "company": "Company 76 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 76",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "77",
+        "company": "Company 77 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 77",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "6",
+        "status": "Over Due"
+    },
+    {
+        "sno": "78",
+        "company": "Company 78 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 78",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "7",
+        "status": "Complied"
+    },
+    {
+        "sno": "79",
+        "company": "Company 79 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 79",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "8",
+        "status": "Not Complied"
+    },
+    {
+        "sno": "80",
+        "company": "Company 80 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 80",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "9",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "81",
+        "company": "Company 81 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 81",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "0",
+        "status": "Over Due"
+    },
+    {
+        "sno": "82",
+        "company": "Company 82 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 82",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "1",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "83",
+        "company": "Company 83 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 83",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "2",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "84",
+        "company": "Company 84 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 84",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "3",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "85",
+        "company": "Company 85 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 85",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "4",
+        "status": "Over Due"
+    },
+    {
+        "sno": "86",
+        "company": "Company 86 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 86",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "87",
+        "company": "Company 87 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 87",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "6",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "88",
+        "company": "Company 88 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 88",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "7",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "89",
+        "company": "Company 89 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 89",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "8",
+        "status": "Over Due"
+    },
+    {
+        "sno": "90",
+        "company": "Company 90 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 90",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "9",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "91",
+        "company": "Company 91 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 91",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "High",
+        "score": "0",
+        "status": "Not Complied"
+    },
+    {
+        "sno": "92",
+        "company": "Company 92 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 92",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "1",
+        "status": "Complied"
+    },
+    {
+        "sno": "93",
+        "company": "Company 93 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 93",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "2",
+        "status": "Over Due"
+    },
+    {
+        "sno": "94",
+        "company": "Company 94 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 94",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "3",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "95",
+        "company": "Company 95 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 95",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "4",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "96",
+        "company": "Company 96 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 96",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "High",
+        "score": "5",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "97",
+        "company": "Company 97 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 97",
+        "compliance": "Trade License",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "6",
+        "status": "Over Due"
+    },
+    {
+        "sno": "98",
+        "company": "Company 98 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 98",
+        "compliance": "PF Remittance",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "7",
+        "status": "Partially Complied"
+    },
+    {
+        "sno": "99",
+        "company": "Company 99 Technologies India Private Limited",
+        "state": "Maharashtra",
+        "branch": "Branch 99",
+        "compliance": "Trade License",
+        "staff": "Swetha",
+        "priority": "Low",
+        "score": "8",
+        "status": "Complied"
+    },
+    {
+        "sno": "100",
+        "company": "Company 100 Technologies India Private Limited",
+        "state": "Tamil Nadu",
+        "branch": "Branch 100",
+        "compliance": "PF Remittance",
+        "staff": "Ashok",
+        "priority": "Medium",
+        "score": "9",
+        "status": "Partially Complied"
     }
-]
+]   

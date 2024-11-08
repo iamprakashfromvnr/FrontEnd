@@ -54,7 +54,7 @@ const Activity = ({ activities, filters }) => {
     );
   });
   return (
-    <div className="p-4 bg-white rounded-lg border mt-4 mb-4">
+    <div className="p-4 bg-white rounded-lg border border-selectbg shadow-lg mt-4 mb-4">
       <h3 className="text-lg font-semibold mb-4">Upcoming Activity</h3>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">

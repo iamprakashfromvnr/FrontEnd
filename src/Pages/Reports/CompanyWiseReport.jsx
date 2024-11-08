@@ -99,7 +99,7 @@ import { PiCaretUpDownFill } from "react-icons/pi";
 import CompanyData from '../../Components/reports/CompanyDatas';
 import { Link } from 'react-router-dom';
 import { FaSliders } from 'react-icons/fa6';
-import CustomPagination from '../../Components/compliance list/CustomPagination';
+import CustomPagination from '../../Components/CustomPagination';
 import { CompanyColumns } from '../../Components/reports/CompanyColumns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -159,8 +159,8 @@ const CompanyWiseReport = () => {
     });
   };
 
-  // Filter the data based on the selected filters
-  var filter = CompanyData.filter((item) => {
+  
+  const filter = CompanyData.filter((item) => {
     const formattedFiledDate = startDate ? moment(startDate).format('DD-MM-YYYY') : '';
 
     return (
@@ -187,11 +187,11 @@ const CompanyWiseReport = () => {
   });
 
   const totalPages = Math.ceil(filter.length / itemsPerPage);
-  filter = filter.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const pagination = filter.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-  useEffect(() => {
-    setCount(selectValue.length);
-  }, [selectValue]);
+  // useEffect(() => {
+  //   setCount(selectValue.length);
+  // }, [selectValue]);
 
   const customStyles = {
     rows: {
@@ -211,6 +211,14 @@ const CompanyWiseReport = () => {
       }
     },
   };
+  useEffect(() => {
+    if (currentPage > totalPages) {
+        setCurrentPage(totalPages);
+    }
+}, [filter, currentPage, totalPages])
+const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+};
 
   const downloadCSV = () => {
     const csv = data.map(row => Object.values(row).join(',')).join('\n');
@@ -226,7 +234,7 @@ const CompanyWiseReport = () => {
   return (
     <div className='p-2 -z-50'>
       <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
-        <h2 className='font-semibold text-lg'>Companywise Report ({filter.length})</h2>
+        <h2 className='font-semibold text-lg'>Company Wise Report ({filter.length})</h2>
         <div className='flex gap-3'>
           <button><FiPrinter className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
           <button><CiMail className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
@@ -234,35 +242,48 @@ const CompanyWiseReport = () => {
         </div>
       </div>
 
-      <div className='relative py-6 flex justify-start items-center flex-wrap gap-5 mb-4'>
+      <div className='relative py-6 flex justify-start items-center flex-wrap gap-3 mb-4'>
         {filters.companyname && (
-          <select className='w-full lg:w-36 py-2 px-4 rounded-md border border-bordergray bg-selectbg ' value={selectValue.Company_Name} onChange={(e) => setSelectValue({ ...selectValue, Company_Name: e.target.value })}>
+          <select className='w-full lg:w-32 py-2 px-4 rounded-md border border-bordergray bg-white ' value={selectValue.Company_Name} onChange={(e) => setSelectValue({ ...selectValue, Company_Name: e.target.value })}>
             <option value="">Company</option>
-            {CompanyData.map((item) => <option key={item.Company_Name} value={item.Company_Name}>{item.Company_Name}</option>)}
+            {[...new Set(CompanyData.map((data) => data.Company_Name))].map((company, index) => (
+                            <option key={index} value={company}>{company}</option>
+                        ))}
           </select>
         )}
         {filters.state && (
-          <select className='w-full lg:w-36 py-2 px-4 rounded-md border border-bordergray bg-selectbg ' value={selectValue.State} onChange={(e) => setSelectValue({ ...selectValue, State: e.target.value })}>
+          <select className='w-full lg:w-32 py-2 px-4 rounded-md border border-bordergray bg-white ' value={selectValue.State} onChange={(e) => setSelectValue({ ...selectValue, State: e.target.value })}>
             <option value="">State</option>
-            {CompanyData.map((item) => <option key={item.State} value={item.State}>{item.State}</option>)}
+            {[...new Set(CompanyData.map((data) => data.State))].map((state, index) => (
+                            <option key={index} value={state}>{state}</option>
+                        ))}
+            {/* {CompanyData.map((item) => <option key={item.State} value={item.State}>{item.State}</option>)} */}
           </select>
         )}
         {filters.branch && (
-          <select className='w-full lg:w-36 py-2 px-4 rounded-md border border-bordergray bg-selectbg ' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
+          <select className='w-full lg:w-32 py-2 px-4 rounded-md border border-bordergray bg-white ' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
             <option value="">Branch</option>
-            {CompanyData.map((item) => <option key={item.Branch} value={item.Branch}>{item.Branch}</option>)}
+            {/* {CompanyData.map((item) => <option key={item.Branch} value={item.Branch}>{item.Branch}</option>)} */}
+            {[...new Set(CompanyData.map((data) => data.Branch))].map((branch, index) => (
+                            <option key={index} value={branch}>{branch}</option>
+                        ))}
           </select>
         )}
         {filters.activity && (
-          <select className='w-full lg:w-36 py-2 px-4 rounded-md border border-bordergray bg-selectbg ' value={selectValue.Activity} onChange={(e) => setSelectValue({ ...selectValue, Activity: e.target.value })}>
+          <select className='w-full lg:w-32 py-2 px-4 rounded-md border border-bordergray bg-white ' value={selectValue.Activity} onChange={(e) => setSelectValue({ ...selectValue, Activity: e.target.value })}>
             <option value="">Activity</option>
-            {CompanyData.map((item) => <option key={item.Activity} value={item.Activity}>{item.Activity}</option>)}
+            {[...new Set(CompanyData.map((data) => data.Activity))].map((activity, index) => (
+                            <option key={index} value={activity}>{activity}</option>
+                        ))}
+            {/* {CompanyData.map((item) => <option key={item.Activity} value={item.Activity}>{item.Activity}</option>)} */}
           </select>
         )}
         {filters.status && (
-          <select className='w-full lg:w-36 py-2 px-4 rounded-md border border-bordergray bg-selectbg ' value={selectValue.Status} onChange={(e) => setSelectValue({ ...selectValue, Status: e.target.value })}>
+          <select className='w-full lg:w-32 py-2 px-4 rounded-md border border-bordergray bg-white ' value={selectValue.Status} onChange={(e) => setSelectValue({ ...selectValue, Status: e.target.value })}>
             <option value="">Status</option>
-            {CompanyData.map((item) => <option key={item.Status} value={item.Status}>{item.Status}</option>)}
+            {[...new Set(CompanyData.map((data) => data.Status))].map((status, index) => (
+                            <option key={index} value={status}>{status}</option>
+                        ))}
           </select>
         )}
         {filters.filedate && (
@@ -285,11 +306,11 @@ const CompanyWiseReport = () => {
             
         )}
         <span className='w-full lg:w-36 relative'>
-          <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
-          <IoIosSearch className='absolute top-2.5 left-2' size={20} />
+          <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md placeholder:text-black ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
+          <IoIosSearch className='absolute top-1.5 left-2 text-input' size={23} />
         </span>
         <span className='relative'>
-          <FaSliders size={35} className="p-1.5 bg-white border border-gray-400 rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
+          <FaSliders size={35} className="p-1.5 bg-white border border-bordergray rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
           <div className='absolute z-30 lg:-left-44 left-0 top-10'>
             {showMenu && (
               <div className='border border-gray-300 rounded-md p-4 w-56 bg-white shadow-md'>
@@ -481,7 +502,7 @@ const CompanyWiseReport = () => {
         
         ]
         } sortIcon={<PiCaretUpDownFill />}
-        data={filter}
+        data={pagination}
         responsive
         selectableRows
         fixedHeader
@@ -496,7 +517,7 @@ const CompanyWiseReport = () => {
           <option value="20">Show 20</option>
           <option value="30">Show 30</option>
         </select>
-        <CustomPagination currentPage={currentPage} totalPages={totalPages} onPageChange={(page) => setCurrentPage(page)} />
+        <CustomPagination page={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
     </div>
   );

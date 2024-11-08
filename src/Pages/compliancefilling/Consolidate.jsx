@@ -6,15 +6,23 @@ import { HiOutlineDownload } from "react-icons/hi";
 import { FiMail } from "react-icons/fi";
 import { PiCaretUpDownFill } from "react-icons/pi";
 import { IoIosSearch } from 'react-icons/io';
-import { DatePicker } from 'rsuite';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import { BsSliders } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
 import 'rsuite/dist/rsuite.min.css';
 import CustomPage from '../../Components/compliancefilling/CustomPage';
 import Dummy from '../../Components/compliancefilling/ScoreDum';
+import { MdOutlineCalendarMonth } from 'react-icons/md';
+import CustomPagination from '../../Components/CustomPagination';
+import EditCompliances from '../../Components/compliancefilling/EditCompliances';
 const Consolidate = () => {
     const [Page, setPage] = useState(1)
     const [Itemsperpage] = useState(5)
+    const [modelopen, setmodelopen] = useState(false)
+    const toggleModal = () => {
+        setmodelopen(!modelopen)
+    }
 
     const [Percent, setPercent] = useState({
         totalCom: {
@@ -46,6 +54,7 @@ const Consolidate = () => {
     const [search, setSearch] = useState('')
     const [selectValue, setSelectValue] = useState({ Company: "", State: '', Status: '', Branch: '', Compliance: '', AssignStaff: '', Priority: '' })
     var filterdata = Data.filter((row) => {
+        // const formattedFiledDate = startDate ? moment(startDate).format('DD-MM-YYYY') : '';
         return (
             (selectValue.Company ? row.company === selectValue.Company : true) &&
             (selectValue.State ? row.state === selectValue.State : true) &&
@@ -90,12 +99,13 @@ const Consolidate = () => {
                 backgroundColor: '#000',
                 color: '#fff',
                 paddingLeft: '10px',
-                fontSize: '14px',
+                fontSize: '11px',
+                whiteSpace:'normal'
             },
         },
         cells: {
             style: {
-                fontSize: '14px',
+                fontSize: '13px',
             },
         },
     }
@@ -132,104 +142,121 @@ const Consolidate = () => {
                 </div>
             </div>
 
-            <div className=' flex justify-center lg:justify-start items-center flex-wrap  m-2 gap-3 '>
-                <div onClick={(e) => setSelectValue({ ...selectValue, Status: '' })} 
-                style={{ width: '245px', height: '150px' }} className=' relative overflow-hidden h-36 pt-1 pe-1 bg-fuchsia-100 rounded-lg border-l-8 border-fuchsia-600  hover:border-4 hover:ps-1 hover:pt-0 hover:pe-0 hover:border-fuchsia-500'>
-                    <span className='flex mt-3 items-center font-semibold  text-xl  '><TbReportAnalytics className=' text-white  border bg-fuchsia-500 w-10 h-11  m-2 rounded-lg  ' /> Total Compliance</span>
-                    <div className='flex justify-between items-center mt-3 px-2'>
-                        <h2 className='font-semibold text-3xl' >{Percent.totalCom.value}</h2>
+            <div className=' flex flex-nowrap lg:justify-start items-center overflow-x-scroll  m-2 gap-2 '>
+
+                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: '' })} 
+                 className='flex flex-col gap-6 p-4 relative overflow-hidden min-w-64 h-40  bg-fuchsia-100 rounded-lg border-l-8 border-fuchsia-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5  hover:border-fuchsia-500'>
+                    <span className='flex items-center font-semibold  text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-fuchsia-500 w-10 h-11 rounded-lg me-3 ' /> Total Compliance </span>
+                    <div className='flex justify-between items-end ps-1'>
+                        <h2 className='font-semibold text-3xl'>{Percent.totalCom.value}</h2>
                         <Dummy percent={(Percent.totalCom.value / Percent.totalCom.value * 100)} things={Percent.totalCom} />
+
                     </div>
-                    <div className=' absolute -top-2 -left-20 bg-purple-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
-                        <div className='absolute left-24 bottom-20 bg-purple-400 w-52 h-52 rounded-full bg-opacity-10'></div>
+                    <div className=' absolute -top-2 -left-14 bg-fuchsia-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
+                        <div className='absolute left-24 bottom-20 bg-fuchsia-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                </div>
-                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Complied' })} 
-                style={{ width: '245px', height: '150px' }} className='relative overflow-hidden h-36 pt-1 pe-1 bg-green-100 rounded-lg border-l-8 border-green-600  hover:border-4  hover:ps-1 hover:pt-0 hover:pe-0 hover:border-green-500'>
-                    <span className='flex mt-3 items-center font-semibold text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-green-500 w-10 h-11 m-2 rounded-lg ' /> Complied</span>
-                    <div className='flex justify-between items-center px-2 mt-3'>
-                        <h2 className='font-semibold text-3xl' >{Percent.complied.value}</h2>
-                        <Dummy percent={(Percent.complied.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.complied} />
                     </div>
-                    <div className=' absolute -top-2 -left-20 bg-green-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
+
+                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Complied' })}  className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-64 h-40  bg-green-100 rounded-lg border-l-8 border-green-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5  hover:border-green-500'>
+                    <span className='flex items-center font-semibold  text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-green-500 w-10 h-11 rounded-lg me-5 ' /> Compiled</span>
+                    <div className='flex justify-between items-end ps-1'>
+                    <h2 className='font-semibold text-3xl' >{Percent.complied.value}</h2>
+                    <Dummy percent={(Percent.complied.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.complied} />
+                    </div>
+                    <div className=' absolute -top-2 -left-14 bg-green-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-green-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                    
-                </div>
-                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Not Complied' })} 
-                style={{ width: '245px', height: '150px' }} className='relative overflow-hidden h-36 pt-1 pe-1 bg-red-100 rounded-lg border-l-8 border-red-600  hover:border-4  hover:ps-1 hover:pt-0 hover:pe-0 hover:border-red-500'>
-                    <span className='flex mt-3 items-center font-semibold text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-red-500 w-10 h-11 m-2 rounded-lg ' /> Not Complied</span>
-                    <div className='flex justify-between items-center px-2 mt-3'>
-                        <h2 className='font-semibold text-3xl' >{Percent.notComplied.value}</h2>
+                    </div>
+
+
+                 <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Not Complied' })} 
+                 className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-64 h-40  bg-red-100 rounded-lg border-l-8 border-red-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-red-500'>
+                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-red-500 w-10 h-11 rounded-lg me-3 ' /> Not Complied</span>
+                    <div className='flex justify-between items-end ps-1'>
+                        <h2 className='font-semibold text-3xl'>{Percent.notComplied.value}</h2>
                         <Dummy percent={(Percent.notComplied.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.notComplied} />
                     </div>
-                    <div className=' absolute -top-2 -left-20 bg-red-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
+                    <div className=' absolute -top-2 -left-14 bg-red-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-red-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
                     </div>
-                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Partially Complied' })} 
-                style={{ width: '245px', height: '150px' }} className='relative overflow-hidden h-36 pt-1 pe-1 bg-yellow-100 rounded-lg border-l-8 border-yellow-600  hover:border-4  hover:ps-1 hover:pt-0 hover:pe-0 hover:border-yellow-500'>
-                    <span className='flex mt-3  items-center font-semibold text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-yellow-500 w-10 h-11 m-2 rounded-lg' /> Partially Complied</span>
-                    <div className='flex justify-between items-center px-2 mt-3'>
-                        <h2 className='font-semibold text-3xl' >{Percent.partiallyCom.value}</h2>
+
+                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Partially Complied' })} 
+                 className='flex flex-col gap-6 p-4 relative overflow-hidden min-w-64 h-40  bg-yellow-100 rounded-lg border-l-8 border-yellow-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-yellow-500'>
+                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-yellow-500 w-10 h-11 rounded-lg me-6 ' /> Partially Complied</span>
+                    <div className='flex justify-between items-end ps-1'>
+                        <h2 className='font-semibold text-3xl'>{Percent.partiallyCom.value}</h2>
                         <Dummy percent={(Percent.partiallyCom.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.partiallyCom} />
                     </div>
-                    <div className=' absolute -top-2 -left-20 bg-yellow-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
+                    <div className=' absolute -top-2 -left-14 bg-yellow-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-yellow-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                   </div>
-                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Over Due' })} 
-                style={{ width: '245px', height: '150px' }} className='relative overflow-hidden h-36 pt-1 pe-1  bg-orange-100 rounded-lg border-l-8 border-orange-500  hover:border-4  hover:ps-1 hover:pt-0 hover:pe-0 hover:border-orange-500'>
-                    <span className='flex mt-3 items-center font-semibold text-wrap text-xl '><TbReportAnalytics className='text-white border bg-orange-500 w-10 h-11 m-2 rounded-lg' /> OverDue</span>
-                    <div className='flex justify-between items-center px-2 mt-3'>
-                        <h2 className='font-semibold text-3xl' >{Percent.overDue.value}</h2>
+                    </div>                    
+                
+                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Over Due' })} 
+                 className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-64 h-40  bg-orange-100 rounded-lg border-l-8 border-orange-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-orange-500'>
+                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-orange-500 w-10 h-11 rounded-lg me-5 ' /> Over Due</span>
+                    <div className='flex justify-between items-end ps-1'>
+                        <h2 className='font-semibold text-3xl'>{Percent.overDue.value}</h2>
                         <Dummy percent={(Percent.overDue.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.overDue} />
                     </div>
-                    <div className=' absolute -top-2 -left-20 bg-orange-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
+                    <div className=' absolute -top-2 -left-14 bg-orange-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-orange-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
                     </div>
+                
+                
 
             </div>
 
-            <div className='grid grid-cols-1 w-full gap-2 lg:grid-cols-9 px-5 pb-4' >
-                {checkFilter.company && <select className='bg-white border border-gray-200  mt-2  text-sm  h-9  px-4 rounded-md w-full' value={selectValue.Company} onChange={(e) => setSelectValue({ ...selectValue, Company: e.target.value })} >
+            <div className='grid grid-cols-1 w-full gap-2 lg:grid-cols-8 px-5 pb-4' >
+                {checkFilter.company && <select className='bg-white border border-bordergray  mt-2  text-sm  h-9  px-4 rounded-md w-full  ' value={selectValue.Company} onChange={(e) => setSelectValue({ ...selectValue, Company: e.target.value })} >
                     <option value=""> Company</option>
                     {data.map((item) => <option value={item.company}>{item.company}  </option>)}
                 </select>}
-                {checkFilter.state && <select className=' bg-white border border-gray-200 mt-2 text-sm  h-9  px-4 rounded-md w-full' value={selectValue.State} onChange={(e) => setSelectValue({ ...selectValue, State: e.target.value })}>
+                {checkFilter.state && <select className=' bg-white border border-bordergray mt-2 text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.State} onChange={(e) => setSelectValue({ ...selectValue, State: e.target.value })}>
                     <option value=""> State</option>
                     {data.map((item) => <option value={item.state}>{item.state}  </option>)}
                 </select>}
-                {checkFilter.branch && <select className=' bg-white border border-gray-200 mt-2  text-sm  h-9  px-4 rounded-md w-full' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
+                {checkFilter.branch && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
                     <option value=""> Branch</option>
                     {data.map((item) => <option value={item.branch}>{item.branch}  </option>)}
                 </select>}
-                {checkFilter.compliance && <select className=' bg-white border border-gray-200 mt-2  text-sm  h-9  px-4 rounded-md w-full' value={selectValue.Compliance} onChange={(e) => setSelectValue({ ...selectValue, Compliance: e.target.value })}>
+                {checkFilter.compliance && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.Compliance} onChange={(e) => setSelectValue({ ...selectValue, Compliance: e.target.value })}>
                     <option value=""> Compliance</option>
                     {data.map((item) => <option value={item.compliance}>{item.compliance}  </option>)}
                 </select>}
-                {checkFilter.staff && <select className=' bg-white border border-gray-200 mt-2  text-sm  h-9  px-4 rounded-md w-full' value={selectValue.AssignStaff} onChange={(e) => setSelectValue({ ...selectValue, AssignStaff: e.target.value })}>
+                {checkFilter.staff && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.AssignStaff} onChange={(e) => setSelectValue({ ...selectValue, AssignStaff: e.target.value })}>
                     <option value="">Staff</option>
                     {data.map((item) => <option value={item.assignstaff}>{item.assignstaff}  </option>)}
                 </select>}
-                {checkFilter.priority && <select className=' bg-white border border-gray-200 mt-2  text-sm h-9 px-4 rounded-md w-full' value={selectValue.Priority} onChange={(e) => setSelectValue({ ...selectValue, Priority: e.target.value })}>
+                {checkFilter.priority && <select className=' bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full ' value={selectValue.Priority} onChange={(e) => setSelectValue({ ...selectValue, Priority: e.target.value })}>
                     <option value="">Priority</option>
                     {data.map((item) => <option value={item.priority}>{item.priority}  </option>)}
                 </select>}
 
-                <DatePicker className=' mt-2  text-sm rounded-md bg- w-full'
+                {/* <DatePicker className=' mt-2  text-sm rounded-md bg- w-full'
                     placeholder="Date Range"
-                    block />
+                    block /> */}
+                    {/* <div className='relative bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full'> */}
+                    {/* <div className='relative z-20 lg:w-36 w-96'> */}
+                        {/* <DatePicker className='bg-white border border  text-sm h-9 w-full'selected={startDate} onChange={(date) => { setStartDate(date); setSelectValue({ ...selectValue, Filed_Date: date});}}
+                        placeholderText="Select Date"
+                        dateFormat="dd-MM-yyyy"
+                        />
+                        <span className='absolute top-3.5 right-2'><MdOutlineCalendarMonth size={20}/></span>
+                    </div> */}
+
+
 
                 <div className=' relative '>
-                    <input type='text' className=' bg-white w-full   text-md text-black border border-gray-200 mt-2 pl-8 py-1.5  rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
-                    <div className='absolute inset-y-0 top-4 left-2.5' >
-                        <IoIosSearch size={18} />
+                    <input type='text' className=' bg-white w-full   text-md text-black border border-bordergray mt-2 pl-8 py-1.5  rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
+                    <div className='absolute inset-y-0 top-3.5 text-input left-2.5' >
+                        <IoIosSearch size={23} />
                     </div>
                 </div>
                 <div className='relative'>
-                    <button className=' bg-white shadow-sm  p-2 w-9 h-9 mt-2  border text-md rounded-lg'> <BsSliders size={20} onClick={() => setSlide(!slide)} /></button>
+                    <button className=' bg-white shadow-sm  p-2 w-9 h-9 mt-2  border border-bordergray text-md rounded-lg'> <BsSliders size={20} className='p-0.5 ' onClick={() => setSlide(!slide)} /></button>
                     {slide && (
                         <div className='absolute bg-white shadow-lg border z-20 top-15 py-2 px-3 rounded'>
                             <input className='me-2 accent-black' type='checkbox' checked={checkFilter.company} onChange={() => handleCheckBox('company')} id='company' />
@@ -252,16 +279,27 @@ const Consolidate = () => {
                 columns={columns} selectableRows customStyles={customStyles} sortIcon={<PiCaretUpDownFill style={{ color: 'white' }} />}
                 data={filterdata} >
             </DataTable>
-            <div className='flex justify-between p-5 '>
-                <select className=' bg-white border border-gray-200 mt-2  text-sm h-9 px-4 shadow-md rounded-md w-full lg:w-32'>
+            <div className='flex flex-col lg:flex-row lg:justify-between justify-start p-5'>
+                <select className='  border border-gray-200 mt-2  text-sm h-9 px-4 shadow-md rounded-md w-32 justify-end'>
                     <option value="">Show Option</option>
                     <option value="">Page 5</option>
                     <option value="">Page 10</option>
                     <option value="">page 15</option>
 
                 </select>
-                <CustomPage Page={Page} totalPages={totalPages} onPageChange={(page) => setPage(page)} />
+                <CustomPagination page={Page} totalPages={totalPages} onPageChange={(page) => setPage(page)} />
             </div>
+            <div className='flex justify-center'>
+            <button className='h-10 w-36 text-center bg-primary' onClick={toggleModal}>edit</button>
+            {modelopen &&
+                <div className='absolute w-full top-0 left-0 h-full py-52 bg-black bg-opacity-50 z-50'>
+                    <div className="bg-white mx-auto rounded-lg shadow-lg w-4/5">
+                        <EditCompliances onClose={toggleModal} />
+                    </div>
+                </div>
+            }
+            </div>
+            
         </>
     )
 }

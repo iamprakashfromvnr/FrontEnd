@@ -4,9 +4,10 @@ import SelectInput from '../../Components/SelectInput'
 import TextareaInput from '../../Components/TextareaInput'
 import Button from '../../Components/Button'
 import FileInput from '../../Components/FileInput'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const CreateCompany = () => {
+    const navigate=useNavigate()
     const [company, setcompany] = useState({
         companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
         stakeholderName: '', username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
@@ -36,12 +37,14 @@ const CreateCompany = () => {
             category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
             establishmentType: '', notificationAlert: '', password: '', image: null,
         })
+        navigate('/clientmanagement')
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         alert('Form submitted!!');
         console.log(company)
+        navigate('/clientmanagement')
         setcompany({
             companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
             stakeholderName: '', username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
@@ -95,7 +98,7 @@ const CreateCompany = () => {
                         <TextInput label='Stakehholder Name' name='stakeholderName' value={company.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
                         <TextInput label='User Name' name='username' value={company.username} placeholder='Enter the username' onChange={handleInputChange} />
                     </div>
-                    <div className='flex flex-col gap-3'>
+                    <div className='flex flex-col gap-3 lg:mt-20 pt-2'>
                         <SelectInput label="Sub-Category" name="subCategory" value={company.subCategory} onChange={handleInputChange}
                             options={[
                                 { value: "", label: "Select sub category" },
@@ -135,7 +138,7 @@ const CreateCompany = () => {
                 </div>
                 <div className='flex justify-center items-center gap-5'>
                     <Button label='Cancel' onClick={handleCancel} className='bg-white border border-gray-800' />
-                   <Link to="clientmanagement"> <Button label='Save' type='submit' className='text-white bg-primary border border-yellow-500' /></Link>
+                   <Button label='Save' type='submit' className='text-white bg-primary border border-yellow-500' />
                 </div>
             </form>
         </div>

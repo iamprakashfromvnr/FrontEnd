@@ -180,17 +180,17 @@ const customStyles={
       </div>:
     
     <div className='p-4'>
-    <div className='flex justify-center lg:justify-start gap-10 flex-wrap w-full'>
+    <div className='flex justify-center lg:justify-start gap-2 flex-wrap w-full'>
     {filterData.map((data)=>
         // <div className='relative py-8 px-16 rounded-md bg-white items-center' style={{borderLeft:`40px solid ${data.level == 'high' ? 'blue': data.level==='medium'?'green':data.level==='low'?'orange':'white'}`}}>
-        <div className=' py-5 border rounded-md px-3 justify-center h-60 relative overflow-hidden w-96'>
+        <div className=' py-3 border border-bordergray rounded-md px-2 justify-center h-60 relative overflow-hidden'style={{width:'300px'}}> 
                 <div className='w-32 h-8 absolute top-4 -right-8 '>
                      <div className={`${data.prioriy==="incomplete" ? 'text-black':'text-white'} h-full w-full bg-yellow-400 text-center leading-8 font-semibold transform rotate-45`}>{data.prioriy}</div>
                  </div>
-            <div className='flex justify-start gap-3'>
+            <div className='flex justify-start gap-4'>
                 <img src={logo} className='rounded-full h-16 w-16'/>
                 <div className='h-40 w-52'> 
-                    <h5 className='font-semibold text-wrap mb-4'>{data.company}</h5>
+                    <h5 className='font-semibold pe-10 text-wrap mb-1'>{data.company}</h5>
                     <p className='mb-0'>Branches - {data.Branch}</p>
                     {data.email && <p className='mb-0'>{data.email}</p>}
                     {data.user && <p className='mb-0'>Assigned User :{data.user}</p>}
@@ -199,8 +199,8 @@ const customStyles={
             </div>
             {/* <h6 className='transform rotate-90 font-bold -left-8 bg-yellow-500 items-center text-white'>{data.level}</h6> */}
         
-            <div className='flex gap-3 border-t w-full justify-center p-2'>
-                <AiOutlineFileSearch className='h-10 w-10 bg-primary text-white rounded-full p-2.5'/>
+            <div className='flex gap-2 border-t w-full justify-center py-2'>
+                <Link to="/calendar"><AiOutlineFileSearch className={`${data.prioriy==="incomplete" ? 'bg-red-600':'bg-green-600'} h-10 w-10  text-white rounded-full p-2.5`}/></Link>
                 <IoNotificationsOffOutline className='h-10 w-10 bg-primary text-white rounded-full p-2.5'/>
                 <AiOutlineMail className='h-10 w-10 bg-primary text-white rounded-full p-2.5'/>
                 <GoPencil className='h-10 w-10 bg-primary text-white rounded-full p-2.5'/>

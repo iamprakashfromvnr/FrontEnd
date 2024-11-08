@@ -86,23 +86,23 @@ const customStyles={
       <div className="flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between">
             <h1 className='font-bold text-lg mt-3 ms-4'>Client Management({Data.length})</h1>
             <div className='flex justify-evenly items-center gap-3 me-5 p-3'>    
-                <GoDownload className='rounded-full bg-primary text-white h-9 w-9 p-2' size={15} onClick={()=>window.print()}/>
-                <Link to='/company' className='flex rounded-md bg-primary text-white h-10 w-36 justify-center gap-3 items-center'><MdAdd  size={15}/>Add Client</Link>    
+                <GoDownload className='rounded-full bg-primary text-white h-8 w-8 p-1.5' size={15} onClick={()=>window.print()}/>
+                <Link to='/company' className='flex rounded-md bg-primary text-white h-8 w-28 justify-center items-center'><MdAdd  size={22}/>Add Client</Link>    
             </div>
       </div>
       
       <div className='flex my-3 justify-between gap-3 p-2 ms-3 items-center flex-wrap'>
         <div className='flex items-center gap-3 flex-wrap'>
-          <select className='bg-white rounded-lg border  border-bordergray px-4 h-9 w-full lg:w-56 ' value={filter.company} onChange={(e)=>setFilter({...filter,company:e.target.value})}>
+          <select className='bg-white rounded-lg border  border-bordergray px-4 h-9 w-full lg:w-44 ' value={filter.company} onChange={(e)=>setFilter({...filter,company:e.target.value})}>
             <option value="">Company</option>
             {Data.map((item)=><option value={item.company}>{item.company}</option>)}
           </select>
-          <div className='relative w-full lg:w-56'>
-            <input type="text" className='bg-white rounded-lg border  border-bordergray  w-full lg:w-56 py-1.5 ps-8 ' placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)}/>
-                <CiSearch className='absolute top-2 left-2' size={20} />
+          <div className='relative w-full lg:w-44'>
+            <input type="text" className='bg-white rounded-lg border  border-bordergray  w-full lg:w-44 py-1.5 ps-8 ' placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+                <CiSearch className='absolute top-1.5 left-2' size={23} />
           </div>
         </div>
-        <div className='flex items-start gap-2 me-16'>
+        <div className='flex items-start gap-2 me-6'>
             <button onClick={(e)=>setView('grid')} className={`${view ==='grid' ? 'bg-black text-white': 'bg-white text-black'} p-2.5 border-1 border-gray-400 rounded-md `}><CiGrid41 size={17}/></button>
             <button onClick={(e)=>setView('list')}className={`${view === 'list' ? 'bg-black text-white': 'bg-white text-black'} p-2.5 border-1 border-gray-400 rounded-md `}><CiBoxList size={17}/></button>
         </div>

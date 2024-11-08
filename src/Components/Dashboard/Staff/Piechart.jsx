@@ -21,7 +21,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 const Piechart = ({ pieData, COLORS }) => {
   return (
     <div className="flex flex-col items-center justify-center ">
-      <div className="bg-white p-3 w-11/12 md:w-80 lg:w-96">
+      <div className="bg-white p-3 w-11/12 md:w-80 lg:w-96 sm:w-40">
         <h5 className="font-semibold mb-2">Compliance Status</h5>
         <ResponsiveContainer width="100%" height={200}>
           <PieChart>

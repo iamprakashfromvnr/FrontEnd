@@ -102,18 +102,18 @@ const Board = () => {
   return (
     <div className="p-6 bg-white">
       <div className="flex space-x-4 p-4 bg-white-100">
-        <select className="p-2 border rounded-lg focus:outline-none" value={filters.company} onChange={(e) => handleChange('company', e.target.value)}>
+        <select className="p-2 border border-selectbg rounded-lg focus:outline-none" value={filters.company} onChange={(e) => handleChange('company', e.target.value)}>
           <option value="">Company</option>
           <option value="Acme Corporation">Acme Corporation</option>
         </select>
 
-        <select className="p-2 border rounded-lg focus:outline-none" value={filters.state} onChange={(e) => handleChange('state', e.target.value)}>
+        <select className="p-2 border border-selectbg rounded-lg focus:outline-none" value={filters.state} onChange={(e) => handleChange('state', e.target.value)}>
           <option value="">State</option>
           <option value="Tamilnadu">Tamilnadu</option>
           <option value="Mumbai">Mumbai</option>
         </select>
 
-        <select className="p-2 border rounded-lg focus:outline-none" value={filters.branch} onChange={(e) => handleChange('branch', e.target.value)}>
+        <select className="p-2 border border-selectbg rounded-lg focus:outline-none" value={filters.branch} onChange={(e) => handleChange('branch', e.target.value)}>
           <option value="">Branch</option>
           <option value="Rayapuram">Rayapuram</option>
           <option value="Indira Nagar">Indira Nagar</option>
@@ -122,12 +122,12 @@ const Board = () => {
           <option value="Nagaon">Nagaon</option>
         </select>
 
-        <select className="p-2 border rounded-lg focus:outline-none" value={filters.area} onChange={(e) => handleChange('area', e.target.value)}>
+        <select className="p-2 border border-selectbg rounded-lg focus:outline-none" value={filters.area} onChange={(e) => handleChange('area', e.target.value)}>
           <option value="">Area</option>
           <option value="Area1">Area 1</option>
           <option value="Area2">Area 2</option>
         </select>
-        <select className="p-2 border rounded-lg focus:outline-none" value={filters.priority} onChange={(e) => handleChange('area', e.target.value)}>
+        <select className="p-2 border border-selectbg rounded-lg focus:outline-none" value={filters.priority} onChange={(e) => handleChange('area', e.target.value)}>
           <option value="">Priority</option>
           <option value="Priority1">Priority 1</option>
           <option value="Priority"> Priority2</option>

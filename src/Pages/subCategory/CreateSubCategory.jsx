@@ -58,7 +58,7 @@ const CreateSubCategory = () => {
 
                 <div className='flex justify-center items-center gap-5'>
                     <Button label='Cancel' onClick={handleCancel} className='bg-white border border-gray-800' />
-                    <Button label='Save' type='submit' className='text-white bg-primary border border-yellow-500' />
+                    <Button label='Save' type='submit' className='text-white bg-primary border border-primary' />
                 </div>
             </form>
         </div>

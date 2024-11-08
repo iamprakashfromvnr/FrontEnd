@@ -20,7 +20,7 @@
     font-style: normal;
     font-weight: 300;
     src:url('./fonts/popins/Poppins-Light.ttf') format('truetype');
-}
+}   
 
 body{
     @apply font-pop;

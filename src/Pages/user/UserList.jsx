@@ -56,12 +56,13 @@ const UserList = () => {
                 backgroundColor: '#000',
                 color: '#fff',
                 fontSize: '14px',
+                padding:'0px 10px'
             },
         },
         cells: {
             style: {
                 borderBottom: '1px solid rgba(0,0,0,0.15)',
-                padding: '15px 20px',
+                padding: '10px 10px',
                 fontSize: '14px',
             },
         },
@@ -79,28 +80,28 @@ const UserList = () => {
                     </Link>
                 </div>
             </div>
-            <div className="flex justify-between items-center flex-wrap gap-2 lg:gap:4">
+            <div className="flex justify-between items-center flex-wrap gap-2 lg:gap:3">
                 <div className="flex items-center gap-4 flex-wrap">
-                    <select onChange={(e) => setFilter({ ...filter, company: e.target.value })} value={filter.company} className='w-full lg:w-56 bg-selectbg border border-bordergray py-2 px-4 rounded '>
+                    <select onChange={(e) => setFilter({ ...filter, company: e.target.value })} value={filter.company} className='w-full lg:w-44 bg-white border border-bordergray py-2 px-4 rounded '>
                         <option value="">Company</option>
                         {Data.map((data) => <option value={data.company}>{data.company}</option>)}
                     </select>
-                    <select onChange={(e) => setFilter({ ...filter, designation: e.target.value })} value={filter.designation} className='w-full lg:w-56 bg-selectbg border border-bordergray py-2 px-4 rounded '>
+                    <select onChange={(e) => setFilter({ ...filter, designation: e.target.value })} value={filter.designation} className='w-full lg:w-44 bg-white border border-bordergray py-2 px-4 rounded '>
                         <option value="">Designation</option>
                         {Data.map((data) => <option value={data.designation}>{data.designation}</option>)}
                     </select>
-                    <select onChange={(e) => setFilter({ ...filter, modules: e.target.value })} value={filter.modules} className='w-full lg:w-56 bg-selectbg border border-bordergray py-2 px-4 rounded '>
+                    <select onChange={(e) => setFilter({ ...filter, modules: e.target.value })} value={filter.modules} className='w-full lg:w-44 bg-white border border-bordergray py-2 px-4 rounded '>
                         <option value="">Modules</option>
                         {Data.map((data) => <option value={data.modules}>{data.modules}</option>)}
                     </select>
-                    <span className='w-full lg:w-56 relative'>
-                        <input type='text' className='w-full focus-visible focus-visible:outline-none py-1.5 ps-8 border border-bordergray rounded' placeholder='Search' onChange={(e) => setSearch(e.target.value)} value={search} />
-                        <IoIosSearch className='absolute top-2 left-2' size={20} />
+                    <span className='w-full lg:w-44 relative'>
+                        <input type='text' className='w-full focus-visible focus-visible:outline-none py-2 ps-8 border border-bordergray rounded placeholder:text-black' placeholder='Search' onChange={(e) => setSearch(e.target.value)} value={search} />
+                        <IoIosSearch className='absolute top-2 left-2 text-input' size={23} />
                     </span>
                 </div>
                 <div className="flex items-center justify-center gap-2 py-2">
-                    <LuLayoutGrid className={`${view === 'grid' ? 'bg-black text-white' : 'bg-white text-black'} p-1 rounded cursor-pointer`} size={30} onClick={handleGridView} />
-                    <FaListUl className={`${view === 'list' ? 'bg-black text-white' : 'bg-white text-black'} p-1 rounded cursor-pointer`} size={30} onClick={handleListView} />
+                    <LuLayoutGrid className={`${view === 'grid' ? 'bg-black text-white' : 'bg-white text-black'} p-1.5 rounded-md cursor-pointer`} size={30} onClick={handleGridView} />
+                    <FaListUl className={`${view === 'list' ? 'bg-black text-white' : 'bg-white text-black'} p-1.5 rounded cursor-pointer`} size={30} onClick={handleListView} />
                 </div>
             </div>
             {view === 'list' ?
@@ -215,7 +216,7 @@ export default UserList
 //             </div>
 //             <div className="flex justify-between items-center flex-wrap gap-2">
 //                 <div className="flex justify-center items-center gap-4 flex-wrap">
-//                     <select onChange={(e) => setFilter({ ...filter, company: e.target.value })} value={filter.company} className='w-full lg:w-56 py-2 px-4 rounded '>
+//                     <select onChange={(e) => setFilter({ ...filter, company: e.target.value })} value={filter.company} className='w-full lg:w-44 py-2 px-4 rounded '>
 //                         <option value="">Company</option>
 //                         {Data.map((data) => <option value={data.company}>{data.company}</option>)}
 //                     </select>

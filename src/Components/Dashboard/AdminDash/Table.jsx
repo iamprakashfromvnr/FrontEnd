@@ -227,7 +227,7 @@ const Table = ({ companies, currentPage, totalPages, onPageChange, filters }) =>
             <h6 className='mt-4'>Compliance for the period of April 2024 to November 2024</h6>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
                 <table className="min-w-full text-sm text-left text-black">
-                    <thead className="text-xs text-black font-semibold">
+                    <thead className="text-xs text-black font-semibold bg-slate-300 border border-slate-300">
                         <tr className="bg-gray-300">
                             <th scope="col" className="px-4 py-3">S.No</th>
                             <th scope="col" className="px-4 py-3">Date</th>
@@ -240,7 +240,7 @@ const Table = ({ companies, currentPage, totalPages, onPageChange, filters }) =>
                     </thead>
                     <tbody>
                         {filteredData.map((row) => (
-                            <tr key={row.SNO} className="border-b border-gray-300">
+                            <tr key={row.SNO} className="border border-gray-300">
                                 <td className="px-4 py-2">{row.SNO}</td>
                                 <td className="px-4 py-2">{row.Date}</td>
                                 <td className="px-4 py-2">

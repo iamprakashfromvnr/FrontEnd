@@ -70,7 +70,7 @@ const ClientList = ({ totalCompany, state, district, branch }) => {
   return (
     <div className='border border-bordergray rounded mt-2'>
       <div>
-        <h5 className='font-semibold ps-9 mt-3'>Client list</h5>
+        <h5 className='font-semibold ps-9 mt-3'>Clients list</h5>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 font-poppins">
 

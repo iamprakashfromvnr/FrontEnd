@@ -23,7 +23,7 @@ const NatureComplianceList = () => {
       },
       headCells: {
           style: {
-            paddingLeft: '30px',
+            paddingLeft: '0px',
             paddingRight: '60px',
             backgroundColor: '#000',
             color: '#fff',
@@ -32,7 +32,7 @@ const NatureComplianceList = () => {
       },
       cells: {
         style: {
-          paddingLeft: '30px',
+          paddingLeft: '0px',
           paddingRight: '80px',
           fontSize:'14px'
         },
@@ -62,9 +62,9 @@ const NatureComplianceList = () => {
       </div>
 
       <div className='relative -z-50 items-center'>
-        <input type='text' className='m-5 focus-visible focus-visible:outline-none  mt-2 bg-white border text-md text-black border-bordergray  px-7 py-2 rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
-        <div className='absolute inset-y-0 top-5 left-7 text-gray'>
-          <IoIosSearch size={18} />
+        <input type='text' className='m-5 focus-visible focus-visible:outline-none w-44  mt-2 bg-white border text-md text-black border-bordergray  px-7 py-2 rounded-md placeholder:text-black ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
+        <div className='absolute inset-y-0 top-4 left-6 text-gray'>
+          <IoIosSearch size={25} className='text-slate-300' />
         </div>
       </div>
 

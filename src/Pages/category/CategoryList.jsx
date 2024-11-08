@@ -23,7 +23,7 @@ const CategoryList = () => {
         },
         headCells: {
           style: {
-            paddingLeft: '30px',
+            paddingLeft: '0px',
             paddingRight: '60px',
             backgroundColor: '#000',
             color: '#fff',
@@ -32,7 +32,7 @@ const CategoryList = () => {
         },
         cells: {
           style: {
-            paddingLeft: '30px',
+            paddingLeft: '0px',
             paddingRight: '70px',
             fontSize:'14px'
           }
@@ -59,9 +59,9 @@ const CategoryList = () => {
                 </div>
             </div>
             <div className='relative'>
-                <input type='text' className='m-5 focus-visible focus-visible:outline-none  mt-2 bg-gray-100 border text-md text-black border-bordergray  px-7 py-2 rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
-                <div className='absolute inset-y-0 top-5 left-6' style={{ opacity: '0.5' }}>
-                    <IoIosSearch size={20} />
+                <input type='text' className='m-5 focus-visible focus-visible:outline-none  mt-2 bg-gray-100 border text-md text-black border-bordergray  px-7 py-2 rounded-md placeholder:text-black' placeholder='Search' onChange={(e) => setSearch(e.target.value)}  ></input>
+                <div className='absolute inset-y-0 top-4 left-6 ' >
+                    <IoIosSearch size={25} className="text-slate-400" />
                 </div>
             </div>
             <div className='mx-4 mr-7'>

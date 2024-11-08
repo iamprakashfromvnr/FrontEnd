@@ -1,29 +1,29 @@
 import React from 'react';
 
-const LineStatus = ({ companies, currentPage, totalPages, onPageChange }) => {
+const LineStatus = ({ companies, current, total, onPageChange }) => {
     const handlePageClick = (page) => {
         onPageChange(page);
     };
 
-    const getPaginationButtons = (currentPage, totalPages) => {
+    const getPaginationButtons = (current, total) => {
         const paginationButtons = [];
         const maxButtons = 3;
 
         let startPage, endPage;
 
-        if (totalPages <= maxButtons) {
+        if (total <= maxButtons) {
             startPage = 1;
-            endPage = totalPages;
+            endPage = total;
         } else {
-            if (currentPage <= Math.ceil(maxButtons / 2)) {
+            if (current <= Math.ceil(maxButtons / 2)) {
                 startPage = 1;
                 endPage = maxButtons;
-            } else if (currentPage + Math.floor(maxButtons / 2) >= totalPages) {
-                startPage = totalPages - maxButtons + 1;
-                endPage = totalPages;
+            } else if (current + Math.floor(maxButtons / 2) >= total) {
+                startPage = total - maxButtons + 1;
+                endPage = total;
             } else {
-                startPage = currentPage - Math.floor(maxButtons / 2);
-                endPage = currentPage + Math.floor(maxButtons / 2);
+                startPage = current - Math.floor(maxButtons / 2);
+                endPage = current + Math.floor(maxButtons / 2);
             }
         }
 
@@ -42,9 +42,9 @@ const LineStatus = ({ companies, currentPage, totalPages, onPageChange }) => {
             finalButtons.push(button);
         });
 
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) finalButtons.push("...");
-            finalButtons.push(totalPages);
+        if (endPage < total) {
+            if (endPage < total - 1) finalButtons.push("...");
+            finalButtons.push(total);
         }
 
         return finalButtons;
@@ -52,7 +52,7 @@ const LineStatus = ({ companies, currentPage, totalPages, onPageChange }) => {
 
     return (
         <div>
-            <div className='border mt-5 pe-4 ps-4 pb-4 rounded'>
+            <div className='border border-selectbg shadow-md mt-5 pe-4 ps-4 pb-4 rounded mb-4'>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
                     <table className="min-w-full text-sm text-left rtl:text-right text-black">
                         <thead className="text-xs text-black font-semibold">
@@ -93,51 +93,52 @@ const LineStatus = ({ companies, currentPage, totalPages, onPageChange }) => {
                         </tbody>
                     </table>
                 </div>
-                <div className="flex items-center justify-between mt-4 flex-wrap">
-                    <div className="bg-white  px-4 py-2 mb-2">
-                        <label htmlFor="page-select" className="mr-2 text-sm"> Page</label>
-                        <select id="page-select" value={currentPage} onChange={(e) => handlePageClick(Number(e.target.value))} className="border border-gray-300 rounded-md p-1">
-                            {Array.from({ length: totalPages }, (_, index) => (
+
+                <div className="flex items-center justify-between mt-4">
+                    <div className="bg-white px-4 py-2 flex-shrink-0 mb-2">
+                        <label htmlFor="page-select" className="mr-2 text-sm">Page</label>
+                        <select id="page-select" value={current} onChange={(e) => handlePageClick(Number(e.target.value))} className="border border-gray-300 rounded-md p-1">
+                            {Array.from({ length: total }, (_, index) => (
                                 <option key={index} value={index + 1}>{index + 1}</option>
                             ))}
                         </select>
-                        <span className="ml-2 text-sm">of {totalPages}</span>
+                        <span className="ml-2 text-sm">of {total}</span>
                     </div>
 
-                    <div className="flex items-center space-x-2">
-                        <button onClick={() => handlePageClick(1)} disabled={currentPage === 1}
-                            className={`flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''}`}>
+                    <div className="flex items-center space-x-1 overflow-x-auto whitespace-nowrap mb-2">
+                        <button onClick={() => handlePageClick(1)} disabled={current === 1}
+                            className={`flex items-center justify-center px-2 py-0 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${current === 1 ? 'cursor-not-allowed opacity-50' : ''}`}>
                             &laquo;
                         </button>
 
-                        <button onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 1}
-                            className={`flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''}`}>
+                        <button onClick={() => handlePageClick(current - 1)} disabled={current === 1}
+                            className={`flex items-center justify-center px-2 py-0 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${current === 1 ? 'cursor-not-allowed opacity-50' : ''}`}>
                             &lt;
                         </button>
 
-                        {getPaginationButtons(currentPage, totalPages).map((button, index) => {
+                        {getPaginationButtons(current, total).map((button, index) => {
                             if (button === '...') {
                                 return (
-                                    <span key={index} className="px-3 py-1 text-sm font-medium text-gray-700">
+                                    <span key={index} className="px-2 py-0 text-sm font-medium text-gray-700">
                                         {button}
                                     </span>
                                 );
                             }
                             return (
                                 <button key={index} onClick={() => handlePageClick(button)}
-                                    className={`flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${button === currentPage ? 'bg-yellow-400 font-bold' : ''}`}>
+                                    className={`flex items-center justify-center px-2 py-0 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${button === current ? 'bg-yellow-400 font-bold' : ''}`}>
                                     {button}
                                 </button>
                             );
                         })}
 
-                        <button onClick={() => handlePageClick(currentPage + 1)} disabled={currentPage === totalPages}
-                            className={`flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''}`}>
+                        <button onClick={() => handlePageClick(current + 1)} disabled={current === total}
+                            className={`flex items-center justify-center px-2 py-0 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${current === total ? 'cursor-not-allowed opacity-50' : ''}`}>
                             &gt;
                         </button>
 
-                        <button onClick={() => handlePageClick(totalPages)} disabled={currentPage === totalPages}
-                            className={`flex items-center justify-center px-3 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''}`}>
+                        <button onClick={() => handlePageClick(total)} disabled={current === total}
+                            className={`flex items-center justify-center px-2 py-0 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out ${current === total ? 'cursor-not-allowed opacity-50' : ''}`}>
                             &raquo;
                         </button>
                     </div>
