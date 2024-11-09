@@ -65,7 +65,7 @@ const CustomToolbar = (toolbar) => {
   
 
   return (
-    <div className='w-screen lg:w-2/5'>
+    <div className='lg:w-2/5 w-full '>
       <div className="flex justify-between mb-4">
         <button onClick={goToBack} className="px-2 py-2 bg-yellow-100 rounded-full">
           <IoIosArrowBack className='text-yellow-500 ' size={25} />
@@ -109,6 +109,8 @@ const MyCalendar = () => {
       border: '0px',
       display: 'block',
       padding: '5px',
+      overflowWrap:'break-word',
+      whiteSpace:'pre-wrap'
     };
     return { style };
   };
@@ -126,15 +128,15 @@ const MyCalendar = () => {
         </span>
       </div>
 
-      <div className="flex justify-start my-4 ms-5 gap-3">
-        <select className="bg-white border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5">
+      <div className="flex flex-wrap justify-start lg:w-full my-4 ms-5 gap-3">
+        <select className="bg-white border w-full border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-48 p-2.5">
           <option>Status</option>
           <option>2</option>
         </select>
         <select
           value={view}
           onChange={(e) => setView(e.target.value)}
-          className="bg-white border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5">
+          className="bg-white border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-48 w-full p-2.5">
           <option value="month">Month</option>
           <option value="week">Week</option>
           <option value="day">Day</option>
@@ -143,13 +145,13 @@ const MyCalendar = () => {
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           placeholderText="Date Range"
-          className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5"
+          className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  lg:w-48 w-full p-2.5 z-50"
         />
-        <input type='text' placeholder='search' value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5" />
+        <input type='text' placeholder='search' value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-48 w-full p-2.5" />
       </div>
 
-      <div className="App">
-        <Calendar className='-z-50'
+      <div className="max-w-full bg-red-600 ">
+        <Calendar className='-z-50  overflow-x-scroll'
           localizer={localizer}
           events={convertedEvents}
           style={{ height: 800, margin: '20px', }}
