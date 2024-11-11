@@ -246,7 +246,6 @@
 
 
 
-
 import React, { useState } from 'react';
 import Menu from '../../Components/Notification/Menu';
 import Search from '../../Components/Notification/Search';
@@ -263,11 +262,22 @@ const Message = () => {
     const filterItems = (items) => {
         return items.filter(item => {
             const matchesSearch = item.message.toLowerCase().includes(searchTerm.toLowerCase());
-            
-            const itemDate = moment(item.time);
-            const matchesDate = startDate 
-                ? itemDate.isSameOrAfter(moment(startDate)) 
-                : true; 
+
+            const itemDate = moment(item.time, "MMM DD, hh:mm A");
+
+            let matchesDate = true;
+
+            if (startDate) {
+                if (startDate.length === 2) {
+                    const startOfDay = moment(startDate[0]).startOf('day');
+                    const endOfDay = moment(startDate[1]).endOf('day');
+
+                    matchesDate = itemDate.isBetween(startOfDay, endOfDay, null, '[]');
+                } else if (startDate.length === 2) {
+                    const selectedDate = moment(startDate[0]).startOf('day');
+                    matchesDate = itemDate.isSame(selectedDate, 'day');
+                }
+            }
 
             return matchesSearch && matchesDate;
         });
@@ -278,35 +288,42 @@ const Message = () => {
 
     return (
         <div className='ps-5 pe-5'>
-            <Menu />
+            <Menu filteredNotifications={filteredNotifications} filteredData={filteredData} />
+            
             <Search
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 startDate={startDate}
                 setStartDate={setStartDate}
             />
-            <div className="bg-white border border-bordergray rounded-lg shadow-md mt-5 p-5">
-                <div className="p-2 font-semibold">Sep 12, 2024</div>
-                {filteredNotifications.map((notification, index) => (
-                    <September
-                        key={index}
-                        time={notification.time}
-                        message={notification.message}
-                        status={notification.status}
-                    />
-                ))}
-            </div>
-            <div className="p-6 bg-white border border-bordergray rounded-lg shadow-md mt-5 mb-5">
-                <h6 className="p-2 font-semibold mb-4">Last Weeks</h6>
-                {filteredData.map((item, index) => (
-                    <Item
-                        key={index}
-                        time={item.time}
-                        message={item.message}
-                        status={item.status}
-                    />
-                ))}
-            </div>
+
+            {filteredNotifications.length > 0 && (
+                <div className="bg-white border border-bordergray rounded-lg shadow mt-5 p-5">
+                    <div className="p-2 font-semibold">Sep 12, 2024</div>
+                    {filteredNotifications.map((notification, index) => (
+                        <September
+                            key={index}
+                            time={notification.time}
+                            message={notification.message}
+                            status={notification.status}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {filteredData.length > 0 && (
+                <div className="p-6 bg-white border border-bordergray rounded-lg shadow mt-5 mb-5">
+                    <h6 className="p-2 font-semibold mb-4">Last Week</h6>
+                    {filteredData.map((item, index) => (
+                        <Item
+                            key={index}
+                            time={item.time}
+                            message={item.message}
+                            status={item.status}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

@@ -66,13 +66,19 @@ const ComplianceReport = () => {
     });
   };
   const filter = CompanyData.filter((item) => {
-    const itemFiledDate = moment(item.Filed_Date, 'DD-MM-YYYY'); // Ensure consistent date format
+    // const itemFiledDate = moment(item.Filed_Date, 'DD-MM-YYYY'); // Ensure consistent date format
+    const itemFiledDate = moment(item.Filed_Date, 'DD-MM-YYYY');
   
     // Only filter by date range if both dates are set
+    // const isDateInRange =
+    //   startDate && EndDate
+    //     ? itemFiledDate.isBetween(moment(startDate), moment (EndDate), null, '[]')
+    //     : true; // If no date range selected, show all records
+
     const isDateInRange =
-      startDate && EndDate
-        ? itemFiledDate.isBetween(moment(startDate), moment (EndDate), null, '[]')
-        : true; // If no date range selected, show all records
+    startDate && EndDate
+      ? itemFiledDate.isBetween(moment(startDate), moment(EndDate), "", '[]')
+      : true;
     return (
       isDateInRange &&
       (selectValue.Company_Name ? item.Company_Name === selectValue.Company_Name : true) &&
@@ -221,14 +227,24 @@ const ComplianceReport = () => {
                 const [start,end]=date;
                 setStartDate(start);
                 setEndDate(end)
-                setSelectValue({
-                  ...selectValue,
-                  Filed_Date: date
-                });
+                if(!start && !end){
+                  setSelectValue({
+                    ...selectValue,
+                    Filed_Date: ""
+                  });
+                }
+                else{
+                  setSelectValue({
+                    ...selectValue,
+                    Filed_Date: date
+                  });
+                }
               }}
               selectsRange={true}
               onCalendarOpen={() => setIsDatePickerActive(true)}
-
+              showYearDropdown
+              scrollableMonthYearDropdown
+              yearDropdownItemNumber={15}
               isClearable={true}
               placeholderText="Select Date"
               dateFormat="dd-MM-yyyy"

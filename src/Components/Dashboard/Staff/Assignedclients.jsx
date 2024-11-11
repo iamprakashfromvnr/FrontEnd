@@ -8,7 +8,7 @@ const Assignedclients = ({ totalclients, state, district, branch }) => {
       <div>
         <h5 className='font-semibold ps-5 mt-3'>Assigned Clients</h5>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 font-poppins">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 ">
         <div className=" relative overflow-hidden p-4 sm:ms-5 md:ms-4 rounded-lg w-11/12 h-auto min-h-[7rem] border-l-4 border-l-purple-500" style={{ backgroundColor: '#eeeef7', borderColor: '#0000cc' }}>
 
           <div className=' absolute -top-2 -left-20 bg-gray-400 w-44 h-44 rounded-full bg-opacity-10'></div>

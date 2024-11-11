@@ -41,7 +41,7 @@ const Staff = () => {
         { name: "Dec", Complied: 75, "NotComplied": 5, Partially: 10, Overdue: 10 },
     ];
     return (
-        <div  className='p-5  '>
+        <div  className='p-5 '>
             <Drop onFilterChange={handleFilterChange} />
             <Assignedclients
                 totalclients={company.totalclients}

@@ -20,6 +20,7 @@
     "chart.js": "^4.4.5",
     "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^4.1.0",
+    "flatpickr": "^4.6.13",
     "html-to-pdf": "^0.1.11",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.2",

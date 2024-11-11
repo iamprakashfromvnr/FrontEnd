@@ -72,7 +72,7 @@ const ClientList = ({ totalCompany, state, district, branch }) => {
       <div>
         <h5 className='font-semibold ps-9 mt-3'>Clients list</h5>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 font-poppins">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 ">
 
         <div className=" relative overflow-hidden p-4 sm:ms-5 md:ms-4 rounded-lg w-11/12 h-auto min-h-[7rem] border-l-4 border-l-purple-500" style={{ backgroundColor: '#e6e6e6', borderColor: '#003366', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div className=' absolute -top-2 -left-20 bg-violet-400 w-44 h-44 rounded-full bg-opacity-10'></div>

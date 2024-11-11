@@ -12,7 +12,7 @@ const Item = ({ time, message, status }) => {
     const handleDelete = () => {
         setDropdownOpen(false);
     };
-    
+
     const toggleDropdown = () => {
         setDropdownOpen(prev => !prev);
     };
@@ -20,7 +20,7 @@ const Item = ({ time, message, status }) => {
         <div className="flex justify-between md:items-start lg:items-center p-5 ">
       <div className="flex items-start gap-2"> 
         <span className='flex items-start lg:items-center justify-center gap-2 '>
-          <input type="checkbox" className="text-black font-semi-bold" />
+          <input type="checkbox"className="text-black font-semi-bold"/>
           <p className="text-sm text-black w-10 lg:w-40">{time}</p>
         </span>
 
@@ -46,7 +46,7 @@ const Item = ({ time, message, status }) => {
           <FaEllipsisV />
         </div>
         {dropdownOpen && (
-          <div className="absolute right-0 mt-1 w-28 bg-white rounded shadow-md z-10">
+          <div className="absolute right-0 mt-1 w-32 bg-white border rounded-md shadow-lg">
             <button
               onClick={handleEdit}
               className="flex items-center  w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -66,6 +66,3 @@ const Item = ({ time, message, status }) => {
 };
 
 export default Item;
-
-
-

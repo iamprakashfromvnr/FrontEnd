@@ -139,7 +139,7 @@ const Board = () => {
         <div>
           <h5 className='font-semi bold ps-12 mt-3' >Assigned Clients</h5>
         </div>
-        <div className="grid grid-cols-3 md:grid-cols-4 mt-5 mb-5 font-poppins font-ExtraLight  200">
+        <div className="grid grid-cols-3 md:grid-cols-4 mt-5 mb-5 font-ExtraLight  200">
           <div className=" p-5 ms-14  rounded-lg shadow-md w-3/4 h-32 border-l-4 border-l-purple-500 " style={{ backgroundColor: '#eeeef7', borderColor: '#0000cc' }}>
             <div className="flex items-center ">
 
