@@ -85,9 +85,9 @@ const ComplianceList = () => {
     },
     headCells: {
       style: {
-        backgroundColor: '#000',
-        color: '#fff',
-
+        overflowWrap:'break-word',
+        backgroundColor:'#000',
+        color:'white'
       }
     },
     cells: {
@@ -148,7 +148,7 @@ const ComplianceList = () => {
     if (currentPage > totalPages) {
       setCurrentPage(totalPages);
     }
-  }, [filter, currentPage, totalPages])
+  }, [filter, currentPage, totalPages,search])
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -158,9 +158,9 @@ const ComplianceList = () => {
     <div className='p-2 -z-50' >
       <div className='flex flex-col justify-center gap/-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-bold  text-lg'>Compliance List</h2>
-        {/* <div className='flex gap-3 items-center'>
-          <Link to="/compliance"><button className='py-2 w-44 lg:w-40 rounded-md text-white bg-primary'>Create Compliance</button> </Link>
-        </div> */}
+        <div className='flex gap-3 items-center'>
+          <Link to="/compliance"><button className='py-2 w-44 lg:w-40 rounded-md text-white print:text-white bg-primary print:bg-primary'>Create Compliance</button> </Link>
+        </div>
       </div>
 
       <div className='relative py-6 flex justify-start items-center flex-wrap gap-4 mb-4'>
@@ -172,7 +172,7 @@ const ComplianceList = () => {
           ))}
         </select>)}
         {filters.formname && (
-          <select className='w-full lg:w-40 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.formname} onChange={(e) => setSelectValue({ ...selectValue, formname: e.target.value })}>
+          <select className='w-full lg:w-40 bg-selectbg py-2 px-4 rounded-md border border-bordergray print:border-bordergray' value={selectValue.formname} onChange={(e) => setSelectValue({ ...selectValue, formname: e.target.value })}>
             <option value="">Name of the form</option>
             {/* {Data.map((item)=><option value={item.nameOfForm}>{item.nameOfForm}</option>)} */}
             {[...new Set(Data.map((data) => data.nameOfForm))].map((formname, index) => (
@@ -180,7 +180,7 @@ const ComplianceList = () => {
             ))}
           </select>)}
         {filters.acttype && (
-          <select className='w-full lg:w-40 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.acttype} onChange={(e) => setSelectValue({ ...selectValue, acttype: e.target.value })}>
+          <select className='w-full lg:w-40 bg-selectbg print:bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.acttype} onChange={(e) => setSelectValue({ ...selectValue, acttype: e.target.value })}>
             <option value="">Type of Act</option>
             {/* {Data.map((item)=><option value={item.typeOfAct}>{item.typeOfAct}</option>)} */}
             {[...new Set(Data.map((data) => data.typeOfAct))].map((acttype, index) => (
@@ -207,7 +207,7 @@ const ComplianceList = () => {
           <IoIosSearch className='  absolute top-2 left-2' size={20} />
         </span>
         <span className='relative'>
-          <FaSliders size={35} className="p-1.5 bg-white border border-gray-400 rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
+          <FaSliders size={35} className="p-1.5 bg-white print:bg-white border border-gray-400 rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
           <div className='absolute z-30 top-10 lg:'>
             {showMenu &&
               (
@@ -260,7 +260,7 @@ const ComplianceList = () => {
         </span>
       </div>
 
-      <div className='w-auto -z-40'>
+      <div className='w-auto -z-40 text-wrap'>
 
         <DataTable
           columns={[
@@ -276,6 +276,7 @@ const ComplianceList = () => {
               name: 'Nature Of Activity',
               selector: (row) => row.natureOfActivity,
               sortable: true,
+              width:'155px',
               omit: filters.natureofactivity == false,
 
             },
@@ -283,13 +284,16 @@ const ComplianceList = () => {
               name: 'Activity',
               selector: (row) => row.activity,
               sortable: true,
+              width:'170px',
+              left:true,
               omit: filters.activity == false,
 
             },
             {
               name: 'Name of the Form',
-              selector: (row) => row.nameOfForm,
+              selector: (row) =><p className='text-wrap'>{row.nameOfForm}</p> ,
               sortable: true,
+              width:'180px',
               omit: filters.formname == false,
               grow: 2
             },
@@ -302,10 +306,10 @@ const ComplianceList = () => {
             },
             {
               name: 'Applicable Law',
-              selector: (row) => row.applicationLaw,
+              selector: (row) =><p className='text-wrap'>{row.applicationLaw}</p>,
               sortable: true,
               omit: filters.applicablelaw == false,
-              grow: 3
+              width:'200px'
             },
             {
               name: 'Type of Act',
@@ -318,6 +322,7 @@ const ComplianceList = () => {
               name: 'Actual Filing Frequency',
               selector: (row) => row.actualFillingFrequency,
               sortable: true,
+              width:'150px',
               omit: filters.actualfilling == false,
 
             },
@@ -325,7 +330,7 @@ const ComplianceList = () => {
               name: 'Last Filed Date',
               cell: (row) => <div className='flex gap-2 items-center justify-start'><p>{row.lastFilledDate}</p><IoCalendarOutline className='text-black' /></div>,
               sortable: true,
-              grow: 1.5,
+              width:'150px',
               omit: filters.lastfill == false,
 
             },
@@ -333,7 +338,7 @@ const ComplianceList = () => {
               name: 'Filling Frequency',
               selector: (row) => row.fillingFrequency,
               sortable: true,
-              grow: 1.5,
+              width:'130px',
               omit: filters.frequency == false,
             },
             {
@@ -349,7 +354,8 @@ const ComplianceList = () => {
           selectableRows
           fixedHeader
           highlightOnHover
-          customStyles={customStyles} >
+          customStyles={customStyles} 
+          className='text-wrap'>
         </DataTable>
       </div>
       <div className="py-2 lg:flex lg:justify-between items-center w-auto flex-row justify-center">
@@ -362,9 +368,10 @@ const ComplianceList = () => {
         </select>
         <CustomPagination page={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
-
-
-
+      <div className="flex justify-center items-center gap-5">
+        <button className='w-36 py-1 rounded bg-primary print:bg-primary'>Active</button>
+        <button className='w-36 py-1 rounded bg-light print:bg-light border'>Cancel</button>
+      </div>
     </div>
   )
 }

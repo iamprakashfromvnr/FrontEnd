@@ -5,15 +5,50 @@ import TextareaInput from '../../Components/TextareaInput'
 import Button from '../../Components/Button'
 import FileInput from '../../Components/FileInput'
 import { Link, useNavigate } from 'react-router-dom'
-
+import { IoIosClose } from "react-icons/io";
+import CheckedSelect from '../../Components/company/CheckedSelect'
 const CreateCompany = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [company, setcompany] = useState({
         companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
-        stakeholderName: '', username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
+        username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
         category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
         establishmentType: '', notificationAlert: '', password: '', image: null,
     })
+    const [emails, setEmails] = useState([]);
+    const [selectOptions, setSelectOptions] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+
+    const handleEmailInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.key === ',') {
+            event.preventDefault();
+            addEmail(inputValue.trim());
+        }
+        else if (event.key === 'Backspace' && inputValue === '') {
+            event.preventDefault();
+            removeLastEmail()
+        }
+    };
+
+    const addEmail = (email) => {
+
+        if (email && !emails.includes(email)) {
+            setEmails([...emails, email]);
+            setInputValue(''); // Clear input
+        }
+    };
+
+    const removeEmail = (email) => {
+        setEmails(emails.filter((e) => e !== email));
+    };
+
+    const removeLastEmail = () => {
+        setEmails(emails.slice(0, -1))
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -33,7 +68,7 @@ const CreateCompany = () => {
     const handleCancel = () => {
         setcompany({
             companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
-            stakeholderName: '', username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
+            username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
             category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
             establishmentType: '', notificationAlert: '', password: '', image: null,
         })
@@ -44,14 +79,18 @@ const CreateCompany = () => {
         e.preventDefault();
         alert('Form submitted!!');
         console.log(company)
+        console.log(emails)
         navigate('/clientmanagement')
         setcompany({
             companyName: '', branch: '', addressLine1: '', addressLine2: '', contactPerson: '',
-            stakeholderName: '', username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
+            username: '', pincode: '', contactNumber: '', stakeholderDetail: '',
             category: '', state: '', priority: '', assignedStaff: '', subCategory: '', district: '',
             establishmentType: '', notificationAlert: '', password: '', image: null,
         })
     }
+    const handleSelectedOptions = (options) => {
+        setSelectOptions(options);
+    };
 
     return (
         <div className='h-full p-5 shadow-lg'>
@@ -88,13 +127,14 @@ const CreateCompany = () => {
                                 { value: "high", label: "High" },
                             ]}
                         />
-                        <SelectInput label="Assigned Staff" name="assignedStaff" value={company.assignedStaff} onChange={handleInputChange}
-                            options={[
-                                { value: "", label: "Select assign staff" },
-                                { value: "manager", label: "Manager" },
-                                { value: "supervisor", label: "Supervisor" },
-                            ]}
-                        />
+                        <div className="flex flex-col mb-3 relative">
+                            <label className="block font-semibold mb-2">Assigned Staff</label>
+                            <CheckedSelect
+                                selectedOptions={selectOptions}
+                                setSelectedOptions={handleSelectedOptions}
+                            />
+                        </div>
+
                         <TextInput label='Stakehholder Name' name='stakeholderName' value={company.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
                         <TextInput label='User Name' name='username' value={company.username} placeholder='Enter the username' onChange={handleInputChange} />
                     </div>
@@ -132,13 +172,41 @@ const CreateCompany = () => {
                                 { value: "none", label: "None" },
                             ]}
                         />
-                        <TextInput label='Stakeholder Detail with Email ID' name='stakeholderDetail' value={company.stakeholderDetail} placeholder='Enter the email id' onChange={handleInputChange} />
-                        <TextInput label='Password' type='password' name='password' value={company.password} placeholder='Enter the password' onChange={handleInputChange} />
+                        <div className="w-full flex flex-col gap-2 justify-center">
+                            <label className=" text-md font-semibold text-gray-900 ">
+                                Stakeholder detail with mail ID
+                            </label>
+                            <div className='flex justify-between items-center'>
+                                <div className="flex items-center border w-[580px] h-[40px]  py-1 border-bordergray rounded pe-3 justify-between gap-3 overflow-y-scroll">
+                                    <div className="flex flex-wrap gap-2 ps-2">
+                                        {emails.map((email, index) => (
+                                            <span key={index} className="flex items-start  px-2 py-2 text-sm text-black bg-slate-200 rounded-md">
+                                                {email}
+                                                <IoIosClose size={20} onClick={() => removeEmail(email)}
+                                                    className="text-red-600 hover:text-gray-200" />
+                                            </span>
+                                        ))}
+                                        <input
+                                            type="email"
+                                            value={inputValue}
+                                            onChange={handleEmailInputChange}
+                                            onKeyDown={handleKeyDown}
+                                            placeholder="Enter The Mail ID..."
+                                            className="flex-2 px-2 py-1 text-gray-700 bg-transparent focus:outline-none placeholder-gray-400 w-60 "
+                                        />
+                                    </div>
+                                </div>
+                                <button type='button' className='bg-primary w-7 h-7 rounded-full ' onClick={() => addEmail(inputValue.trim())}>+</button>
+                            </div>
+                            <TextInput label='Password' type='password' name='password' value={company.password} placeholder='Enter the password' onChange={handleInputChange} />
+
+                        </div>
+
                     </div>
                 </div>
                 <div className='flex justify-center items-center gap-5'>
                     <Button label='Cancel' onClick={handleCancel} className='bg-white border border-gray-800' />
-                   <Button label='Save' type='submit' className='text-white bg-primary border border-yellow-500' />
+                    <Button label='Save' type='submit' className='text-white bg-primary border border-yellow-500' />
                 </div>
             </form>
         </div>

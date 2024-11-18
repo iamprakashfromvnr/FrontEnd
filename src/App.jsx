@@ -33,6 +33,7 @@ import CompanyComplianceList from './Pages/company/CompanyComplianceList';
 import Consolidate from './Pages/compliancefilling/Consolidate';
 import CompanyCompliance from './Pages/company/CompanyCompliance';
 import Message from './Pages/notification/Message';
+import EditCompliance from './Pages/compliance/EditCompliance';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -64,6 +65,7 @@ const App = () => {
                 <Route path="/user" element={<CreateUser />} />
                 <Route path="/userlist" element={<UserList/>} />
                 <Route path="/compliance" element={<CreateCompliance />} />
+                <Route path="/editcompliance" element={<EditCompliance/>}/>
                 <Route path="/compliancelist" element={<ComplianceList/>}/>
                 <Route path="/category" element={<CreateCategory />} />
                 <Route path="/categorylist" element={<CategoryList/>} />

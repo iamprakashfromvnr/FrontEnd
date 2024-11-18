@@ -28,6 +28,7 @@ body{
 
 *{
     text-decoration: none;
+    
 }
 
 a:hover,a:focus,a:active{
@@ -43,5 +44,17 @@ a:link{
     @apply text-black
 }
 *{
+    scrollbar-width: thin; 
+    scrollbar-color: #f2f0f0 #ffffff; 
+    
+    /* scroll-padding: 10px; */
+}
+.no-scrollbar{
     scrollbar-width: none;
 }
+@media print {
+    * {
+      -webkit-print-color-adjust: exact; 
+      print-color-adjust: exact; 
+    }
+  }

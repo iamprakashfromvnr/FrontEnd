@@ -1,7 +1,7 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { AiOutlineMail } from "react-icons/ai";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -9,6 +9,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { MdNavigateNext, MdOutlineFileDownload } from "react-icons/md";
 import logo from '../../Images/sky.jpg';
 import {Link} from 'react-router-dom'
+import { useReactToPrint } from 'react-to-print';
 const localizer = momentLocalizer(moment);
 
 const events = [
@@ -108,6 +109,8 @@ const MyCalendar = () => {
   const [filter, setFilter] = useState({ status: "", view: "", range: "" });
   const [search, setSearch] = useState("");
   const [calendarDate, setCalendarDate] = useState(new Date());
+  const componentRef=useRef(null)
+  const handlePrint=useReactToPrint({content:()=>componentRef.current})
 
   const eventStyleGetter = (event) => {
     const backgroundColor = event.status === 'compiled' ? '#6DAf45' : event.status === 'not compiled' ? '#Df4343' : event.status === 'partially compiled' ? '#d7b95f' : 'white';
@@ -154,14 +157,14 @@ const MyCalendar = () => {
 
   return (
     <>
-      <div className="p-5 flex justify-between">
+      <div className="p-5 flex justify-between" ref={componentRef}>
         <span className="flex justify-between gap-3 items-center ">
           <img src={logo} alt="" className="h-9 w-9 rounded-full" />
           <h4 className="text-md font-bold">Ace Corporation, <span className="text-md font-medium">Bangalore</span></h4>
         </span>
         <span className="flex justify-between items-center gap-3">
           <AiOutlineMail className="w-8 h-8 p-1.5 bg-primary text-white rounded-full" size={15} />
-          <MdOutlineFileDownload className="w-8 h-8 p-1.5 bg-primary text-white rounded-full" size={15} />
+          <MdOutlineFileDownload className="w-8 h-8 p-1.5 bg-primary text-white rounded-full" size={15} onClick={handlePrint}/>
           <Link to="/clientbranchmanagement">
           <IoIosArrowBack className="w-8 h-8 p-1.5 bg-primary text-white rounded-full" size={15} />
           </Link>

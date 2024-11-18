@@ -100,7 +100,7 @@ const Consolidate = () => {
                 color: '#fff',
                 paddingLeft: '10px',
                 fontSize: '11px',
-                whiteSpace:'normal'
+                whiteSpace: 'normal'
             },
         },
         cells: {
@@ -142,11 +142,11 @@ const Consolidate = () => {
                 </div>
             </div>
 
-            <div className=' flex flex-nowrap lg:justify-start items-center overflow-x-scroll  m-2 gap-2 '>
+            <div className=' flex flex-nowrap lg:justify-start items-center overflow-x-scroll mx-5 my-2 gap-2 '>
 
-                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: '' })} 
-                 className='flex flex-col gap-6 p-4 relative overflow-hidden min-w-64 h-40  bg-fuchsia-100 rounded-lg border-l-8 border-fuchsia-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5  hover:border-fuchsia-500'>
-                    <span className='flex items-center font-semibold  text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-fuchsia-500 w-10 h-11 rounded-lg me-3 ' /> Total Compliance </span>
+                <div onClick={(e) => setSelectValue({ ...selectValue, Status: '' })}
+                    className='flex flex-col gap-6 p-4 relative overflow-hidden min-w-60 h-40  bg-fuchsia-100 rounded-lg border-l-8 border-fuchsia-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5  hover:border-fuchsia-500 '>
+                    <span className='flex items-center font-semibold  text-wrap text-xl w-52'><TbReportAnalytics className=' text-white border bg-fuchsia-500 w-12 h-11 rounded-lg me-3 ' /> Total Compliance </span>
                     <div className='flex justify-between items-end ps-1'>
                         <h2 className='font-semibold text-3xl'>{Percent.totalCom.value}</h2>
                         <Dummy percent={(Percent.totalCom.value / Percent.totalCom.value * 100)} things={Percent.totalCom} />
@@ -155,23 +155,23 @@ const Consolidate = () => {
                     <div className=' absolute -top-2 -left-14 bg-fuchsia-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-fuchsia-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                    </div>
+                </div>
 
-                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Complied' })}  className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-64 h-40  bg-green-100 rounded-lg border-l-8 border-green-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5  hover:border-green-500'>
-                    <span className='flex items-center font-semibold  text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-green-500 w-10 h-11 rounded-lg me-5 ' /> Compiled</span>
+                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Complied' })} className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-[240px] h-40  bg-green-100 rounded-lg border-l-8 border-green-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5  hover:border-green-500'>
+                    <span className='flex items-center font-semibold  text-wrap text-xl w-52'><TbReportAnalytics className=' text-white border bg-green-500 w-10 h-11 rounded-lg me-5 ' /> Compiled</span>
                     <div className='flex justify-between items-end ps-1'>
-                    <h2 className='font-semibold text-3xl' >{Percent.complied.value}</h2>
-                    <Dummy percent={(Percent.complied.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.complied} />
+                        <h2 className='font-semibold text-3xl' >{Percent.complied.value}</h2>
+                        <Dummy percent={(Percent.complied.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.complied} />
                     </div>
                     <div className=' absolute -top-2 -left-14 bg-green-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-green-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                    </div>
+                </div>
 
 
-                 <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Not Complied' })} 
-                 className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-64 h-40  bg-red-100 rounded-lg border-l-8 border-red-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-red-500'>
-                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-red-500 w-10 h-11 rounded-lg me-3 ' /> Not Complied</span>
+                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Not Complied' })}
+                    className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-60 h-40  bg-red-100 rounded-lg border-l-8 border-red-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-red-500'>
+                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl w-52 '><TbReportAnalytics className=' text-white border bg-red-500 w-10 h-11 rounded-lg me-3 ' /> Not Complied</span>
                     <div className='flex justify-between items-end ps-1'>
                         <h2 className='font-semibold text-3xl'>{Percent.notComplied.value}</h2>
                         <Dummy percent={(Percent.notComplied.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.notComplied} />
@@ -179,11 +179,11 @@ const Consolidate = () => {
                     <div className=' absolute -top-2 -left-14 bg-red-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-red-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                    </div>
+                </div>
 
-                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Partially Complied' })} 
-                 className='flex flex-col gap-6 p-4 relative overflow-hidden min-w-64 h-40  bg-yellow-100 rounded-lg border-l-8 border-yellow-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-yellow-500'>
-                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-yellow-500 w-10 h-11 rounded-lg me-6 ' /> Partially Complied</span>
+                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Partially Complied' })}
+                    className='flex flex-col gap-6 p-4 relative overflow-hidden min-w-60 h-40  bg-yellow-100 rounded-lg border-l-8 border-yellow-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-yellow-500'>
+                    <span className='flex items-center font-semibold mt-0.5 w-52 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-yellow-500 w-14 h-11 rounded-lg me-6 ' /> Partially Complied</span>
                     <div className='flex justify-between items-end ps-1'>
                         <h2 className='font-semibold text-3xl'>{Percent.partiallyCom.value}</h2>
                         <Dummy percent={(Percent.partiallyCom.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.partiallyCom} />
@@ -191,11 +191,11 @@ const Consolidate = () => {
                     <div className=' absolute -top-2 -left-14 bg-yellow-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-yellow-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                    </div>                    
-                
-                    <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Over Due' })} 
-                 className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-64 h-40  bg-orange-100 rounded-lg border-l-8 border-orange-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-orange-500'>
-                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl '><TbReportAnalytics className=' text-white border bg-orange-500 w-10 h-11 rounded-lg me-5 ' /> Over Due</span>
+                </div>
+
+                <div onClick={(e) => setSelectValue({ ...selectValue, Status: 'Over Due' })}
+                    className='flex flex-col gap-8 p-4 relative overflow-hidden min-w-[240px] h-40  bg-orange-100 rounded-lg border-l-8 border-orange-600  hover:border-4 hover:pt-3 hover:pe-3 hover:ps-5   hover:border-orange-500'>
+                    <span className='flex items-center font-semibold mt-0.5 text-wrap text-xl w-52'><TbReportAnalytics className=' text-white border bg-orange-500 w-10 h-11 rounded-lg me-5 ' /> Over Due</span>
                     <div className='flex justify-between items-end ps-1'>
                         <h2 className='font-semibold text-3xl'>{Percent.overDue.value}</h2>
                         <Dummy percent={(Percent.overDue.value / Percent.totalCom.value * 100).toFixed(1)} things={Percent.overDue} />
@@ -203,9 +203,9 @@ const Consolidate = () => {
                     <div className=' absolute -top-2 -left-14 bg-orange-400 w-52 h-52 rounded-full bg-opacity-5 overflow-hidden'>
                         <div className='absolute left-24 bottom-20 bg-orange-400 w-52 h-52 rounded-full bg-opacity-10'></div>
                     </div>
-                    </div>
-                
-                
+                </div>
+
+
 
             </div>
 
@@ -238,9 +238,9 @@ const Consolidate = () => {
                 {/* <DatePicker className=' mt-2  text-sm rounded-md bg- w-full'
                     placeholder="Date Range"
                     block /> */}
-                    {/* <div className='relative bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full'> */}
-                    {/* <div className='relative z-20 lg:w-36 w-96'> */}
-                        {/* <DatePicker className='bg-white border border  text-sm h-9 w-full'selected={startDate} onChange={(date) => { setStartDate(date); setSelectValue({ ...selectValue, Filed_Date: date});}}
+                {/* <div className='relative bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full'> */}
+                {/* <div className='relative z-20 lg:w-36 w-96'> */}
+                {/* <DatePicker className='bg-white border border  text-sm h-9 w-full'selected={startDate} onChange={(date) => { setStartDate(date); setSelectValue({ ...selectValue, Filed_Date: date});}}
                         placeholderText="Select Date"
                         dateFormat="dd-MM-yyyy"
                         />
@@ -290,16 +290,16 @@ const Consolidate = () => {
                 <CustomPagination page={Page} totalPages={totalPages} onPageChange={(page) => setPage(page)} />
             </div>
             <div className='flex justify-center'>
-            <button className='h-10 w-36 text-center bg-primary' onClick={toggleModal}>edit</button>
-            {modelopen &&
-                <div className='absolute w-full top-0 left-0 h-full py-52 bg-black bg-opacity-50 z-50'>
-                    <div className="bg-white mx-auto rounded-lg shadow-lg w-4/5">
-                        <EditCompliances onClose={toggleModal} />
+                <button className='h-10 w-36 text-center bg-primary' onClick={toggleModal}>edit</button>
+                {modelopen &&
+                    <div className='absolute w-full top-0 left-0 h-full py-52 bg-black bg-opacity-50 z-50'>
+                        <div className="bg-white mx-auto rounded-lg shadow-lg w-4/5">
+                            <EditCompliances onClose={toggleModal} />
+                        </div>
                     </div>
-                </div>
-            }
+                }
             </div>
-            
+
         </>
     )
 }

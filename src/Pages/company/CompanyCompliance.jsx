@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import { LuDownload } from "react-icons/lu";
 import { HiOutlineMail } from "react-icons/hi";
 import { TbReportAnalytics } from 'react-icons/tb';
-import { BsSliders } from "react-icons/bs";
+import { BsFiletypeCsv, BsFiletypePdf, BsSliders } from "react-icons/bs";
 import { IoIosSearch } from 'react-icons/io'
 import { Columns } from '../../Components/company/CompanyCompliance/Columns';
 import { Data } from '../../Components/company/CompanyCompliance/Data';
@@ -10,10 +10,15 @@ import DataTable from 'react-data-table-component';
 import Percent from '../../Components/company/CompanyCompliance/Percent';
 import ENHR from '../../Images/sky.jpg'
 import CustomPagination from '../../Components/company/CompanyCompliance/CustomPagination';
+import html2pdf from 'html2pdf.js'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const CompanyCompliance = () => {
+    const componentRef = useRef(null);
     const [search, setSearch] = useState("")
     const [showMenu, setShowMenu] = useState(false)
+    const [DownMenu,setDownMenu]=useState(false)
     // here we use useState variable.......
     const [tableData] = useState(Data)
     const [filter, setFilter] = useState({
@@ -87,39 +92,104 @@ const CompanyCompliance = () => {
     const customStyles = {
         rows: {
             style: {
-                minHeight: '20px',
+                minHeight: '10px',
             },
         },
         headCells: {
             style: {
                 backgroundColor: '#000',
                 color: '#fff',
-                fontSize: '14px',
+                fontSize: '12px',
+                width: '100%',
+                wordBreak: 'break-word',
+                whiteSpace: 'normal',
+                padding: '8px 0px',
+                // margin:'2px'
             },
         },
         cells: {
             style: {
-                borderBottom: '1px solid rgba(0,0,0,0.15)',
-                fontSize: '14px',
-                paddingTop: '10px',
-                paddingBottom: '10px',
+                // borderBottom: '1px solid rgba(0,0,0,0.15)',
+                fontSize: '12px',
+                wordWrap: 'break-word',
+                whiteSpace: 'normal',
+                width:'100%',
+                padding:'8px 0px',
+                // margin:'2px'
             },
         },
     };
+//     const downloadPDF = () => {
+//     const element = componentRef.current;
+//     html2pdf()
+//         .set({
+//             margin: 0.5,  // Reduce margin to fit content better
+//             filename: 'Compliance_Report.pdf',
+//             html2canvas: { scale: 3, useCORS: true },  // Lower the scale for better alignment
+//             jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }
+//         })
+//         .from(element)
+//         .toPdf()
+//         .get('pdf')
+//         .then((pdf) => {
+//             const totalPages = pdf.internal.getNumberOfPages();
+//             for (let i = 1; i <= totalPages; i++) {
+//                 pdf.setPage(i);
+//                 pdf.setFontSize(10);
+//                 pdf.text(`Page ${i} of ${totalPages}`, pdf.internal.pageSize.getWidth() - 1, pdf.internal.pageSize.getHeight() - 0.5);
+//             }
+//         })
+//         .save();
+// };
+
+const downloadPDF = () => {
+    const element = componentRef.current;
+    html2pdf()
+        .set({
+            margin: 0.5,  
+            filename: 'Compliance_Report.pdf',
+            html2canvas: { scale: 2.5, useCORS: true },  // Lower the scale for better alignment
+            jsPDF: { unit: 'mm', format: 'a3', orientation: 'landscape' }  // Larger page format
+        })
+        .from(element)
+        .save();
+};
+const downloadCSV = () => {
+    const headers = Object.keys(pagination[0]);
+    const csv = [
+        headers.join(','),
+        ...pagination.map(row => Object.values(row).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'companycompliance.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
 
     return (
         <div className='h-full w-full p-5 shadow-lg'>
             <div className="flex items-center justify-between mb-8">
                  <h2 className='text-xl font-bold flex items-center gap-2'><div className='w-10 h-10 bg-blue-900 rounded-full' />Acme Corporation</h2>
                  <div className="flex items-center justify-center gap-2">
-                     <HiOutlineMail className="bg-yellow-600 text-white rounded-full p-2 cursor-pointer" size={35} />
-                     <LuDownload className="bg-yellow-600 text-white rounded-full p-2 cursor-pointer" size={35} />
+                     <HiOutlineMail className="bg-yellow-600 text-white rounded-full p-2 cursor-pointer" size={35}  />
+                     <div className='relative'><button className="bg-yellow-600 text-white rounded-full p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}><LuDownload size={20}  /></button>
+                     {DownMenu && <div className='absolute mt-5 right-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
+                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} ><BsFiletypePdf size={18} />  Download PDF</span>
+                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} ><BsFiletypeCsv size={18}/>  Download CSV</span>
+                     </div>
+
+                     }
+                     </div>
                  </div>
              </div>
-             <div className='flex justify-center lg:justify-start gap-3 flex-wrap mb-6'>
-                 <div className="relative bg-purple-600 border-s-4 border-purple-600 p-4 rounded-md overflow-hidden cursor-pointer text-white"
-                    style={{ width: '245px', height: '150px' }} onClick={() => setFilter({ ...filter, status: '' })}>
-                    <p className='flex items-center gap-4 h-16'><TbReportAnalytics size={40} className='bg-white text-purple-600 p-1 rounded-md' />
+             <div className='flex  flex-nowrap justify-start gap-3 mb-6 pb-1 overflow-x-scroll'>
+                 <div className="relative bg-purple-600 border-s-4 border-purple-600 p-4 rounded-md overflow-hidden cursor-pointer text-white min-w-60 h-[150px]"
+                    onClick={() => setFilter({ ...filter, status: '' })}>
+                    <p className='flex items-center gap-4 h-16 w-48'><TbReportAnalytics size={40} className='bg-white text-purple-600 p-1 rounded-md' />
                         <span className='text-xl font-semibold'>{cards.totalCom.label}</span></p>
                     <div className='h-14 flex justify-between items-end'>
                         <span className='text-2xl font-bold'>{cards.totalCom.value}</span>
@@ -130,8 +200,8 @@ const CompanyCompliance = () => {
                         <div className='absolute -top-32 -right-32 w-64 h-64 rounded-full bg-white bg-opacity-10' />
                     </div>
                 </div>
-                <div className={`relative bg-green-100 ${filter.status === 'Complied' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-green-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3`}
-                    style={{ width: '245px', height: '150px' }} onClick={() => setFilter({ ...filter, status: 'Complied' })}>
+                <div className={`relative bg-green-100 ${filter.status === 'Complied' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-green-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3 min-w-60 h-[150px]`}
+                     onClick={() => setFilter({ ...filter, status: 'Complied' })}>
                     <p className='flex items-center gap-4 h-16'><TbReportAnalytics size={40} className='bg-green-600 text-white p-1 rounded-md' />
                         <span className='text-xl font-semibold'>{cards.complied.label}</span></p>
                     <div className='h-14 flex justify-between items-end'>
@@ -143,8 +213,8 @@ const CompanyCompliance = () => {
                         <div className='absolute -top-32 -right-32 w-64 h-64 rounded-full bg-green-500 bg-opacity-10' />
                     </div>
                 </div>
-                <div className={`relative bg-red-100 ${filter.status === 'Not Complied' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-red-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3`}
-                    style={{ width: '245px', height: '150px' }} onClick={() => setFilter({ ...filter, status: 'Not Complied' })}>
+                <div className={`relative bg-red-100 ${filter.status === 'Not Complied' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-red-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3 min-w-60 h-[150px]`}
+                    onClick={() => setFilter({ ...filter, status: 'Not Complied' })}>
                     <p className='flex items-center gap-4 h-16'><TbReportAnalytics size={40} className='bg-red-600 text-white p-1 rounded' />
                         <span className='text-xl font-semibold'>{cards.notComplied.label}</span></p>
                     <div className='h-14 flex justify-between items-end'>
@@ -156,10 +226,10 @@ const CompanyCompliance = () => {
                         <div className='absolute -top-32 -right-32 w-64 h-64 rounded-full bg-red-400 bg-opacity-10' />
                     </div>
                 </div>
-                <div className={`relative bg-yellow-100 ${filter.status === 'Partially Complied' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-yellow-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3`}
-                    style={{ width: '245px', height: '150px' }} onClick={() => setFilter({ ...filter, status: 'Partially Complied' })}>
+                <div className={`relative bg-yellow-100 ${filter.status === 'Partially Complied' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-yellow-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3 min-w-60 h-[150px]`}
+                     onClick={() => setFilter({ ...filter, status: 'Partially Complied' })}>
                     <p className='flex items-center gap-4 h-16'><TbReportAnalytics size={40} className='bg-yellow-600 text-white p-1 rounded' />
-                        <span className='text-xl font-semibold'>{cards.partiallyCom.label}</span></p>
+                        <span className='text-xl font-semibold w-36 '>{cards.partiallyCom.label}</span></p>
                     <div className='h-14 flex justify-between items-end'>
                         <span className='text-2xl font-bold'>{cards.partiallyCom.value}</span>
                         {/* <span className='text-xs'>{(cards.partiallyCom.value / cards.totalCom.value * 100).toFixed(1)}%</span> */}
@@ -169,8 +239,8 @@ const CompanyCompliance = () => {
                         <div className='absolute -top-32 -right-32 w-64 h-64 rounded-full bg-yellow-400 bg-opacity-10' />
                     </div>
                 </div>
-                <div className={`relative bg-orange-100 ${filter.status === 'Over Due' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-orange-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3`}
-                    style={{ width: '245px', height: '150px' }} onClick={() => setFilter({ ...filter, status: 'Over Due' })}>
+                <div className={`relative bg-orange-100 ${filter.status === 'Over Due' ? 'border-4 pt-3 pe-3' : 'border-s-4'} border-orange-600 p-4 rounded-md overflow-hidden cursor-pointer hover:border-4 hover:pt-3 hover:pe-3 min-w-60 h-[150px]`}
+                    onClick={() => setFilter({ ...filter, status: 'Over Due' })}>
                     <p className='flex items-center gap-4 h-16'><TbReportAnalytics size={40} className='bg-orange-600 text-white p-1 rounded' />
                         <span className='text-xl font-semibold'>{cards.overdue.label}</span></p>
                     <div className='h-14 flex justify-between items-end'>
@@ -243,9 +313,9 @@ const CompanyCompliance = () => {
                     </div>
                 </div>
             </div>
-            <div className='mt-6'>
+            <div className='mt-6' ref={componentRef}>
                 <DataTable columns={Columns} data={pagination} selectableRows customStyles={customStyles} />
-            </div>
+            </div>  
             <div className="text-center flex justify-between items-center px-5 mt-6">
                 <div className='flex justify-center items-center gap-2'>
                     Page

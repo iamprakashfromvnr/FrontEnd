@@ -1,7 +1,7 @@
 import { LuDelete } from "react-icons/lu";
 import { LuLayoutGrid } from "react-icons/lu";
 import { FaBell, FaListUl } from "react-icons/fa6";
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { LuDownload } from "react-icons/lu";
 import { Data } from "./Data";
 import { IoIosAdd, IoIosSearch } from "react-icons/io";
@@ -11,11 +11,14 @@ import CustomPagination from "./CustomPagination";
 import { Link } from "react-router-dom";
 import { HiViewList } from "react-icons/hi";
 import { GoDownload } from "react-icons/go";
-
+import html2pdf from 'html2pdf.js'
+import { BsFiletypeCsv, BsFiletypePdf } from "react-icons/bs";
 const UserList = () => {
     const [search, setSearch] = useState("")
     const [view, setView] = useState('list')
     const [tableData] = useState(Data)
+    const pdfref=useRef()
+    const [DownMenu,setDownMenu]=useState(false)
     const [filter, setFilter] = useState({
         company: '', designation: '', modules: '',
     })
@@ -67,6 +70,35 @@ const UserList = () => {
             },
         },
     };
+
+    const downloadCSV = () => {
+        const headers = Object.keys(filterData[0]);
+        const csv = [
+            headers.join(','),
+            ...filterData.map(row => Object.values(row).join(','))
+        ].join('\n');
+    
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute('download', 'subcategory.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+    
+    const downloadPDF = () => {
+      const element = pdfref.current;
+      html2pdf()
+          .set({
+              margin: 0.5,  
+              filename: 'userlist.pdf',
+            //   html2canvas: { scale: 2.5, useCORS: true },  // Lower the scale for better alignment
+              jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }  // Larger page format
+          })
+          .from(element)
+          .save();
+    };
     const totalPages = Math.ceil(filterData.length / itemsPerPage)
     var filterData = filterData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
     return (
@@ -74,7 +106,12 @@ const UserList = () => {
             <div className="flex flex-col justify-center gap-2 items-start lg:flex-row mb-6 lg:items-center lg:justify-between">
                 <h2 className='text-xl font-bold'>User Management({filterData.length})</h2>
                 <div className="flex items-center justify-center gap-2 lg:gap-4">
-                    <LuDownload className="bg-primary text-white rounded-full p-2 cursor-pointer" size={35} />
+                <div className='relative'><button className="bg-primary text-white rounded-full p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}><LuDownload size={20}  /></button>
+                    {DownMenu && <div className='absolute mt-5 lg:right-0 left-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
+                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} ><BsFiletypePdf size={18} />  Download PDF</span>
+                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} ><BsFiletypeCsv size={18}/>  Download CSV</span>
+                </div>}
+                </div>                    
                     <Link to='/user' className="w-32 py-1.5 bg-primary text-white rounded cursor-pointer flex items-center justify-center gap-2">
                         <IoIosAdd /><span>Add user</span>
                     </Link>
@@ -105,7 +142,7 @@ const UserList = () => {
                 </div>
             </div>
             {view === 'list' ?
-                (<div className='mt-6'>
+                (<div className='mt-6' ref={pdfref} >
                     <DataTable columns={Columns} data={filterData} selectableRows fixedHeader customStyles={customStyles} responsive />
                 </div>) : (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-4">
                     {filterData.map((user, index) => (

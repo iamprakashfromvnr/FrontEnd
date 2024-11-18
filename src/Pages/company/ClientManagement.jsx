@@ -14,7 +14,7 @@ const ClientManagement = () => {
 const columns=[
     {
         name:"sno",
-        selector:row=>row.sno,
+        selector:row=>row.sno, 
         sortable:true,
         width:'90px',
         grow:1

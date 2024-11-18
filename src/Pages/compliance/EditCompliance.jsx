@@ -9,24 +9,22 @@ import { FaAngleLeft, FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import CheckedSelect from "../../Components/CheckedSelect";
 import Swal from 'sweetalert2';
-import edit from '../../Images/edit.png'
-import done from '../../Images/done.png'
-const CreateCompliance = () => {
+const EditCompliance = () => {
   const navigate = useNavigate();
   const [fileName, setFileName] = useState('')
   const [selectOptions, setSelectOptions] = useState([]);
   const [compliance, setCompliance] = useState({
-    natureOfCompliance: "",
-    activity: "",
-    typeOfAct: "",
-    applicationLaborAct: "",
-    dueDate: "",
-    section: "",
-    remarks: "",
-    nameOfForm: "",
-    state: "",
-    applicability: "",
-    frequencyOfCompliance: "",
+    natureOfCompliance: "Statutory payment",
+    activity: "Activity",
+    typeOfAct: "state",
+    applicationLaborAct: "Act - 1",
+    dueDate: "Monthly",
+    section: "A",
+    remarks: "Nill",
+    nameOfForm: "Form I",
+    state: "Kerala",
+    applicability: "Yes",
+    frequencyOfCompliance: "Monthly",
     priorityType: "",
     documentPdf: null,
   });
@@ -40,10 +38,10 @@ const CreateCompliance = () => {
       setCompliance({ ...compliance, documentPdf: URL.createObjectURL(file) });
       setFileName(file.name)
     }
-    console.log(file);
-    console.log(fileName.slice(-5, -1));
+    console.log(file);    
+    console.log(fileName.slice(-5, -1));    
   };
-
+  
   const handleCancel = () => {
     setCompliance({
       natureOfCompliance: "",
@@ -67,57 +65,33 @@ const CreateCompliance = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: 'Save',
-      text: 'Do you Want to Save the Compliance',
-      imageUrl: "/src/Images/done.png",
-      imageHeight: 100,
-      imageHeight: 100,
-      showCancelButton: true,
-      cancelButtonColor: '#fff',
-      iconColor: "#d7b95f",
-      confirmButtonColor: "#d7b95f",
-      confirmButtonText: "Ok",
-      cancelButtonColor: '#fff'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          {
-            imageUrl: "/src/Images/edit.png",
-            imageHeight: 100,
-            imageHeight: 100,
-            title: 'Edit',
-            text: 'Do you Want to Edit the Compliance',
-            showCancelButton: true,
-            cancelButtonColor: "#fff",
-            iconColor: "#d7b95f",
-            confirmButtonColor: "#d7b95f",
-            confirmButtonText: "Save",
-          }
-        ).then(() => {
-          navigate('/editcompliance')
-          setCompliance({
-            natureOfCompliance: "",
-            activity: "",
-            typeOfAct: "",
-            applicationLaborAct: "",
-            dueDate: "",
-            section: "",
-            remarks: "",
-            nameOfForm: "",
-            state: "",
-            applicability: "",
-            frequencyOfCompliance: "",
-            priorityType: "",
-            documentPdf: null,
-          });
-          setFileName('')
-        })
-      }
-
-
-
+        
+        icon: 'success',
+        title: 'Save',
+        showCancelButton:true,
+        text: 'Your Compliance Edited Successfully',
+      }).then(() => {
+        navigate('/compliancelist');
+      });
+    
+    console.log(compliance);
+    setCompliance({
+      natureOfCompliance: "",
+      activity: "",
+      typeOfAct: "",
+      applicationLaborAct: "",
+      dueDate: "",
+      section: "",
+      remarks: "",
+      nameOfForm: "",
+      state: "",
+      applicability: "",
+      frequencyOfCompliance: "",
+      priorityType: "",
+      documentPdf: null,
     });
-
+    setFileName('')
+    navigate("/compliancelist");
   };
   const handleSelectedOptions = (options) => {
     setSelectOptions(options);
@@ -126,9 +100,9 @@ const CreateCompliance = () => {
   return (
     <div className="h-full p-5 shadow-lg">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">Create compliance</h2>
+        <h2 className="text-xl font-bold">Edit compliance</h2>
         <Link to="/compliancelist">
-          <button className="w-36 py-1.5 bg-primary print:bg-primary text-white rounded cursor-pointer flex items-center justify-center gap-2">
+          <button className="w-36 py-1.5 bg-primary text-white rounded cursor-pointer flex items-center justify-center gap-2">
             <FaAngleLeft />
             <span>Back to List</span>
           </button>
@@ -146,7 +120,7 @@ const CreateCompliance = () => {
                 { value: "", label: "SELECT" },
                 { value: "Statutory payment", label: "Statutory payment" },
                 { value: "Registration", label: "Registration" },
-
+                
               ]}
             />
             <SelectInput
@@ -218,7 +192,7 @@ const CreateCompliance = () => {
                   </span>
                 )}
                 {compliance.documentPdf ? (
-                  <span>{fileName.slice(0, 4)}..{fileName.slice(-5,)}</span>
+                  <span>{fileName.slice(0,4)}..{fileName.slice(-5,)}</span>
                 ) : (
                   <span className="font-semibold">upload</span>
                 )}
@@ -246,7 +220,7 @@ const CreateCompliance = () => {
                 name="state"
                 value={compliance.state}
                 onChange={handleInputChange}
-                className={`${compliance.typeOfAct === "central" ? 'bg-white cursor-not-allowed' : 'bg-selectbg'}   w-full p-2 border border-bordergray  rounded`}
+                className={`${compliance.typeOfAct==="central" ? 'bg-white cursor-not-allowed':'bg-selectbg' }   w-full p-2 border border-bordergray  rounded`}
                 disabled={compliance.typeOfAct === "central"}
               >
                 <option value="">Select the state</option>
@@ -315,7 +289,7 @@ const CreateCompliance = () => {
           <Button
             label="Save"
             type="submit"
-            className="text-white bg-primary print:bg-primary border border-primary print:border-primary"
+            className="text-white bg-primary border border-primary"
           />
         </div>
       </form>
@@ -323,4 +297,4 @@ const CreateCompliance = () => {
   );
 };
 
-export default CreateCompliance;
+export default EditCompliance;

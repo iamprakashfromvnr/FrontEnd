@@ -132,7 +132,7 @@ const Login = ({ value }) => {
                 type="submit"
                 id="submit"
                 value="Login"
-                className="w-full bg-primary text-md py-1.5 rounded cursor-pointer mt-3"
+                className="w-full bg-primary print:bg-primary text-md py-1.5 rounded cursor-pointer mt-3"
                 required
               />
               <div>
@@ -151,7 +151,7 @@ const Login = ({ value }) => {
               }}
             ></div>
           </div>
-          <div className="flex flex-col justify-center items-center relative px-28 w-full lg:w-1/2 h-screen bg-primary">
+          <div className="flex flex-col justify-center items-center relative px-28 w-full lg:w-1/2 h-screen bg-primary print:bg-primary">
             <div className="flex flex-col justify-center items-start">
               <img
                 src={logo}
