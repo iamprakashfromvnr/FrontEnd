@@ -95,7 +95,10 @@ const customStyles={
         <div className='flex items-center gap-3 flex-wrap'>
           <select className='bg-white rounded-lg border  border-bordergray px-4 h-9 w-full lg:w-44 ' value={filter.company} onChange={(e)=>setFilter({...filter,company:e.target.value})}>
             <option value="">Company</option>
-            {Data.map((item)=><option value={item.company}>{item.company}</option>)}
+            {[...new Set(Data.map((data) => data.company))].map((company, index) => (
+              <option key={index} value={company}>{company}</option>
+            ))}
+            {/* {Data.map((item)=><option value={item.company}>{item.company}</option>)} */}
           </select>
           <div className='relative w-full lg:w-44'>
             <input type="text" className='bg-white rounded-lg border  border-bordergray  w-full lg:w-44 py-1.5 ps-8 ' placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)}/>

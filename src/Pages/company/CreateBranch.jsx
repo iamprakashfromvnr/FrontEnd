@@ -5,9 +5,14 @@ import TextareaInput from '../../Components/TextareaInput'
 import Button from '../../Components/Button'
 import FileInput from '../../Components/FileInput'
 import { useNavigate } from 'react-router-dom'
+import CheckedSelect from '../../Components/company/CheckedSelect'
+import { IoIosClose } from 'react-icons/io'
 
 const CreateBranch = () => {
     const navigate=useNavigate()
+    const [selectOptions, setSelectOptions] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+    const [emails, setEmails] = useState([]);
     const [branch, setBranch] = useState({
         branch: '', addressLine1: '', addressLine2: '', contactPerson: '', stakeholderName: '',
         username: '', pincode: '', contactNumber: '', stakeholderDetail: '', category: '',
@@ -50,6 +55,39 @@ const CreateBranch = () => {
         })
         navigate('clientbranchmanagement')
     }
+    const handleSelectedOptions = (options) => {
+        setSelectOptions(options);
+    };
+    const handleEmailInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.key === ',') {
+            event.preventDefault();
+            addEmail(inputValue.trim());
+        }
+        else if (event.key === 'Backspace' && inputValue === '') {
+            event.preventDefault();
+            removeLastEmail()
+        }
+    };
+
+    const addEmail = (email) => {
+
+        if (email && !emails.includes(email)) {
+            setEmails([...emails, email]);
+            setInputValue(''); // Clear input
+        }
+    };
+
+    const removeEmail = (email) => {
+        setEmails(emails.filter((e) => e !== email));
+    };
+
+    const removeLastEmail = () => {
+        setEmails(emails.slice(0, -1))
+    }
 
     return (
         <div className='h-full p-5 shadow-lg'>
@@ -85,13 +123,13 @@ const CreateBranch = () => {
                                 { value: "high", label: "High" },
                             ]}
                         />
-                        <SelectInput label="Assigned Staff" name="assignedStaff" value={branch.assignedStaff} onChange={handleInputChange}
-                            options={[
-                                { value: "", label: "Select assign staff" },
-                                { value: "manager", label: "Manager" },
-                                { value: "supervisor", label: "Supervisor" },
-                            ]}
-                        />
+                        <div className="flex flex-col mb-3 relative">
+                            <label className="block font-semibold mb-2">Assigned Staff</label>
+                            <CheckedSelect
+                                selectedOptions={selectOptions}
+                                setSelectedOptions={handleSelectedOptions}
+                            />
+                        </div>
                         <TextInput label='Stakehholder Name' name='stakeholderName' value={branch.stakeholderName} placeholder='Enter the stakeholder name' onChange={handleInputChange} />
                         <TextInput label='User Name' name='username' value={branch.username} placeholder='Enter the username' onChange={handleInputChange} />
                     </div>
@@ -129,7 +167,35 @@ const CreateBranch = () => {
                                 { value: "none", label: "None" },
                             ]}
                         />
-                        <TextInput label='Stakeholder Detail with Email ID' name='stakeholderDetail' value={branch.stakeholderDetail} placeholder='Enter the email id' onChange={handleInputChange} />
+                        <div className="w-full flex flex-col gap-2 justify-center">
+                            <label className=" text-md font-semibold text-gray-900 ">
+                                Stakeholder detail with mail ID
+                            </label>
+                            <div className='flex justify-between items-center'>
+                                <div className="flex items-center border w-[580px] h-[40px]  py-1 border-bordergray rounded pe-3 justify-between gap-3 overflow-y-scroll">
+                                    <div className="flex flex-wrap gap-2 ps-2">
+                                        {emails.map((email, index) => (
+                                            <span key={index} className="flex items-start  px-2 py-2 text-sm text-black bg-slate-200 rounded-md">
+                                                {email}
+                                                <IoIosClose size={20} onClick={() => removeEmail(email)}
+                                                    className="text-red-600 hover:text-gray-200" />
+                                            </span>
+                                        ))}
+                                        <input
+                                            type="email"
+                                            value={inputValue}
+                                            onChange={handleEmailInputChange}
+                                            onKeyDown={handleKeyDown}
+                                            placeholder="Enter The Mail ID..."
+                                            className="flex-2 px-2 py-1 text-gray-700 bg-transparent focus:outline-none placeholder-gray-400 w-60 "
+                                        />
+                                    </div>
+                                </div>
+                                <button type='button' className='bg-primary w-7 h-7 rounded-full ' onClick={() => addEmail(inputValue.trim())}>+</button>
+                            </div>
+
+                        </div>
+                        
                         <TextInput label='Password' type='password' name='password' value={branch.password} placeholder='Enter the password' onChange={handleInputChange} />
                     </div>
                 </div>

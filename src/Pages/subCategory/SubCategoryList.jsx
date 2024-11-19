@@ -96,11 +96,17 @@ const downloadPDF = () => {
       <div className='py-6 flex justify-start items-center flex-wrap gap-6 mb-4'>
         <select  className='w-full lg:w-56 bg-selectbg py-2 px-4 rounded-md border border-bordergray' value={selectValue.subcategory} onChange={(e)=>setSelectValue({...selectValue,subcategory:e.target.value})}>
           <option value="">Sub Category</option>
-          {Data.map((item)=><option value={item.subcategory}>{item.subcategory}</option>)}
+          {[...new Set(Data.map((data) => data.subcategory))].map((subcategory, index) => (
+              <option key={index} value={subcategory}>{subcategory}</option>
+            ))}
+          {/* {Data.map((item)=><option value={item.subcategory}>{item.subcategory}</option>)} */}
         </select>
         <select  className='w-full lg:w-56 bg-selectbg py-2 px-4 rounded-md border border-bordergray'value={selectValue.category} onChange={(e)=>setSelectValue({...selectValue,category:e.target.value})}>
           <option value="">Category</option>
-          {Data.map((item)=><option value={item.category}>{item.category}</option>)}
+          {[...new Set(Data.map((data) => data.category))].map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
+          {/* {Data.map((item)=><option value={item.category}>{item.category}</option>)} */}
         </select>
         <span className='w-full lg:w-56 bg-selectbg relative'>
           <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />

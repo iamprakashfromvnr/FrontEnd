@@ -143,20 +143,20 @@ const Login = ({ value }) => {
               </div>
             </form>
             <div
-              className="h-96 w-96 rounded-full absolute -left-36 -bottom-60"
+              className="h-96 w-96 rounded-full absolute lg:-left-40 -left-44 lg:-bottom-60 -bottom-64"
               style={{
-                background: "rgb(255,252,0)",
+                background: "#d7b95f",
                 background:
                   "linear-gradient(192deg, rgba(255,252,0,0.7399159492898721) 0%, rgba(255,255,255,0.4878151089537377) 100%)",
               }}
             ></div>
           </div>
-          <div className="flex flex-col justify-center items-center relative px-28 w-full lg:w-1/2 h-screen bg-primary print:bg-primary">
-            <div className="flex flex-col justify-center items-start">
+          <div className="flex flex-col justify-center items-center relative lg:px-24 px-10 w-full lg:w-1/2 h-screen  bg-primary print:bg-primary">
+            <div className="flex flex-col justify-center items-start gap-3">
               <img
                 src={logo}
                 alt="Login logo"
-                className="mx-auto"
+                className="mx-auto px-5"
                 width={340}
               />
               <div className="text-center mt-3">
@@ -171,7 +171,7 @@ const Login = ({ value }) => {
               </div>
             </div>
             <div
-              className="h-96 w-96 rounded-full absolute -right-32 -top-60"
+              className="h-96 w-96 rounded-full absolute lg:-right-32 -top-60 -right-44"
               style={{
                 background: "rgb(87,87,81)",
                 background:

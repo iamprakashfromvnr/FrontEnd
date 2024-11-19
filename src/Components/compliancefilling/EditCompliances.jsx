@@ -30,14 +30,14 @@ const EditCompliances = ({ onClose }) => {
             setCompliance({ ...compliance, documentPdf: URL.createObjectURL(file), });
         }
     };
-    const handleCancel = () => {
-        setCompliance({
-            natureOfCompliance: '', activity: '', typeOfAct: '', applicationLaborAct: '', nameOfForm:'',
-            dueDate: '', section: '', remarks: '', penalty: '', state: '', applicability: '',
-            frequencyOfCompliance: '', priorityType: '', lastFillingDate: '', notification: '',
-            score: '', documentPdf: null
-        })
-    }
+    // const handleCancel = () => {
+    //     setCompliance({
+    //         natureOfCompliance: '', activity: '', typeOfAct: '', applicationLaborAct: '', nameOfForm:'',
+    //         dueDate: '', section: '', remarks: '', penalty: '', state: '', applicability: '',
+    //         frequencyOfCompliance: '', priorityType: '', lastFillingDate: '', notification: '',
+    //         score: '', documentPdf: null
+    //     })&&onClose
+    // }
     const handleSubmit = (e) => {
         e.preventDefault();
         alert('Form submitted!!');
@@ -149,7 +149,7 @@ const EditCompliances = ({ onClose }) => {
                     </div>
                 </div>
                 <div className='flex justify-center items-center gap-5'>
-                    <button onClick={handleCancel} className='border border-gray-800 w-28 h-8 rounded'>Cancel</button>
+                    <button onClick={onClose} className='border border-gray-800 w-28 h-8 rounded'>Cancel</button>
                     <button  type='submit' className='text-white bg-primary w-28 h-8 rounded border-primary'>Save</button>
                 </div>
             </form>

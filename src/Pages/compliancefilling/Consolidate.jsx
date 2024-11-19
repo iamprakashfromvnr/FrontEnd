@@ -18,7 +18,7 @@ import CustomPagination from '../../Components/CustomPagination';
 import EditCompliances from '../../Components/compliancefilling/EditCompliances';
 const Consolidate = () => {
     const [Page, setPage] = useState(1)
-    const [Itemsperpage] = useState(5)
+    const [Itemsperpage,setItemsperpage] = useState(5)
     const [modelopen, setmodelopen] = useState(false)
     const toggleModal = () => {
         setmodelopen(!modelopen)
@@ -209,33 +209,45 @@ const Consolidate = () => {
 
             </div>
 
-            <div className='grid grid-cols-1 w-full gap-2 lg:grid-cols-8 px-5 pb-4' >
-                {checkFilter.company && <select className='bg-white border border-bordergray  mt-2  text-sm  h-9  px-4 rounded-md w-full  ' value={selectValue.Company} onChange={(e) => setSelectValue({ ...selectValue, Company: e.target.value })} >
+            <div className='ps-5 flex flex-wrap items-center gap-2' >
+                {checkFilter.company && <select className='bg-white border border-bordergray  mt-2  text-sm  h-9  px-4 rounded-md w-full lg:w-32  ' value={selectValue.Company} onChange={(e) => setSelectValue({ ...selectValue, Company: e.target.value })} >
                     <option value=""> Company</option>
-                    {data.map((item) => <option value={item.company}>{item.company}  </option>)}
+                    {[...new Set(data.map((data) => data.company))].map((company, index) => (
+                        <option key={index} value={company}>{company}</option>
+                    ))}
                 </select>}
-                {checkFilter.state && <select className=' bg-white border border-bordergray mt-2 text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.State} onChange={(e) => setSelectValue({ ...selectValue, State: e.target.value })}>
+                {checkFilter.state && <select className=' bg-white border border-bordergray mt-2 text-sm  h-9  px-4 rounded-md w-full lg:w-32 ' value={selectValue.State} onChange={(e) => setSelectValue({ ...selectValue, State: e.target.value })}>
                     <option value=""> State</option>
-                    {data.map((item) => <option value={item.state}>{item.state}  </option>)}
+                    {[...new Set(data.map((data) => data.state))].map((state, index) => (
+                        <option key={index} value={state}>{state}</option>
+                    ))}
                 </select>}
-                {checkFilter.branch && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
+                {checkFilter.branch && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full lg:w-32 ' value={selectValue.Branch} onChange={(e) => setSelectValue({ ...selectValue, Branch: e.target.value })}>
                     <option value=""> Branch</option>
-                    {data.map((item) => <option value={item.branch}>{item.branch}  </option>)}
+                    {[...new Set(data.map((data) => data.branch))].map((branch, index) => (
+                        <option key={index} value={branch}>{branch}</option>
+                    ))}
                 </select>}
-                {checkFilter.compliance && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.Compliance} onChange={(e) => setSelectValue({ ...selectValue, Compliance: e.target.value })}>
+                {checkFilter.compliance && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full lg:w-32 ' value={selectValue.Compliance} onChange={(e) => setSelectValue({ ...selectValue, Compliance: e.target.value })}>
                     <option value=""> Compliance</option>
-                    {data.map((item) => <option value={item.compliance}>{item.compliance}  </option>)}
+                    {[...new Set(data.map((data) => data.compliance))].map((compliance, index) => (
+                        <option key={index} value={compliance}>{compliance}</option>
+                    ))}
                 </select>}
-                {checkFilter.staff && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full ' value={selectValue.AssignStaff} onChange={(e) => setSelectValue({ ...selectValue, AssignStaff: e.target.value })}>
+                {checkFilter.staff && <select className=' bg-white border border-bordergray mt-2  text-sm  h-9  px-4 rounded-md w-full lg:w-32 ' value={selectValue.AssignStaff} onChange={(e) => setSelectValue({ ...selectValue, AssignStaff: e.target.value })}>
                     <option value="">Staff</option>
-                    {data.map((item) => <option value={item.assignstaff}>{item.assignstaff}  </option>)}
+                    {[...new Set(data.map((data) => data.assignstaff))].map((assignstaff, index) => (
+                        <option key={index} value={assignstaff}>{assignstaff}</option>
+                    ))}
                 </select>}
-                {checkFilter.priority && <select className=' bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full ' value={selectValue.Priority} onChange={(e) => setSelectValue({ ...selectValue, Priority: e.target.value })}>
+                {checkFilter.priority && <select className=' bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full lg:w-32 ' value={selectValue.Priority} onChange={(e) => setSelectValue({ ...selectValue, Priority: e.target.value })}>
                     <option value="">Priority</option>
-                    {data.map((item) => <option value={item.priority}>{item.priority}  </option>)}
+                    {[...new Set(data.map((data) => data.priority))].map((priority, index) => (
+                        <option key={index} value={priority}>{priority}</option>
+                    ))}
                 </select>}
 
-                {/* <DatePicker className=' mt-2  text-sm rounded-md bg- w-full'
+                {/* <DatePicker className=' mt-2  text-sm rounded-md bg- w-full lg:w-32'
                     placeholder="Date Range"
                     block /> */}
                 {/* <div className='relative bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full'> */}
@@ -250,7 +262,7 @@ const Consolidate = () => {
 
 
                 <div className=' relative '>
-                    <input type='text' className=' bg-white w-full   text-md text-black border border-bordergray mt-2 pl-8 py-1.5  rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
+                    <input type='text' className=' bg-white lg:w-32 w-full   text-md text-black border border-bordergray mt-2 pl-8 py-1.5  rounded-md ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} ></input>
                     <div className='absolute inset-y-0 top-3.5 text-input left-2.5' >
                         <IoIosSearch size={23} />
                     </div>
@@ -280,11 +292,11 @@ const Consolidate = () => {
                 data={filterdata} >
             </DataTable>
             <div className='flex flex-col lg:flex-row lg:justify-between justify-start p-5'>
-                <select className='  border border-gray-200 mt-2  text-sm h-9 px-4 shadow-md rounded-md w-32 justify-end'>
-                    <option value="">Show Option</option>
-                    <option value="">Page 5</option>
-                    <option value="">Page 10</option>
-                    <option value="">page 15</option>
+                <select className='  border border-gray-200 mt-2  text-sm h-9 px-4 shadow-md rounded-md w-32 justify-end' value={Itemsperpage} onChange={(e)=>setItemsperpage(e.target.value)}>
+                    <option value="5">Show Option</option>
+                    <option value="5">Page 5</option>
+                    <option value="10">Page 10</option>
+                    <option value="15">page 15</option>
 
                 </select>
                 <CustomPagination page={Page} totalPages={totalPages} onPageChange={(page) => setPage(page)} />

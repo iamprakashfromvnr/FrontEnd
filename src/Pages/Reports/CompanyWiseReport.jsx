@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 import { FaSliders } from 'react-icons/fa6';
 import CustomPagination from '../../Components/CustomPagination';
 import { CompanyColumns } from '../../Components/reports/CompanyColumns';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { CiMail } from 'react-icons/ci';
 import { FiPrinter } from 'react-icons/fi';
 import moment from 'moment'; 
@@ -21,12 +19,15 @@ import html2pdf  from 'html2pdf.js';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import ReactToPrint from 'react-to-print';
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_blue.css";
+
 const CompanyWiseReport = () => {
   const [data] = useState(CompanyData);
   const printref=useRef()
   const [startDate, setStartDate] = useState(null);
   const[DownMenu,setDownMenu]=useState(false)
-  const pdfref=useRef()
+  const pdfref=useRef()             
   const [search, setSearch] = useState('');
   const [count, setCount] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
@@ -67,6 +68,13 @@ const CompanyWiseReport = () => {
     actions:true,
   });
 
+  const handleFilterReset = () => {
+    // Reset or fetch all data when Filed_Date is empty
+    if (!selectValue.Filed_Date) {
+      // Reset data logic here, e.g., fetch all records
+      setFilteredData(originalData); // Replace with your actual reset logic
+    }
+  };
   const handleCheckboxChange = (filterName) => {
     setFilters({
       ...filters,
@@ -75,16 +83,20 @@ const CompanyWiseReport = () => {
   };
 
   
-  const filter = CompanyData.filter((item) => {
-    const formattedFiledDate = startDate ? moment(startDate).format('DD-MM-YYYY') : '';
-
+  var filter = CompanyData.filter((item) => {
+    const formattedFiledDate = moment(item.Filed_Date, 'DD-MM-YYYY');
+  const dateRangeValid =
+    startDate &&
+    moment(startDate[0]).isSameOrBefore(formattedFiledDate) &&
+    moment(startDate[1]).isSameOrAfter(formattedFiledDate);
     return (
       (selectValue.Company_Name ? item.Company_Name === selectValue.Company_Name : true) &&
       (selectValue.State ? item.State === selectValue.State : true) &&
       (selectValue.Branch ? item.Branch === selectValue.Branch : true) &&
       (selectValue.Activity ? item.Activity === selectValue.Activity : true) &&
       (selectValue.Status ? item.Status === selectValue.Status : true) &&
-      (formattedFiledDate ? item.Filed_Date === formattedFiledDate : true) &&
+      (startDate ? dateRangeValid : true) &&
+      // (formattedFiledDate ? item.Filed_Date === formattedFiledDate : true) &&
       (item.Company_Name.toLowerCase().includes(search.toLowerCase()) ||
         item.Branch.toLowerCase().includes(search.toLowerCase()) ||
         item.State.toLowerCase().includes(search.toLowerCase()) ||
@@ -98,10 +110,11 @@ const CompanyWiseReport = () => {
         item.Document.toLowerCase().includes(search.toLowerCase()) ||
         item.Priority.toLowerCase().includes(search.toLowerCase()) ||
         item.Status.toLowerCase().includes(search.toLowerCase()))
-    );
-  }).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
+    )
+  })
+   
   const totalPages = Math.ceil(filter.length / itemsPerPage);
+  var filter=filter.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   
 
   // useEffect(() => {
@@ -157,8 +170,8 @@ html2pdf()
     .set({
         // margin:5,  
         filename: 'companywisereport.pdf',
-        html2canvas: { scale: 5 },  // Lower the scale for better alignment
-        jsPDF: { unit: 'mm', format: 'a2', orientation: 'landscape' }  // Larger page format
+        html2canvas: { scale: 5 },  
+        jsPDF: { unit: 'mm', format: 'a2', orientation: 'landscape' }  
     })
     .from(element)
     .save();
@@ -168,11 +181,11 @@ html2pdf()
     <div className='p-2 -z-50' ref={printref}>
       <div className='flex flex-col justify-center gap-2 items-start lg:flex-row lg:items-center lg:justify-between'>
         <h2 className='font-semibold text-lg'>Company Wise Report ({filter.length})</h2>
-        <div className='flex gap-3'>
+        <div className='flex gap-3 items-center'>
           <button onClick={()=>window.print()} ><FiPrinter className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
           <button><CiMail className='w-9 h-9 p-2 rounded-full mt-1 bg-primary text-white'  /></button>
-          <div className='relative'><button className="bg-primary text-white rounded-full p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}><LuDownload size={20}  /></button>
-         {DownMenu && <div className='absolute mt-5 lg:right-0 left-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
+          <div className='relative'><button className="bg-primary text-white rounded-full mt-1 p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}><LuDownload size={20}  /></button>
+         {DownMenu && <div className='absolute mt-5 lg:right-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
                         <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} ><BsFiletypePdf size={18} />  Download PDF</span>
                         <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} ><BsFiletypeCsv size={18}/>  Download CSV</span>
                      </div>}
@@ -224,28 +237,65 @@ html2pdf()
                         ))}
           </select>
         )}
+        
         {filters.filedate && (
-          <div className='relative z-20 lg:w-36 w-96'>
-            <DatePicker
-              className='focus-visible focus-visible:outline-none lg:w-36 w-96 py-1.5 ps-2 border border-bordergray  rounded-md '
-              selected={startDate}
-              onChange={(date) => {
-                setStartDate(date);
-                setSelectValue({
-                  ...selectValue,
-                  Filed_Date: date
-                });
-              }}
-              placeholderText="Select Date"
-              dateFormat="dd-MM-yyyy"
-            />
-            <span className='absolute top-2 right-2'><MdOutlineCalendarMonth size={20}/></span>
-            </div>
-            
-        )}
+    <div className='relative z-20 lg:w-32 w-full bg-white'>
+      <Flatpickr
+        className='focus-visible focus-visible:outline-none lg:w-32 w-full py-1.5 ps-2 border border-bordergray rounded-md'
+        value={startDate}
+        onChange={(selectedDates) => {
+          if (selectedDates.length === 2) {
+            setStartDate(selectedDates);
+            setSelectValue({
+              ...selectValue,
+              Filed_Date: {
+                start: moment(selectedDates[0]).format('DD-MM-YYYY'),
+                end: moment(selectedDates[1]).format('DD-MM-YYYY'),
+              },
+            });
+          } else {
+            setStartDate(null);
+            setSelectValue({
+              ...selectValue,
+              Filed_Date: "",
+            });
+          }
+        }}
+        options={{
+          mode: "range",
+          dateFormat: "d-m-Y",
+          maxDate: "today", 
+        }}
+        placeholder="Date Range"
+      />
+      {startDate && ( 
+        <button
+          className="absolute top-1 right-0.5 bg-white px-2 py-1 rounded text-gray-600 hover:text-red-600"
+          onClick={() => {
+            setStartDate(null);
+            handleFilterReset();
+            setSelectValue({
+              ...selectValue,
+              Filed_Date: "",
+            });
+          }}
+        >
+          ✖
+        </button>
+      )}
+      {!startDate && (
+        
+      <span className='absolute top-2 right-2'>
+      <MdOutlineCalendarMonth size={20} />
+    </span>
+      )}
+    </div>
+)}
+
+
         <span className='w-full lg:w-36 relative'>
-          <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md placeholder:text-black ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
-          <IoIosSearch className='absolute top-1.5 left-2 text-input' size={23} />
+      <input type='text' className=' focus-visible focus-visible:outline-none w-full py-1.5 ps-8 border border-bordergray rounded-md placeholder:text-black ' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
+     <IoIosSearch className='absolute top-1.5 left-2 text-input' size={23} />
         </span>
         <span className='relative'>
           <FaSliders size={35} className="p-1.5 bg-white border border-bordergray rounded-md cursor-pointer" onClick={() => setShowMenu(!showMenu)} />
@@ -340,7 +390,7 @@ html2pdf()
                 selector:row=>row.State,
                 sortable:true,
                 width:'120px',
-                center:true,
+                center:1,
                 omit:filters.state==false,
             },
             {
@@ -434,15 +484,12 @@ html2pdf()
                 name: 'Actions',
                 cell:(row)=>(<ActionMenu/>),
                 ignoreRowClick:true,
-                allowOverflow:true,
-                button:true,
-                width:'65px',
+                width:'100px',
                 omit:filters.actions==false
             }
-        
-        
         ]
-        } sortIcon={<PiCaretUpDownFill />}
+        } 
+        sortIcon={<PiCaretUpDownFill />}
         data={filter}
         responsive
         selectableRows

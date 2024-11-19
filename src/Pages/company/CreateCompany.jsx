@@ -198,9 +198,9 @@ const CreateCompany = () => {
                                 </div>
                                 <button type='button' className='bg-primary w-7 h-7 rounded-full ' onClick={() => addEmail(inputValue.trim())}>+</button>
                             </div>
-                            <TextInput label='Password' type='password' name='password' value={company.password} placeholder='Enter the password' onChange={handleInputChange} />
 
                         </div>
+                            <TextInput label='Password' type='password' name='password' value={company.password} placeholder='Enter the password' onChange={handleInputChange} />
 
                     </div>
                 </div>
