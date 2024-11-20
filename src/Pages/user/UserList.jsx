@@ -17,8 +17,8 @@ const UserList = () => {
     const [search, setSearch] = useState("")
     const [view, setView] = useState('list')
     const [tableData] = useState(Data)
-    const pdfref=useRef()
-    const [DownMenu,setDownMenu]=useState(false)
+    const pdfref = useRef()
+    const [DownMenu, setDownMenu] = useState(false)
     const [filter, setFilter] = useState({
         company: '', designation: '', modules: '',
     })
@@ -59,7 +59,7 @@ const UserList = () => {
                 backgroundColor: '#000',
                 color: '#fff',
                 fontSize: '14px',
-                padding:'0px 10px'
+                padding: '0px 10px'
             },
         },
         cells: {
@@ -77,7 +77,7 @@ const UserList = () => {
             headers.join(','),
             ...filterData.map(row => Object.values(row).join(','))
         ].join('\n');
-    
+
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -86,18 +86,18 @@ const UserList = () => {
         link.click();
         document.body.removeChild(link);
     };
-    
+
     const downloadPDF = () => {
-      const element = pdfref.current;
-      html2pdf()
-          .set({
-              margin: 0.5,  
-              filename: 'userlist.pdf',
-            //   html2canvas: { scale: 2.5, useCORS: true },  // Lower the scale for better alignment
-              jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }  // Larger page format
-          })
-          .from(element)
-          .save();
+        const element = pdfref.current;
+        html2pdf()
+            .set({
+                margin: 0.5,
+                filename: 'userlist.pdf',
+                //   html2canvas: { scale: 2.5, useCORS: true },  // Lower the scale for better alignment
+                jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }  // Larger page format
+            })
+            .from(element)
+            .save();
     };
     const totalPages = Math.ceil(filterData.length / itemsPerPage)
     var filterData = filterData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
@@ -106,12 +106,12 @@ const UserList = () => {
             <div className="flex flex-col justify-center gap-2 items-start lg:flex-row mb-6 lg:items-center lg:justify-between">
                 <h2 className='text-xl font-bold'>User Management({filterData.length})</h2>
                 <div className="flex items-center justify-center gap-2 lg:gap-4">
-                <div className='relative'><button className="bg-primary text-white rounded-full p-2 cursor-pointer" onClick={()=>setDownMenu(!DownMenu)}><LuDownload size={20}  /></button>
-                    {DownMenu && <div className='absolute mt-5 lg:right-0 left-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
-                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} ><BsFiletypePdf size={18} />  Download PDF</span>
-                        <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} ><BsFiletypeCsv size={18}/>  Download CSV</span>
-                </div>}
-                </div>                    
+                    <div className='relative'><button className="bg-primary text-white rounded-full p-2 cursor-pointer" onClick={() => setDownMenu(!DownMenu)}><LuDownload size={20} /></button>
+                        {DownMenu && <div className='absolute mt-5 lg:right-0 left-0 w-40 h-[80px] rounded-md bg-selectbg  z-30 border border-bordergray'>
+                            <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadPDF} ><BsFiletypePdf size={18} />  Download PDF</span>
+                            <span className='flex justify-start gap-5  items-center hover:bg-slate-200  hover:rounded py-2.5 px-2 cursor-pointer' onClick={downloadCSV} ><BsFiletypeCsv size={18} />  Download CSV</span>
+                        </div>}
+                    </div>
                     <Link to='/user' className="w-32 py-1.5 bg-primary text-white rounded cursor-pointer flex items-center justify-center gap-2">
                         <IoIosAdd /><span>Add user</span>
                     </Link>
@@ -121,15 +121,24 @@ const UserList = () => {
                 <div className="flex items-center gap-4 flex-wrap">
                     <select onChange={(e) => setFilter({ ...filter, company: e.target.value })} value={filter.company} className='w-full lg:w-44 bg-white border border-bordergray py-2 px-4 rounded '>
                         <option value="">Company</option>
-                        {Data.map((data) => <option value={data.company}>{data.company}</option>)}
+                        {/* {Data.map((data) => <option value={data.company}>{data.company}</option>)} */}
+                        {[...new Set(Data.map((data) => data.company))].map((company, index) => (
+                            <option key={index} value={company}>{company}</option>
+                        ))}
                     </select>
                     <select onChange={(e) => setFilter({ ...filter, designation: e.target.value })} value={filter.designation} className='w-full lg:w-44 bg-white border border-bordergray py-2 px-4 rounded '>
                         <option value="">Designation</option>
-                        {Data.map((data) => <option value={data.designation}>{data.designation}</option>)}
+                        {/* {Data.map((data) => <option value={data.designation}>{data.designation}</option>)} */}
+                        {[...new Set(Data.map((data) => data.designation))].map((designation, index) => (
+                            <option key={index} value={designation}>{designation}</option>
+                        ))}
                     </select>
                     <select onChange={(e) => setFilter({ ...filter, modules: e.target.value })} value={filter.modules} className='w-full lg:w-44 bg-white border border-bordergray py-2 px-4 rounded '>
                         <option value="">Modules</option>
-                        {Data.map((data) => <option value={data.modules}>{data.modules}</option>)}
+                        {/* {Data.map((data) => <option value={data.modules}>{data.modules}</option>)} */}
+                        {[...new Set(Data.map((data) => data.modules))].map((modules, index) => (
+                            <option key={index} value={modules}>{modules}</option>
+                        ))}
                     </select>
                     <span className='w-full lg:w-44 relative'>
                         <input type='text' className='w-full focus-visible focus-visible:outline-none py-2 ps-8 border border-bordergray rounded placeholder:text-black' placeholder='Search' onChange={(e) => setSearch(e.target.value)} value={search} />

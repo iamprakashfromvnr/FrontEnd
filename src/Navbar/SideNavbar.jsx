@@ -141,13 +141,13 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
         setIsReportOpen(!isReportOpen);
     };
     return (
-        <div className={`fixed top-0 left-0 py-3 h-screen bg-white w-60
+        <div className={`fixed top-0 left-0 py-2 h-screen bg-white w-60
             transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
             transition-transform duration-300 ease-in-out overflow-scroll no-scrollbar`}
         >
-            <div className="px-3 py-4 flex justify-between items-center">
+            <div className="px-3 pb-4 flex justify-between items-center">
                 <div className='flex items-center gap-2'>
-                    <img src={ENHR} alt="ENCompliance HR" width={50} />
+                    <img src={ENHR} alt="ENCompliance HR" width={40} />
                     <h3 className="text-sm lg:text-base font-bold">ENCOMPLIANCE HR</h3>
                 </div>
                 <FaTimes className="text-lg cursor-pointer lg:hidden" onClick={closeSidebar} />
@@ -162,11 +162,11 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                 
                 <li>
                     <div
-                        className="px-4 py-2 cursor-pointer flex items-center justify-between
+                        className=" ps-4 pe-2 py-2 cursor-pointer flex items-center justify-between
                         hover:bg-primary hover:border-black hover:border-e-4" onClick={toggleComplianceMaster}
                     >
                         <div className='flex items-center gap-2'>
-                            <TbReportSearch className='text-2xl' /><span>Compliance Master</span>
+                            <TbReportSearch className='text-2xl text-nowrap' /><span>Compliance Master</span>
                         </div>
                         {isComplianceOpen ? <FaChevronDown /> : <FaChevronRight />}
                     </div>
@@ -175,13 +175,13 @@ const SideNavbar = ({ isOpen, closeSidebar }) => {
                             <Link to="/compliance" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Compliance<FaPlus className='text-sm ' />
                             </Link>
-                            <Link to="/naturecompliancelist" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
+                            <Link to="/createnaturecompliance" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Nature of Comp..<FaPlus className='text-sm' />
                             </Link>
-                            <Link to="/categorylist" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
+                            <Link to="/category" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Category<FaPlus className='text-sm' />
                             </Link>
-                            <Link to="/subcatlist" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
+                            <Link to="/createsubcategory" className="ps-12 py-2 pe-4 hover:pe-3 flex items-center justify-between hover:bg-primary hover:border-black hover:border-e-4 cursor-pointer">
                                 Sub-Category<FaPlus className='text-sm' />
                             </Link>
                         </ul>

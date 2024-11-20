@@ -33,7 +33,6 @@ import CompanyComplianceList from './Pages/company/CompanyComplianceList';
 import Consolidate from './Pages/compliancefilling/Consolidate';
 import CompanyCompliance from './Pages/company/CompanyCompliance';
 import Message from './Pages/notification/Message';
-import EditCompliance from './Pages/compliance/EditCompliance';
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -65,7 +64,6 @@ const App = () => {
                 <Route path="/user" element={<CreateUser />} />
                 <Route path="/userlist" element={<UserList/>} />
                 <Route path="/compliance" element={<CreateCompliance />} />
-                <Route path="/editcompliance" element={<EditCompliance/>}/>
                 <Route path="/compliancelist" element={<ComplianceList/>}/>
                 <Route path="/category" element={<CreateCategory />} />
                 <Route path="/categorylist" element={<CategoryList/>} />
@@ -100,3 +98,107 @@ const App = () => {
 };
 
 export default App;
+
+// import React, { lazy, Suspense, useState } from 'react';
+// import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// const CreateCompany=lazy(()=>import('./Pages/company/CreateCompany'));
+// const CreateBranch=lazy(()=>import('./Pages/company/CreateBranch'));
+// // import DemoCompany from './Pages/company/DemoCompany';
+// const CreateUser=lazy(()=>import('./Pages/user/CreateUser'));
+// const CreateCompliance=lazy(()=>import('./Pages/compliance/CreateCompliance'));
+// const CreateCategory=lazy(()=>import('./Pages/category/CreateCategory'));
+// const CreateSubCategory=lazy(()=>import('./Pages/subCategory/CreateSubCategory'));
+// const Login=lazy(()=>import('./login/Login'));
+// // import ProtectedRoute from './Components/ProtectedRoutes';
+// const ComplianceList=lazy(()=>import('./Pages/compliance/ComplianceList'));
+// // import Outlets from './Navbar/Outlets';
+// const Index=lazy(()=>import('./Pages/Dashboard/Admin'));
+// const CompanywiseReport=lazy(()=>import('./Pages/Reports/CompanyWiseReport'));
+// const CategoryList=lazy(()=>import('./Pages/category/CategoryList'));
+// const NatureofCompliance=lazy(()=>import('./Pages/category/CreateNatureOfCompliance'));
+// const NatureComplianceList=lazy(()=>import('./Pages/category/NatureComplianceList'));
+// const SubCategoryList=lazy(()=>import('./Pages/subCategory/SubCategoryList'));
+// const Viewsub=lazy(()=>import('./Pages/subCategory/ViewSubCategory'));
+// const UserList=lazy(()=>import('./Pages/user/UserList'));
+// const Container=lazy(()=>import('./Navbar/Container'));
+// const ComplianceReport=lazy(()=>import('./Pages/Reports/ComplianceReport'));
+// import CalendarModule from './Pages/CompanyMaster/CalendarModule';
+// const Staff=lazy(()=>import('./Pages/Dashboard/StaffDashBoard'));
+// const ClientDash=lazy(()=>import('./Pages/Dashboard/ClientDash'));
+// const ClientManagement=lazy(()=>import('./Pages/company/ClientManagement'));
+// const  ClientBranchManagement=lazy(()=>import('./Pages/company/ClientBranchManagement'));
+// import CalendarComponent from './Pages/CompanyMaster/CalendarModule';
+// const MyCalendar=lazy(()=>import('./Pages/company/MyCalendar'));
+// const CompanyComplianceList=lazy(()=>import('./Pages/company/CompanyComplianceList'));
+// const Consolidate=lazy(()=>import('./Pages/compliancefilling/Consolidate'));
+// const CompanyCompliance=lazy(()=>import('./Pages/company/CompanyCompliance'));
+// const Message=lazy(()=>import('./Pages/notification/Message'));
+// const EditCompliance=lazy(()=>import('./Pages/compliance/EditCompliance'));
+// import './index.css'
+// const App = () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+//   const closeSidebar = () => {
+//     setIsSidebarOpen(false);
+//   };
+
+//   return (
+//     <BrowserRouter>
+//     <Suspense fallback={<div id="loader" ></div>}>
+//       {/* <div className="flex">
+//         <div
+//           className={`shadow-lg ${isSidebarOpen ? 'translate-x-0 w-60' : '-translate-x-full w-0'}
+//            transition-transform-w duration-300 ease-in-out fixed lg:static`}
+//         >
+//           <SideNavbar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+//         </div>
+//         <div className="flex-1">
+//           <MainNavbar toggleSidebar={toggleSidebar} />
+//           <div className="p-4"> */}
+//             <Routes>
+//               <Route path="/" element={<Login/>} />
+//               <Route element={<Container />}>
+//                 <Route path="/home" element={<Index/>}/>
+//                 <Route path="/company" element={<CreateCompany />} />
+//                 <Route path="/branch" element={<CreateBranch />} />
+//                 <Route path="/user" element={<CreateUser />} />
+//                 <Route path="/userlist" element={<UserList/>} />
+//                 <Route path="/compliance" element={<CreateCompliance />} />
+//                 <Route path="/editcompliance" element={<EditCompliance/>}/>
+//                 <Route path="/compliancelist" element={<ComplianceList/>}/>
+//                 <Route path="/category" element={<CreateCategory />} />
+//                 <Route path="/categorylist" element={<CategoryList/>} />
+//                 <Route path="/createnaturecompliance" element={<NatureofCompliance/>} />
+//                 <Route path="/naturecompliancelist" element={<NatureComplianceList/>} />
+//                 <Route path="/createsubcategory" element={<CreateSubCategory />} />
+//                 {/* <Route path="/createsubcatlist" element={<CreatesubCatList />} /> */}
+//                 <Route path="/subcatlist" element={<SubCategoryList />} />
+//                 <Route path="/viewsubcatlist" element={<Viewsub />} />
+//                 <Route path="/companyreport" element={<CompanywiseReport />} />
+//                 <Route path="/compliancereport" element={<ComplianceReport />} />
+//                 <Route path="/calendar" element={<MyCalendar/>} />
+//                 <Route path="/dash" element={<Staff />} />
+//                 <Route path="/admindash" element={<Index/>} />
+//                 <Route path="/clientdash" element={<ClientDash/>} />
+//                 <Route path="/clientmanagement" element={<ClientManagement/>} />
+//                 <Route path="/clientbranchmanagement" element={<ClientBranchManagement/>} />
+//                 <Route path="/companycompliancelist" element={<CompanyComplianceList/>} />
+//                 <Route path="/compliancefilling" element={<Consolidate/>} />
+//                 <Route path="/companycompliance" element={<CompanyCompliance/>} />
+//                 <Route path="/notification" element={<Message/>} />
+                
+
+//                 {/* <Route path="/reportCompany" element={<CompanywiseReport/>}/> */}
+//               </Route>
+//             </Routes>
+//           {/* </div>
+//         </div>
+//       </div> */}
+//       </Suspense>
+//     </BrowserRouter>
+//   );
+// };
+
+// export default App;

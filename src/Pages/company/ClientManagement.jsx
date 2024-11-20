@@ -118,9 +118,9 @@ const customStyles={
     {/* <div className={`grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 xl:grid-cols-4 bg-red-200 ` }> */}
     <div className="flex justify-start gap-10 flex-wrap w-full">
 
-    {filterData.map((data)=>
+    {filterData.map((data,index)=>
         // <div className='relative py-8 px-16 rounded-md bg-white items-center' style={{borderLeft:`40px solid ${data.level == 'high' ? 'blue': data.level==='medium'?'green':data.level==='low'?'orange':'white'}`}}>
-        <div className='flex items-center border border-bordergray rounded-md bg-white w-min' onClick={branch}>
+        <div key={index} className='flex items-center border border-bordergray rounded-md bg-white w-min' onClick={branch}>
             <span className={`w-8 h-full  ${data.level == 'high' ? 'bg-highBlue': data.level==='medium'?'bg-medgreen':data.level==='low'?'bg-lowOrange':'bg-white'} text-center text-white flex items-center justify-center rounded-s-md`}>
                 <p className='transform -rotate-90 font-bold'>{data.level.toUpperCase()}</p>
             </span>

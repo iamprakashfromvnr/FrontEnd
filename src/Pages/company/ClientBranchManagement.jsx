@@ -194,9 +194,9 @@ const customStyles={
     
     <div className='p-4'>
     <div className='flex justify-center lg:justify-start gap-2 flex-wrap w-full'>
-    {filterData.map((data)=>
+    {filterData.map((data,index)=>
         // <div className='relative py-8 px-16 rounded-md bg-white items-center' style={{borderLeft:`40px solid ${data.level == 'high' ? 'blue': data.level==='medium'?'green':data.level==='low'?'orange':'white'}`}}>
-        <div className={`py-3 border border-bordergray rounded-md px-2 justify-center h-52 relative overflow-hidden ${data.prioriy==='incomplete'? 'bg-red-50':data.prioriy==='complete'?'bg-green-50':''}`}style={{width:'300px'}} > 
+        <div key={index} className={`py-3 border border-bordergray rounded-md px-2 justify-center h-52 relative overflow-hidden ${data.prioriy==='incomplete'? 'bg-red-50':data.prioriy==='complete'?'bg-green-50':''}`}style={{width:'300px'}} > 
                 <div className='w-32 h-8 absolute top-4 -right-8 '>
                      <div className={`${data.prioriy==="incomplete" ? 'text-black':'text-white'} h-full w-full bg-yellow-400 text-center leading-8 font-semibold transform rotate-45`}>{data.prioriy}</div>
                  </div>

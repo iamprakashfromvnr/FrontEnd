@@ -38,10 +38,10 @@ const EditCompliance = () => {
       setCompliance({ ...compliance, documentPdf: URL.createObjectURL(file) });
       setFileName(file.name)
     }
-    console.log(file);    
-    console.log(fileName.slice(-5, -1));    
+    console.log(file);
+    console.log(fileName.slice(-5, -1));
   };
-  
+
   const handleCancel = () => {
     setCompliance({
       natureOfCompliance: "",
@@ -64,34 +64,41 @@ const EditCompliance = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    Swal.fire({
-        
-        icon: 'success',
-        title: 'Save',
-        showCancelButton:true,
-        text: 'Your Compliance Edited Successfully',
-      }).then(() => {
-        navigate('/compliancelist');
-      });
-    
+    Swal.fire(
+      {
+        imageUrl: "/src/Images/edit.png",
+        imageHeight: 100,
+        imageHeight: 100,
+        title: 'Edit',
+        text: 'Do you Want to Edit the Compliance',
+        showCancelButton: true,
+        iconColor: "#d7b95f",
+        confirmButtonColor: "#d7b95f",
+        confirmButtonText: "Save",
+      }
+    ).then((result)=>{
+      if(result.isConfirmed){
+        setCompliance({
+          natureOfCompliance: "",
+          activity: "",
+          typeOfAct: "",
+          applicationLaborAct: "",
+          dueDate: "",
+          section: "",
+          remarks: "",
+          nameOfForm: "",
+          state: "",
+          applicability: "",
+          frequencyOfCompliance: "",
+          priorityType: "",
+          documentPdf: null,
+        });
+        setFileName('')
+        navigate("/compliancelist");
+      }
+    })
     console.log(compliance);
-    setCompliance({
-      natureOfCompliance: "",
-      activity: "",
-      typeOfAct: "",
-      applicationLaborAct: "",
-      dueDate: "",
-      section: "",
-      remarks: "",
-      nameOfForm: "",
-      state: "",
-      applicability: "",
-      frequencyOfCompliance: "",
-      priorityType: "",
-      documentPdf: null,
-    });
-    setFileName('')
-    navigate("/compliancelist");
+    
   };
   const handleSelectedOptions = (options) => {
     setSelectOptions(options);
@@ -120,7 +127,7 @@ const EditCompliance = () => {
                 { value: "", label: "SELECT" },
                 { value: "Statutory payment", label: "Statutory payment" },
                 { value: "Registration", label: "Registration" },
-                
+
               ]}
             />
             <SelectInput
@@ -192,7 +199,7 @@ const EditCompliance = () => {
                   </span>
                 )}
                 {compliance.documentPdf ? (
-                  <span>{fileName.slice(0,4)}..{fileName.slice(-5,)}</span>
+                  <span>{fileName.slice(0, 4)}..{fileName.slice(-5,)}</span>
                 ) : (
                   <span className="font-semibold">upload</span>
                 )}
@@ -220,7 +227,7 @@ const EditCompliance = () => {
                 name="state"
                 value={compliance.state}
                 onChange={handleInputChange}
-                className={`${compliance.typeOfAct==="central" ? 'bg-white cursor-not-allowed':'bg-selectbg' }   w-full p-2 border border-bordergray  rounded`}
+                className={`${compliance.typeOfAct === "central" ? 'bg-white cursor-not-allowed' : 'bg-selectbg'}   w-full p-2 border border-bordergray  rounded`}
                 disabled={compliance.typeOfAct === "central"}
               >
                 <option value="">Select the state</option>

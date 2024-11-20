@@ -67,34 +67,18 @@ const CreateCompliance = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: 'Save',
-      text: 'Do you Want to Save the Compliance',
-      imageUrl: "/src/Images/done.png",
-      imageHeight: 100,
-      imageHeight: 100,
-      showCancelButton: true,
-      cancelButtonColor: '#fff',
-      iconColor: "#d7b95f",
-      confirmButtonColor: "#d7b95f",
-      confirmButtonText: "Ok",
-      cancelButtonColor: '#fff'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          {
-            imageUrl: "/src/Images/edit.png",
-            imageHeight: 100,
-            imageHeight: 100,
-            title: 'Edit',
-            text: 'Do you Want to Edit the Compliance',
-            showCancelButton: true,
-            cancelButtonColor: "#fff",
-            iconColor: "#d7b95f",
-            confirmButtonColor: "#d7b95f",
-            confirmButtonText: "Save",
-          }
-        ).then(() => {
-          navigate('/editcompliance')
+        title: 'Save',
+        text: 'Do you Want to Save the Compliance',
+        imageUrl: "/src/Images/done.png",
+        imageHeight: 100,
+        imageHeight: 100,
+        showCancelButton: true,
+        iconColor: "#d7b95f",
+        confirmButtonColor: "#d7b95f",
+        confirmButtonText: "Ok",
+      }).then((result)=>{
+        if (result.isConfirmed){
+          navigate('/compliancelist')
           setCompliance({
             natureOfCompliance: "",
             activity: "",
@@ -111,12 +95,56 @@ const CreateCompliance = () => {
             documentPdf: null,
           });
           setFileName('')
-        })
-      }
+        }
+      })
+    // Swal.fire({
+    //   title: 'Save',
+    //   text: 'Do you Want to Save the Compliance',
+    //   imageUrl: "/src/Images/done.png",
+    //   imageHeight: 100,
+    //   imageHeight: 100,
+    //   showCancelButton: true,
+    //   iconColor: "#d7b95f",
+    //   confirmButtonColor: "#d7b95f",
+    //   confirmButtonText: "Ok",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire(
+    //       {
+    //         imageUrl: "/src/Images/edit.png",
+    //         imageHeight: 100,
+    //         imageHeight: 100,
+    //         title: 'Edit',
+    //         text: 'Do you Want to Edit the Compliance',
+    //         showCancelButton: true,
+    //         iconColor: "#d7b95f",
+    //         confirmButtonColor: "#d7b95f",
+    //         confirmButtonText: "Save",
+    //       }
+    //     ).then(() => {
+    //       navigate('/editcompliance')
+    //       setCompliance({
+    //         natureOfCompliance: "",
+    //         activity: "",
+    //         typeOfAct: "",
+    //         applicationLaborAct: "",
+    //         dueDate: "",
+    //         section: "",
+    //         remarks: "",
+    //         nameOfForm: "",
+    //         state: "",
+    //         applicability: "",
+    //         frequencyOfCompliance: "",
+    //         priorityType: "",
+    //         documentPdf: null,
+    //       });
+    //       setFileName('')
+    //     })
+    //   }
 
 
 
-    });
+    // });
 
   };
   const handleSelectedOptions = (options) => {
