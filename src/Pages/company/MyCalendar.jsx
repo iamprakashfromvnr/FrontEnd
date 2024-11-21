@@ -6,10 +6,12 @@ import moment from 'moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { IoIosArrowBack } from "react-icons/io";
-import { MdNavigateNext, MdOutlineFileDownload } from "react-icons/md";
+import { MdClose, MdNavigateNext, MdOutlineCalendarMonth, MdOutlineFileDownload } from "react-icons/md";
 import logo from '../../Images/sky.jpg';
 import {Link} from 'react-router-dom'
 import { useReactToPrint } from 'react-to-print';
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_blue.css"; 
 const localizer = momentLocalizer(moment);
 
 const events = [
@@ -183,7 +185,25 @@ const MyCalendar = () => {
           <option value="week">Week</option>
           <option value="day">Day</option>
         </select>
-        <DatePicker
+        <div className='relative'>
+      <Flatpickr value={dateRange} 
+      onChange={(selectedDates) => setDateRange(selectedDates)}
+      options={{
+        mode: "range", // Enables date range selection
+        dateFormat: "Y-m-d", // Customize the date format
+        allowInput: true, // Allows manual input
+        enableTime: false, // Removes time selection if not needed
+      }}
+      className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 lg:w-48 w-full p-2.5"
+      placeholder="Date Range"
+      style={{ zIndex: 1000 }}
+    />
+    {!dateRange[0] &&
+      <MdOutlineCalendarMonth className="absolute top-3 right-2 bg-white " size={18}/>}
+    {dateRange[0] &&
+      <MdClose className="absolute top-3 right-2 bg-white " size={18} onClick={()=>setDateRange([null,null])}/>} 
+    </div>
+        {/* <DatePicker
           selected={dateRange[0]}
           onChange={(update) => setDateRange(update)}
           startDate={dateRange[0]}
@@ -195,7 +215,7 @@ const MyCalendar = () => {
           placeholderText="Date Range"
           className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 lg:w-48 w-full p-2.5"
           style={{ zIndex: 1000 }}
-        />
+        /> */}
         <input type="text" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)} className="bg-gray-50 border border-bordergray text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block lg:w-48 w-full p-2.5" />
       </div>
 

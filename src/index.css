@@ -31,13 +31,8 @@ body{
     
 }
 
-
-a:focus,a:active,a:hover{
+a:link,a:hover,a:active,a:focus,a:visited{
     @apply no-underline text-black;
-}
-a:link{
-    @apply no-underline ;
-
 }
 
 *{
@@ -61,11 +56,17 @@ a:link{
     border: 5px solid #d7b95f;
     border-bottom-color: transparent;
     border-radius: 50%;
-    display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 @keyframes rotation {
     0%{transform: rotate(0deg);}
     100%{transform: rotate(360deg);}
+}
+
+*{
+    -webkit-text-size-adjust: none; 
 }

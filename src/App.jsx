@@ -33,7 +33,7 @@ import CompanyComplianceList from './Pages/company/CompanyComplianceList';
 import Consolidate from './Pages/compliancefilling/Consolidate';
 import CompanyCompliance from './Pages/company/CompanyCompliance';
 import Message from './Pages/notification/Message';
-
+import Error from './Components/Error'
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
@@ -85,6 +85,7 @@ const App = () => {
                 <Route path="/compliancefilling" element={<Consolidate/>} />
                 <Route path="/companycompliance" element={<CompanyCompliance/>} />
                 <Route path="/notification" element={<Message/>} />
+                <Route path="*" element={<Error />} />
                 
 
                 {/* <Route path="/reportCompany" element={<CompanywiseReport/>}/> */}
@@ -135,6 +136,7 @@ export default App;
 // const Message=lazy(()=>import('./Pages/notification/Message'));
 // const EditCompliance=lazy(()=>import('./Pages/compliance/EditCompliance'));
 // import './index.css'
+// import Error from './Components/Error';
 // const App = () => {
 //   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 //   const toggleSidebar = () => {
@@ -146,7 +148,7 @@ export default App;
 
 //   return (
 //     <BrowserRouter>
-//     <Suspense fallback={<div id="loader" ></div>}>
+//     <Suspense fallback={<div className='grid place-items-center h-screen' ><span id="loader" ></span></div>}>
 //       {/* <div className="flex">
 //         <div
 //           className={`shadow-lg ${isSidebarOpen ? 'translate-x-0 w-60' : '-translate-x-full w-0'}
@@ -159,8 +161,9 @@ export default App;
 //           <div className="p-4"> */}
 //             <Routes>
 //               <Route path="/" element={<Login/>} />
-//               <Route element={<Container />}>
+//               <Route element={<Container />} >
 //                 <Route path="/home" element={<Index/>}/>
+//                 <Route path="*" element={<Error/>}/>
 //                 <Route path="/company" element={<CreateCompany />} />
 //                 <Route path="/branch" element={<CreateBranch />} />
 //                 <Route path="/user" element={<CreateUser />} />

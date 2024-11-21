@@ -1,8 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+
 export default {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors:{
@@ -41,7 +39,7 @@ export default {
         turquoiseblue:'#6FD6D6'
       },
       fontFamily:{
-        pop:['Poppins','sans-serif']
+        pop:['"Poppins"','sans-serif']
       }
     },
   },

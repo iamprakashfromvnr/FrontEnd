@@ -16,7 +16,11 @@ import Dummy from '../../Components/compliancefilling/ScoreDum';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import CustomPagination from '../../Components/CustomPagination';
 import EditCompliances from '../../Components/compliancefilling/EditCompliances';
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/material_green.css";
+import { IoCloseSharp } from 'react-icons/io5';
 const Consolidate = () => {
+    const [dateRange, setdateRange] = useState([null, null]);
     const [Page, setPage] = useState(1)
     const [Itemsperpage,setItemsperpage] = useState(5)
     const [modelopen, setmodelopen] = useState(false)
@@ -240,6 +244,8 @@ const Consolidate = () => {
                         <option key={index} value={assignstaff}>{assignstaff}</option>
                     ))}
                 </select>}
+
+
                 {checkFilter.priority && <select className=' bg-white border border-bordergray mt-2  text-sm h-9 px-4 rounded-md w-full lg:w-32 ' value={selectValue.Priority} onChange={(e) => setSelectValue({ ...selectValue, Priority: e.target.value })}>
                     <option value="">Priority</option>
                     {[...new Set(data.map((data) => data.priority))].map((priority, index) => (
@@ -247,6 +253,22 @@ const Consolidate = () => {
                     ))}
                 </select>}
 
+                <div className='relative lg:w-32 w-full'>
+
+                    <Flatpickr
+                    className="bg-white border border-bordergray text-black mt-2 text-sm h-9 px-4 rounded-md lg:w-32 w-full "
+                    value={dateRange}
+                        onChange={(selectedDates) => setdateRange(selectedDates)}
+                        options={{
+                            mode: 'range',
+                            dateFormat: "d-m-Y",
+                            allowInput: true,
+                        }}
+                        placeholder="Date Range"
+                    />
+                    {dateRange[0]===null && <MdOutlineCalendarMonth size={20} className='absolute top-4 right-2 bg-white' />}
+                    {dateRange[0] && <IoCloseSharp size={20} onClick={()=>setdateRange([null,null])} className='absolute top-4 right-2 cursor-pointer bg-white' />}
+                </div>
                 {/* <DatePicker className=' mt-2  text-sm rounded-md bg- w-full lg:w-32'
                     placeholder="Date Range"
                     block /> */}

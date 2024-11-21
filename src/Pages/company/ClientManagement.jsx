@@ -73,10 +73,11 @@ const customStyles={
             (filter.company ? data.company === filter.company : true) &&
             (data.company.toLowerCase().includes(search.toLowerCase()) ||
             data.branches.toLowerCase().includes(search.toLowerCase()) ||
-            data.level.toLoswerCase().includes(search.toLowerCase()))
+            data.level.toLowerCase().includes(search.toLowerCase()))
         );
     });
     setfilterData(filtered);
+    
 }, [Data, filter, search]);
    const branch=()=>{
     navigate('/clientbranchmanagement')

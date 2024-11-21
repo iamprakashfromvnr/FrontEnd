@@ -14,13 +14,13 @@ const columns = [
         cell: (row) => <span className="flex justify-center items-center gap-3"> <img src={img} alt="Picture" className="w-9 h-9  rounded-full" /> {row.company}</span>,
         sortable: true,
         width:'220px',
-        center:true
+        center:1
     },
     {
         name: 'State',
         cell: (row) => <span className="flex justify-center items-center gap-0.5"><MdOutlineLocationOn size={22} /> {row.state}</span>,
         sortable: true,
-        center:true,
+        center:1,
         width:'160px'
     },
     {
@@ -28,14 +28,14 @@ const columns = [
         cell: (row) => <span className="flex justify-center items-center gap-0.5"> <MdOutlineLocationOn size={22} /> {row.branch}</span>,
         sortable: true,
         width:'130px',
-        center:true
+        center:1
     },
     {
         name: 'Compliance',
         selector: row => row.compliance,
         sortable: true,
         width:'130px',
-        center:true
+        center:1
     },
     {
         name: 'Assign staff',
@@ -54,7 +54,7 @@ const columns = [
         cell: (row) => (<Dummy2 percent={row.score} />),
         selector: row => row.score,
         width:'90px',
-        center:true
+        center:1
     },
     {
         name: 'Status',
@@ -65,15 +65,15 @@ const columns = [
             } rounded-full  items-center w-44 text-center py-1 px-2 text-sm text-nowrap`}>{row.status}</span>,
         sortable: true,
         width:'160px',
-        center:true
+        center:1
     },
     {
         name: 'Action',
         selector: row => row.action,
         cell: (row) => <ActionMenu row={row} />,
-        right: true,
+        right: 1,
         width: '100px',
-        center:true
+        center:1
     },
 ]
 export default columns
